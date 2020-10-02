@@ -55,7 +55,7 @@ export default function SignUp() {
     content = (
       <div className="w-full">
         <input
-          className="w-full text-lg bg-transparent py-2"
+          className="w-full text-lg bg-transparent py-2 text-white"
           style={{
             outline: "none",
             borderBottom: "1px solid #DDDFE29E",
@@ -64,7 +64,7 @@ export default function SignUp() {
           placeholder="First Name"
         />
         <input
-          className="w-full text-lg  bg-transparent py-2 mt-4"
+          className="w-full text-lg  bg-transparent py-2 text-white mt-4"
           style={{
             outline: "none",
             borderBottom: "1px solid #DDDFE29E",
@@ -114,7 +114,7 @@ export default function SignUp() {
     content = (
       <div className="w-full mt-8">
         <input
-          className="w-full text-lg bg-transparent py-2 mb-8"
+          className="w-full text-lg bg-transparent py-2 mb-8 text-white"
           style={{
             outline: "none",
             borderBottom: "1px solid #DDDFE29E",
@@ -128,7 +128,7 @@ export default function SignUp() {
     content = (
       <div className="w-full mt-8">
         <input
-          className="w-full text-lg bg-transparent py-2 mb-8"
+          className="w-full text-lg bg-transparent py-2 mb-8 text-white"
           style={{
             outline: "none",
             borderBottom: "1px solid #DDDFE29E",
@@ -201,7 +201,7 @@ export default function SignUp() {
       <div className="w-full">
         <input
           type="password"
-          className="w-full text-lg bg-transparent py-2"
+          className="w-full text-lg bg-transparent py-2 text-white"
           style={{
             outline: "none",
             borderBottom: "1px solid #DDDFE29E",
@@ -211,7 +211,7 @@ export default function SignUp() {
         />
         <input
           type="password"
-          className="w-full text-lg  bg-transparent py-2 mt-4"
+          className="w-full text-lg  bg-transparent py-2 text-white mt-4"
           style={{
             outline: "none",
             borderBottom: "1px solid #DDDFE29E",
