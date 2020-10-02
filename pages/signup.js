@@ -1,6 +1,47 @@
 import { useState } from "react";
+import Select from "react-select";
+
+import _ from "lodash";
 
 import styles from "./signup.module.css";
+import { stringify } from "querystring";
+
+const MonthOptions = [
+  { value: 1, label: "January" },
+  { value: 2, label: "February" },
+  { value: 3, label: "March" },
+  { value: 4, label: "April" },
+  { value: 5, label: "May" },
+  { value: 6, label: "June" },
+  { value: 7, label: "July" },
+  { value: 8, label: "August" },
+  { value: 9, label: "September" },
+  { value: 10, label: "October" },
+  { value: 11, label: "November" },
+  { value: 12, label: "December" },
+];
+
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: "#2c5282",
+    color: "#a0aec0",
+    cursor: "pointer",
+  }),
+  menu: (provided, state) => ({
+    ...provided,
+    backgroundColor: "#2c5282",
+  }),
+  control: (provided, state) => {
+    return {
+      ...provided,
+      backgroundColor: "#2a4365",
+    };
+  },
+  singleValue: (provided, state) => {
+    return { ...provided, color: "#a0aec0" };
+  },
+};
 
 export default function SignUp() {
   const [step, setStep] = useState(0);
@@ -28,7 +69,7 @@ export default function SignUp() {
   } else if (step === 1) {
     content = (
       <div className="w-full">
-        <p className="text-lg text-gray-500 mb-1">Gender</p>
+        <p className="text-lg text-gray-500 mb-1 mt-4">Gender</p>
         <div className="flex justify-between mb-4">
           <div className="border border-gray-500 rounded-md flex-grow mr-2 p-2 px-3 flex items-center">
             <label
@@ -58,6 +99,84 @@ export default function SignUp() {
               <span className={styles.checkmark}></span>
             </label>
           </div>
+        </div>
+      </div>
+    );
+  } else if (step === 2) {
+    content = (
+      <div className="w-full mt-8">
+        <input
+          className="w-full text-lg bg-transparent py-2 mb-8"
+          style={{ outline: "none", borderBottom: "1px solid #DDDFE29E" }}
+          placeholder="Email"
+        />
+      </div>
+    );
+  } else if (step === 3) {
+    content = (
+      <div className="w-full mt-8">
+        <input
+          className="w-full text-lg bg-transparent py-2 mb-8"
+          style={{ outline: "none", borderBottom: "1px solid #DDDFE29E" }}
+          placeholder="Phone"
+        />
+      </div>
+    );
+  } else if (step === 4) {
+    const dayOptions = _.range(1, 32).map((day) => ({
+      value: day,
+      label: (day < 10 ? "0" : "") + day.toString(),
+    }));
+
+    dayOptions.unshift({ value: 0, label: "Day" });
+
+    const monthOptions = [
+      { value: 0, label: "Month" },
+      { value: 1, label: "January" },
+      { value: 2, label: "February" },
+      { value: 3, label: "March" },
+      { value: 4, label: "April" },
+      { value: 5, label: "May" },
+      { value: 6, label: "June" },
+      { value: 7, label: "July" },
+      { value: 8, label: "August" },
+      { value: 9, label: "September" },
+      { value: 10, label: "October" },
+      { value: 11, label: "November" },
+      { value: 12, label: "December" },
+    ];
+
+    const yearOptions = _.range(1900, 2020).map((year) => ({
+      value: year,
+      label: year.toString(),
+    }));
+    yearOptions.unshift({ value: 0, label: "Year" });
+
+    content = (
+      <div className="w-full flex mb-8 mt-8">
+        <div className="flex-grow mr-2">
+          <Select
+            options={dayOptions}
+            defaultValue={dayOptions[0]}
+            className="w-full"
+            styles={customStyles}
+          />
+        </div>
+        <div className="flex-grow mx-2">
+          <Select
+            options={monthOptions}
+            defaultValue={monthOptions[0]}
+            className="w-full"
+            styles={customStyles}
+          />
+        </div>
+        <div className="flex-grow ml-2">
+          <Select
+            options={yearOptions}
+            defaultValue={yearOptions[0]}
+            className="w-full"
+            styles={customStyles}
+          />
         </div>
       </div>
     );
