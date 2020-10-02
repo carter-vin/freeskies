@@ -56,12 +56,20 @@ export default function SignUp() {
       <div className="w-full">
         <input
           className="w-full text-lg bg-transparent py-2"
-          style={{ outline: "none", borderBottom: "1px solid #DDDFE29E" }}
+          style={{
+            outline: "none",
+            borderBottom: "1px solid #DDDFE29E",
+            caretColor: "white",
+          }}
           placeholder="First Name"
         />
         <input
           className="w-full text-lg  bg-transparent py-2 mt-4"
-          style={{ outline: "none", borderBottom: "1px solid #DDDFE29E" }}
+          style={{
+            outline: "none",
+            borderBottom: "1px solid #DDDFE29E",
+            caretColor: "white",
+          }}
           placeholder="Last Name"
         />
       </div>
@@ -107,7 +115,11 @@ export default function SignUp() {
       <div className="w-full mt-8">
         <input
           className="w-full text-lg bg-transparent py-2 mb-8"
-          style={{ outline: "none", borderBottom: "1px solid #DDDFE29E" }}
+          style={{
+            outline: "none",
+            borderBottom: "1px solid #DDDFE29E",
+            caretColor: "white",
+          }}
           placeholder="Email"
         />
       </div>
@@ -117,7 +129,11 @@ export default function SignUp() {
       <div className="w-full mt-8">
         <input
           className="w-full text-lg bg-transparent py-2 mb-8"
-          style={{ outline: "none", borderBottom: "1px solid #DDDFE29E" }}
+          style={{
+            outline: "none",
+            borderBottom: "1px solid #DDDFE29E",
+            caretColor: "white",
+          }}
           placeholder="Phone"
         />
       </div>
@@ -186,13 +202,21 @@ export default function SignUp() {
         <input
           type="password"
           className="w-full text-lg bg-transparent py-2"
-          style={{ outline: "none", borderBottom: "1px solid #DDDFE29E" }}
+          style={{
+            outline: "none",
+            borderBottom: "1px solid #DDDFE29E",
+            caretColor: "white",
+          }}
           placeholder="Password"
         />
         <input
           type="password"
           className="w-full text-lg  bg-transparent py-2 mt-4"
-          style={{ outline: "none", borderBottom: "1px solid #DDDFE29E" }}
+          style={{
+            outline: "none",
+            borderBottom: "1px solid #DDDFE29E",
+            caretColor: "white",
+          }}
           placeholder="Re-type Password"
         />
       </div>
