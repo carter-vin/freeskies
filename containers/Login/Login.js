@@ -1,14 +1,63 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { message } from 'antd';
+import API from 'configs/API';
+
+// Hook
+import useLocalStorage from 'helpers/hooks/useLocalStorage';
+
+// Styles
 import styles from './styles/login.module.css';
+import { LoginContext } from './storage/LoginContext';
+
+// Actions
+import { setLoading, setAuthorization } from './actions';
 
 export default function Login() {
+  const [username, setUsername] = useState('alex');
+  const [password, setPassword] = useState('123');
   const router = useRouter();
+  const [storage, dispatch] = useContext(LoginContext);
+  const [localstorage, setLocalStorage] = useLocalStorage('storage', storage);
 
   const handleClick = (e) => {
     e.preventDefault();
     router.push('/signup');
   };
+
+  const handleLogin = (username, password) => {
+    dispatch(setLoading(true));
+    API({
+      method: 'post',
+      url: '/accounts/login',
+      data: {
+        username,
+        password,
+      },
+    }).then((response) => {
+      const { status, data } = response;
+
+      if (status === 200) {
+        const dispatchData = setAuthorization(data);
+
+        dispatch(dispatchData);
+        setLocalStorage(dispatchData.payload);
+        setUsername('');
+        setPassword('');
+
+        router.push('/');
+      } else {
+        message.error(data?.message || 'Something wrong');
+      }
+
+      dispatch(setLoading(false));
+    });
+  };
+
+  useEffect(() => {
+    console.log(storage, { localstorage });
+  }, [storage]);
 
   return (
     <div className="flex content-center w-full min-h-screen bg-blue-900">
@@ -17,6 +66,10 @@ export default function Login() {
         <div className="w-full">
           <input
             className="w-full text-lg bg-transparent py-2 text-white"
+            value={username}
+            onChange={({ target }) => {
+              setUsername(target.value);
+            }}
             style={{
               outline: 'none',
               borderBottom: '1px solid #DDDFE29E',
@@ -27,6 +80,10 @@ export default function Login() {
           <input
             type="password"
             className="w-full text-lg bg-transparent py-2 text-white"
+            value={password}
+            onChange={({ target }) => {
+              setPassword(target.value);
+            }}
             style={{
               outline: 'none',
               borderBottom: '1px solid #DDDFE29E',
@@ -36,10 +93,15 @@ export default function Login() {
           />
         </div>
         <button
+          type="button"
           className="w-full rounded-md bg-blue-700 h-12 mt-8 text-white text-lg font-medium"
           style={{ outline: 'none' }}
+          onClick={() => {
+            if (storage.loading) return;
+            handleLogin(username, password);
+          }}
         >
-          SIGN IN
+          {storage.loading ? 'Loading...' : 'SIGN IN'}
         </button>
         <button
           className="w-full rounded-md bg-green-700 h-12 mt-8 text-white text-lg font-medium"
@@ -48,9 +110,9 @@ export default function Login() {
         >
           JOIN
         </button>
-        <a href="#" className={styles.forgottenpassword}>
-          Forgot Password?
-        </a>
+        <Link href="/forget-password">
+          <a className={styles.forgottenpassword}>Forgot Password?</a>
+        </Link>
       </div>
     </div>
   );
