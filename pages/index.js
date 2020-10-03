@@ -1,9 +1,12 @@
-import Head from "next/head";
+import { Login } from 'containers/Login';
+import { LoginProvider } from 'containers/Login/storage/LoginContext';
 
-export default function Home() {
+export default function LoginPage() {
   return (
-    <Head>
-      <title>Home</title>
-    </Head>
+    <>
+      <LoginProvider>
+        <Login />
+      </LoginProvider>
+    </>
   );
 }
