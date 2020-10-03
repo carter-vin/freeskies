@@ -8,6 +8,7 @@ import styles from './styles/signup.module.scss';
 import { RegistrationContext } from './storage/RegistrationContext';
 import setLoading from './actions/setLoading';
 import API from 'configs/API';
+import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 const customStyles = {
   option: (provided, state) => ({
@@ -42,6 +43,7 @@ export default function Signup() {
   const [phone, setPhone] = useState('');
   const [DOB, setDOB] = useState([undefined, undefined, undefined]);
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [rePassword, setRePassword] = useState('');
   const [storage, dispatch] = useContext(RegistrationContext);
 
@@ -303,34 +305,74 @@ export default function Signup() {
   } else if (step === 5) {
     content = (
       <div className="w-full">
-        <input
-          type="password"
-          className="w-full text-lg bg-transparent py-2 text-white"
+        <div
           style={{
-            outline: 'none',
+            display: 'flex',
             borderBottom: '1px solid #DDDFE29E',
-            caretColor: 'white',
+            alignItems: 'center',
           }}
-          placeholder="Password"
-          value={password}
-          onChange={({ target }) => {
-            setPassword(target.value);
-          }}
-        />
-        <input
-          type="password"
-          className="w-full text-lg  bg-transparent py-2 text-white mt-4"
+        >
+          <input
+            type={showPassword ? 'text' : 'password'}
+            className="w-full text-lg bg-transparent py-2 text-white"
+            style={{
+              outline: 'none',
+              caretColor: 'white',
+            }}
+            placeholder="Password"
+            value={password}
+            onChange={({ target }) => {
+              setPassword(target.value);
+            }}
+          />
+
+          <span
+            style={{ color: '#ffffff69', cursor: 'pointer' }}
+            onClick={() => {
+              setShowPassword((state) => !state);
+            }}
+          >
+            {showPassword ? (
+              <EyeInvisibleOutlined style={{ fontSize: 18 }} />
+            ) : (
+              <EyeOutlined style={{ fontSize: 18 }} />
+            )}
+          </span>
+        </div>
+
+        <div
           style={{
-            outline: 'none',
+            display: 'flex',
             borderBottom: '1px solid #DDDFE29E',
-            caretColor: 'white',
+            alignItems: 'center',
           }}
-          placeholder="Re-type Password"
-          value={rePassword}
-          onChange={({ target }) => {
-            setRePassword(target.value);
-          }}
-        />
+        >
+          <input
+            type={showPassword ? 'text' : 'password'}
+            className="w-full text-lg  bg-transparent py-2 text-white mt-2"
+            style={{
+              outline: 'none',
+              caretColor: 'white',
+            }}
+            placeholder="Re-type Password"
+            value={rePassword}
+            onChange={({ target }) => {
+              setRePassword(target.value);
+            }}
+          />
+          <span
+            style={{ color: '#ffffff69', cursor: 'pointer' }}
+            onClick={() => {
+              setShowPassword((state) => !state);
+            }}
+          >
+            {showPassword ? (
+              <EyeInvisibleOutlined style={{ fontSize: 18 }} />
+            ) : (
+              <EyeOutlined style={{ fontSize: 18 }} />
+            )}
+          </span>
+        </div>
       </div>
     );
   } else if (step === 6) {
