@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "start": "next start",
-    "preinstall": "command -v link-module-alias && link-module-alias clean || true",
-    "postinstall": "link-module-alias"
+    "start": "next start"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^3.0.0",
@@ -33,15 +31,6 @@
   "devDependencies": {
     "@types/node": "^14.11.2",
     "@types/react": "^16.9.49",
-    "typescript": "^4.0.3",
-    "link-module-alias": "^1.2.0"
-  },
-  "_moduleAliases": {
-    "styles": "./css",
-    "configs": "./configs",
-    "containers": "./containers",
-    "components": "./components",
-    "helpers": "./helpers",
-    "assets": "./public/assets"
+    "typescript": "^4.0.3"
   }
 }
