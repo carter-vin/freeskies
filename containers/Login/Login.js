@@ -46,6 +46,8 @@ export default function Login() {
         setUsername('');
         setPassword('');
 
+        message.success('Authentication successful');
+
         router.push('/');
       } else {
         message.error(data?.message || 'Something wrong');
