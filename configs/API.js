@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { makeUseAxios } from 'axios-hooks';
 
-export const API_URL = 'http://68.183.133.36/api';
+export const API_URL = 'https://freeskies.com/api';
 
 const serverConfig = {
   baseURL: API_URL,
