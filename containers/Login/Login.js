@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { message } from 'antd';
 import API from 'configs/API';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 // Hook
 import useLocalStorage from 'helpers/hooks/useLocalStorage';
@@ -15,8 +16,8 @@ import { LoginContext } from './storage/LoginContext';
 import { setLoading, setAuthorization } from './actions';
 
 export default function Login() {
-  const [username, setUsername] = useState('alex');
-  const [password, setPassword] = useState('123');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
   const [storage, dispatch] = useContext(LoginContext);
   const [localstorage, setLocalStorage] = useLocalStorage('storage', storage);
@@ -66,33 +67,54 @@ export default function Login() {
       <div className="m-auto flex flex-col items-center" style={{ width: 410 }}>
         <img src="/logo.png" className="mb-32" style={{ height: 55 }} />
         <div className="w-full">
-          <input
-            className="w-full text-lg bg-transparent py-2 text-white"
-            value={username}
-            onChange={({ target }) => {
-              setUsername(target.value);
-            }}
+          <div
             style={{
-              outline: 'none',
+              display: 'flex',
               borderBottom: '1px solid #DDDFE29E',
-              caretColor: 'white',
+              alignItems: 'center',
             }}
-            placeholder="Username"
-          />
-          <input
-            type="password"
-            className="w-full text-lg bg-transparent py-2 text-white"
-            value={password}
-            onChange={({ target }) => {
-              setPassword(target.value);
-            }}
+          >
+            <span style={{ color: '#ffffff69', marginRight: 10 }}>
+              <UserOutlined style={{ fontSize: 18 }} />
+            </span>
+            <input
+              className="w-full text-lg bg-transparent py-2 text-white"
+              value={username}
+              onChange={({ target }) => {
+                setUsername(target.value);
+              }}
+              style={{
+                outline: 'none',
+                caretColor: 'white',
+              }}
+              placeholder="Username"
+            />
+          </div>
+
+          <div
             style={{
-              outline: 'none',
+              display: 'flex',
               borderBottom: '1px solid #DDDFE29E',
-              caretColor: 'white',
+              alignItems: 'center',
             }}
-            placeholder="Password"
-          />
+          >
+            <span style={{ color: '#ffffff69', marginRight: 10 }}>
+              <LockOutlined style={{ fontSize: 18 }} />
+            </span>
+            <input
+              type="password"
+              className="w-full text-lg bg-transparent py-2 text-white"
+              value={password}
+              onChange={({ target }) => {
+                setPassword(target.value);
+              }}
+              style={{
+                outline: 'none',
+                caretColor: 'white',
+              }}
+              placeholder="Password"
+            />
+          </div>
         </div>
         <button
           type="button"
