@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Select from "react-select";
 import { useRouter } from 'next/router'
+import styles from "./login.module.css";
 import _ from "lodash";
 
 export default function Login() {
@@ -50,6 +50,7 @@ export default function Login() {
           >
             JOIN
           </button>
+		  <a href="#" className={styles.forgottenpassword} >Forgot Password?</a>
       </div>
     </div>
   );
