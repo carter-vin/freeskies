@@ -1,25 +1,13 @@
-import { useState } from 'react';
-import Select from 'react-select';
-
+import { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import { message } from 'antd';
 import _ from 'lodash';
-
-import styles from './styles/signup.module.scss';
+import Select from 'react-select';
 import ReCAPTCHA from 'react-google-recaptcha';
-
-const MonthOptions = [
-  { value: 1, label: 'January' },
-  { value: 2, label: 'February' },
-  { value: 3, label: 'March' },
-  { value: 4, label: 'April' },
-  { value: 5, label: 'May' },
-  { value: 6, label: 'June' },
-  { value: 7, label: 'July' },
-  { value: 8, label: 'August' },
-  { value: 9, label: 'September' },
-  { value: 10, label: 'October' },
-  { value: 11, label: 'November' },
-  { value: 12, label: 'December' },
-];
+import styles from './styles/signup.module.scss';
+import { RegistrationContext } from './storage/RegistrationContext';
+import setLoading from './actions/setLoading';
+import API from 'configs/API';
 
 const customStyles = {
   option: (provided, state) => ({
@@ -44,10 +32,63 @@ const customStyles = {
 };
 
 export default function Signup() {
+  const router = useRouter();
   const [step, setStep] = useState(0);
+  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [gender, setGender] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [DOB, setDOB] = useState([undefined, undefined, undefined]);
+  const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
+  const [storage, dispatch] = useContext(RegistrationContext);
 
   const onHandleNext = () => {
     setStep(step + 1);
+  };
+
+  const handleRegistration = () => {
+    dispatch(setLoading(true));
+
+    const data = {
+      username,
+      password,
+      firstName,
+      lastName,
+      female: gender === 'female',
+      email,
+      phone,
+      DoB: `${DOB[2] - DOB[1] - DOB[0]}`,
+    };
+
+    API({
+      method: 'post',
+      url: '/accounts/register',
+      data,
+    }).then((response) => {
+      const { status, data } = response;
+
+      if (status === 200) {
+        setUsername('');
+        setFirstName('');
+        setLastName('');
+        setGender('');
+        setEmail('');
+        setPhone('');
+        setDOB('');
+        setPassword('');
+        setRePassword('');
+
+        message.success('Congratulation! You are registred successfully.');
+        router.push('/');
+      } else {
+        message.error(data?.message || 'Something wrong');
+      }
+
+      dispatch(setLoading(false));
+    });
   };
 
   let content = null;
@@ -56,6 +97,24 @@ export default function Signup() {
       <div className="w-full">
         <input
           className="w-full text-lg bg-transparent py-2 text-white"
+          value={username}
+          onChange={({ target }) => {
+            setUsername(target.value);
+          }}
+          style={{
+            outline: 'none',
+            borderBottom: '1px solid #DDDFE29E',
+            caretColor: 'white',
+            marginBottom: 15,
+          }}
+          placeholder="User Name"
+        />
+        <input
+          className="w-full text-lg bg-transparent py-2 text-white"
+          value={firstName}
+          onChange={({ target }) => {
+            setFirstName(target.value);
+          }}
           style={{
             outline: 'none',
             borderBottom: '1px solid #DDDFE29E',
@@ -69,6 +128,10 @@ export default function Signup() {
             outline: 'none',
             borderBottom: '1px solid #DDDFE29E',
             caretColor: 'white',
+          }}
+          value={lastName}
+          onChange={({ target }) => {
+            setLastName(target.value);
           }}
           placeholder="Last Name"
         />
@@ -91,7 +154,10 @@ export default function Signup() {
                 id="male"
                 name="gender"
                 value="male"
-                checked="checked"
+                checked={gender === 'male'}
+                onChange={({ target }) => {
+                  setGender(target.value);
+                }}
               />
               <span className={styles.checkmark}></span>
             </label>
@@ -103,7 +169,16 @@ export default function Signup() {
               className={styles.container}
             >
               Female
-              <input type="radio" id="female" name="gender" value="female" />
+              <input
+                type="radio"
+                id="female"
+                name="gender"
+                value="female"
+                checked={gender === 'female'}
+                onChange={({ target }) => {
+                  setGender(target.value);
+                }}
+              />
               <span className={styles.checkmark}></span>
             </label>
           </div>
@@ -121,6 +196,10 @@ export default function Signup() {
             caretColor: 'white',
           }}
           placeholder="Email"
+          value={email}
+          onChange={({ target }) => {
+            setEmail(target.value);
+          }}
         />
       </div>
     );
@@ -135,6 +214,10 @@ export default function Signup() {
             caretColor: 'white',
           }}
           placeholder="Phone"
+          value={phone}
+          onChange={({ target }) => {
+            setPhone(target.value);
+          }}
         />
       </div>
     );
@@ -176,6 +259,13 @@ export default function Signup() {
             defaultValue={dayOptions[0]}
             className="w-full"
             styles={customStyles}
+            onChange={(day) => {
+              setDOB((state) => {
+                const cpState = state.slice();
+                cpState[0] = day.value;
+                return cpState;
+              });
+            }}
           />
         </div>
         <div className="flex-grow mx-2">
@@ -184,6 +274,13 @@ export default function Signup() {
             defaultValue={monthOptions[0]}
             className="w-full"
             styles={customStyles}
+            onChange={(month) => {
+              setDOB((state) => {
+                const cpState = state.slice();
+                cpState[1] = month.value;
+                return cpState;
+              });
+            }}
           />
         </div>
         <div className="flex-grow ml-2">
@@ -192,6 +289,13 @@ export default function Signup() {
             defaultValue={yearOptions[0]}
             className="w-full"
             styles={customStyles}
+            onChange={(year) => {
+              setDOB((state) => {
+                const cpState = state.slice();
+                cpState[2] = year.value;
+                return cpState;
+              });
+            }}
           />
         </div>
       </div>
@@ -208,6 +312,10 @@ export default function Signup() {
             caretColor: 'white',
           }}
           placeholder="Password"
+          value={password}
+          onChange={({ target }) => {
+            setPassword(target.value);
+          }}
         />
         <input
           type="password"
@@ -218,6 +326,10 @@ export default function Signup() {
             caretColor: 'white',
           }}
           placeholder="Re-type Password"
+          value={rePassword}
+          onChange={({ target }) => {
+            setRePassword(target.value);
+          }}
         />
       </div>
     );
@@ -242,8 +354,13 @@ export default function Signup() {
           <button
             className="w-full rounded-md bg-green-700 h-12 mt-8 text-white text-lg font-medium"
             style={{ outline: 'none' }}
+            type="button"
+            onClick={() => {
+              if (storage.loading) return;
+              handleRegistration();
+            }}
           >
-            SIGN UP
+            {storage.loading ? 'Loading...' : 'SIGN UP'}
           </button>
         )}
       </div>
