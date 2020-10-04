@@ -32,7 +32,7 @@
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
 .checkmark:after {
-  content: "";
+  content: '';
   position: absolute;
   display: none;
 }
@@ -50,4 +50,20 @@
   height: 8px;
   border-radius: 50%;
   background: white;
+}
+
+.stepwizard {
+  width: 100%;
+}
+
+.stepwizard_navigation {
+  display: flex;
+
+  button {
+    outline: none;
+
+    &:nth-child(2) {
+      margin-left: 15px;
+    }
+  }
 }
