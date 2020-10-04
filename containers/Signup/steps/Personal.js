@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavigationButtons from './NavigationButtons';
 import { useForm } from 'react-hook-form';
 
@@ -31,7 +31,6 @@ export default function Personal(props) {
               outline: 'none',
               borderBottom: '1px solid #DDDFE29E',
               caretColor: 'white',
-              marginBottom: 15,
             }}
             ref={register({ required: true })}
             placeholder="User Name"
@@ -42,7 +41,7 @@ export default function Personal(props) {
         </div>
         <div>
           <input
-            className="w-full text-lg bg-transparent py-2 text-white"
+            className="w-full text-lg bg-transparent py-2 text-white mt-4"
             value={firstName}
             name="firstName"
             onChange={({ target }) => {
