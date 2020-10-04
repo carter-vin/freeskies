@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavigationButtons from './NavigationButtons';
 import { useForm } from 'react-hook-form';
 import styles from '../styles/signup.module.scss';
@@ -31,13 +31,14 @@ export default function PhoneForm(props) {
           placeholder="Phone"
           name="phone"
           value={phone}
-          ref={register({ required: true })}
+          ref={register({ required: true, minLength: 5, pattern: /^\d+$/ })}
           onChange={({ target }) => {
             setPhone(target.value);
           }}
         />
+
         {errors.phone && (
-          <span className="text-white">This field is required</span>
+          <span className="text-white">This field is required </span>
         )}
       </div>
 
