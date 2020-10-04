@@ -31,21 +31,8 @@ export default function Signup() {
     phone: '',
     DoB: [],
   });
-  // const [username, setUsername] = useState('');
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [gender, setGender] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [phone, setPhone] = useState('');
-  // const [DOB, setDOB] = useState([undefined, undefined, undefined]);
-  // const [password, setPassword] = useState('');
-  // const [showPassword, setShowPassword] = useState(false);
-  // const [rePassword, setRePassword] = useState('');
-  const [storage, dispatch] = useContext(RegistrationContext);
 
-  useEffect(() => {
-    console.warn(formStore);
-  }, [formStore]);
+  const [storage, dispatch] = useContext(RegistrationContext);
 
   const handleRegistration = () => {
     dispatch(setLoading(true));
