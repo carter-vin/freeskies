@@ -35,7 +35,7 @@ export default function Profile() {
 
           <div className={styles.user_actions}>
             <Button type="primary">Follow</Button>
-            <Button type="primary">Edit porfile</Button>
+            <Button type="primary">Edit profile</Button>
           </div>
         </div>
       </div>
@@ -54,67 +54,43 @@ export default function Profile() {
               <Button type="link">All photos</Button>
             </div>
 
-            <div className={styles.photos}>
-              <div className={styles.photo}>
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
-              </div>
-              <div className={styles.photo}>
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
-              </div>
-              <div className={styles.photo}>
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
-              </div>
-              <div className={styles.photo}>
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
-              </div>
-              <div className={styles.photo}>
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
-              </div>
-              <div className={styles.photo}>
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
-              </div>
-              <div className={styles.photo}>
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
-              </div>
-              <div className={styles.photo}>
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
-              </div>
-              <div className={styles.photo}>
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
-              </div>
+            <div className={classnames(styles.photos, styles.sections_content)}>
+              {[0, 0, 0, 0, 0, 0, 0, 0, 0].map((item, index) => (
+                <div className={styles.photo}>
+                  <img
+                    src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                    alt=""
+                  />
+                </div>
+              ))}
             </div>
           </div>
           <div className={classnames(styles.container_bg, styles.section)}>
             <div className={styles.section_title}>
               <p>Friends</p>
               <Button type="link">All friends</Button>
+            </div>
+            <div
+              className={classnames(
+                styles.friends_list,
+                styles.sections_content
+              )}
+            >
+              {[0, 0, 0, 0, 0, 0, 0, 0].map((item, index) => {
+                return (
+                  <div className={styles.friend} key={index}>
+                    <div className={styles.avatar}>
+                      <img
+                        src={`https://api.adorable.io/avatars/128/adorable${index}.png`}
+                        alt=""
+                      />
+                    </div>
+                    <div className={styles.friend_name}>
+                      <span>John Doe</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className={classnames(styles.container_bg, styles.section)}>
