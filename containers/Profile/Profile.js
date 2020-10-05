@@ -98,6 +98,30 @@ export default function Profile() {
               <p>Rated</p>
               <Button type="link">My rates</Button>
             </div>
+            <div
+              className={classnames(
+                styles.friends_list,
+                styles.sections_content
+              )}
+            >
+              {[0, 0, 0, 0, 0, 0, 0, 0].map((item, index) => {
+                return (
+                  <div className={styles.friend} key={index}>
+                    <div className={styles.avatar}>
+                      <img
+                        src={`https://api.adorable.io/avatars/128/adorable${
+                          index + 1
+                        }.png`}
+                        alt=""
+                      />
+                    </div>
+                    <div className={styles.friend_name}>
+                      <span>John Doe</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
         <div className={styles.activity}>Activity</div>
