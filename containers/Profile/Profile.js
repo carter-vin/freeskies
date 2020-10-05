@@ -1,7 +1,10 @@
 import styles from './styles/profile.module.scss';
 import classnames from 'classnames';
 import { StarFilled, LikeFilled, MessageFilled } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Button, Input, Tabs } from 'antd';
+
+const { TextArea } = Input;
+const { TabPane } = Tabs;
 
 export default function Profile() {
   return (
@@ -34,8 +37,12 @@ export default function Profile() {
           </div>
 
           <div className={styles.user_actions}>
-            <Button type="primary">Follow</Button>
-            <Button type="primary">Edit profile</Button>
+            <Button type="primary" shape="round">
+              Follow
+            </Button>
+            <Button type="primary" shape="round">
+              Edit profile
+            </Button>
           </div>
         </div>
       </div>
@@ -126,7 +133,30 @@ export default function Profile() {
         </div>
 
         <div className={styles.activity}>
-          <div className={styles.activity_posting}>activity_posting</div>
+          <div className={styles.activity_posting}>
+            <Tabs defaultActiveKey="1" type="card" size={'small'}>
+              <TabPane tab="Text message" key="1">
+                <TextArea
+                  // value={value}
+                  // onChange={this.onChange}
+                  placeholder="Write a message"
+                  autoSize={{ minRows: 2, maxRows: 5 }}
+                />
+              </TabPane>
+              <TabPane tab="Text with media" key="2">
+                <TextArea
+                  // value={value}
+                  // onChange={this.onChange}
+                  placeholder="Write a message"
+                  autoSize={{ minRows: 2, maxRows: 5 }}
+                />
+              </TabPane>
+            </Tabs>
+
+            <div className={styles.actions_container}>
+              <Button type="primary">Post</Button>
+            </div>
+          </div>
           <div className={styles.activity_content}>
             {[0, 0, 0, 0].map((item, index) => (
               <div className={styles.post}>
