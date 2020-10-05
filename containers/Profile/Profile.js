@@ -1,7 +1,7 @@
 import styles from './styles/profile.module.scss';
 import classnames from 'classnames';
 import { StarFilled, LikeFilled, MessageFilled } from '@ant-design/icons';
-import { Button, Input, Tabs } from 'antd';
+import { Button, Input, Tabs, Rate } from 'antd';
 
 const { TextArea } = Input;
 const { TabPane } = Tabs;
@@ -29,9 +29,15 @@ export default function Profile() {
           <div className={styles.user_info}>
             <p className={styles.fullname}>
               <span>John Doe</span>
-              <span className={styles.rating}>
-                <StarFilled className={styles.rating_icon} /> <span>4.8</span>
-              </span>
+            </p>
+            <p className={styles.rating}>
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={3.5}
+                style={{ color: '#fca652', fontSize: '1em' }}
+              />
+              <span className={styles.rating_text}>4.8</span>
             </p>
             <p className={styles.followers}>232 following / 130 followers</p>
           </div>
