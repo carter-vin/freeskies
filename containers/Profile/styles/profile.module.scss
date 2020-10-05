@@ -1,0 +1,107 @@
+.container {
+  width: 70%;
+  margin: 30px auto 30px auto;
+}
+
+.container_bg {
+  background: #edf2f6;
+}
+
+.user_profile {
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  background: #edf2f6;
+
+  .cover {
+    height: 300px;
+    overflow: hidden;
+    border-radius: 5px;
+
+    background-image: url('https://www.sleekcover.com/covers/water-drops-on-plant-facebook-cover.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -120px;
+    position: relative;
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      box-shadow: 0 2px 10px 0px rgb(0 0 0 / 0.15);
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .user_info {
+      margin: 1em 0;
+      color: #212121;
+      text-align: center;
+
+      .fullname {
+        font-size: 1.2em;
+        font-weight: bold;
+
+        .rating {
+          font-size: 16px;
+          margin-left: 5px;
+          .rating_icon {
+            vertical-align: baseline;
+            color: #fca652;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    .followers {
+      color: #52575d;
+      font-size: 0.8em;
+    }
+
+    .user_actions {
+      position: absolute;
+      right: 25px;
+      bottom: 25px;
+      margin: auto;
+
+      & > * {
+        margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.content {
+  display: flex;
+
+  .section {
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+
+  .profile_contents {
+    flex: 1;
+  }
+
+  .activity {
+    flex: 2;
+    margin-left: 20px;
+  }
+}
