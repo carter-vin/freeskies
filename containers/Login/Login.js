@@ -49,7 +49,7 @@ export default function Login() {
 
         message.success('Authentication successful');
 
-        router.push('/');
+        router.push('/profile');
       } else {
         message.error(data?.message || 'Something wrong');
       }
