@@ -82,7 +82,7 @@ export default function Signup() {
 
   return (
     <div className="flex content-center w-full min-h-screen bg-blue-900">
-      <div className="m-auto flex flex-col items-center" style={{ width: 410 }}>
+      <div className="m-auto flex flex-col items-center" style={{ width: 300 }}>
         <img src="/logo.png" className="mb-32" style={{ height: 55 }} />
 
         <StepWizard className={styles.stepwizard}>
