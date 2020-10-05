@@ -39,7 +39,93 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      {/*  */}
+
+      <div
+        className={classnames(
+          styles.container,
+          styles.content,
+          styles.container_bg
+        )}
+      >
+        <div className={styles.profile_contents}>
+          <div className={classnames(styles.container_bg, styles.section)}>
+            <div className={styles.section_title}>
+              <p>Recent photos</p>
+              <Button type="link">All photos</Button>
+            </div>
+
+            <div className={styles.photos}>
+              <div className={styles.photo}>
+                <img
+                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  alt=""
+                />
+              </div>
+              <div className={styles.photo}>
+                <img
+                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  alt=""
+                />
+              </div>
+              <div className={styles.photo}>
+                <img
+                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  alt=""
+                />
+              </div>
+              <div className={styles.photo}>
+                <img
+                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  alt=""
+                />
+              </div>
+              <div className={styles.photo}>
+                <img
+                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  alt=""
+                />
+              </div>
+              <div className={styles.photo}>
+                <img
+                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  alt=""
+                />
+              </div>
+              <div className={styles.photo}>
+                <img
+                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  alt=""
+                />
+              </div>
+              <div className={styles.photo}>
+                <img
+                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  alt=""
+                />
+              </div>
+              <div className={styles.photo}>
+                <img
+                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+          <div className={classnames(styles.container_bg, styles.section)}>
+            <div className={styles.section_title}>
+              <p>Friends</p>
+              <Button type="link">All friends</Button>
+            </div>
+          </div>
+          <div className={classnames(styles.container_bg, styles.section)}>
+            <div className={styles.section_title}>
+              <p>Rated</p>
+              <Button type="link">My rates</Button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.activity}>Activity</div>
+      </div>
     </div>
   );
 }
