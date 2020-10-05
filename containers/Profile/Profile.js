@@ -37,7 +37,7 @@ export default function Profile() {
                 defaultValue={3.5}
                 style={{ color: '#fca652', fontSize: '1em' }}
               />
-              <span className={styles.rating_text}>4.8</span>
+              <span className={styles.rating_text}>3.5</span>
             </p>
             <p className={styles.followers}>232 following / 130 followers</p>
           </div>
