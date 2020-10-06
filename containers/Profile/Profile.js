@@ -1,6 +1,12 @@
 import styles from './styles/profile.module.scss';
 import classnames from 'classnames';
-import { StarFilled, LikeFilled, MessageFilled } from '@ant-design/icons';
+import {
+  StarFilled,
+  LikeFilled,
+  FormOutlined,
+  MessageFilled,
+  CameraOutlined,
+} from '@ant-design/icons';
 import { Button, Input, Tabs, Rate } from 'antd';
 
 const { TextArea } = Input;
@@ -16,7 +22,13 @@ export default function Profile() {
             backgroundImage:
               'url(https://www.sleekcover.com/covers/water-drops-on-plant-facebook-cover.jpg)',
           }}
-        ></div>
+        >
+          <div className={styles.change_cover}>
+            <Button ghost type="dashed">
+              Change cover
+            </Button>
+          </div>
+        </div>
 
         <div className={styles.profile}>
           <div className={styles.avatar}>
@@ -25,18 +37,57 @@ export default function Profile() {
                 src="https://api.adorable.io/avatars/128/adorable.png"
                 alt="avatar"
               />
-              <span className={styles.rating_text}>3.5</span>
-            </p>
-            <p className={styles.followers}>232 following / 130 followers</p>
+            </div>
+            <div className={styles.change_avatar}>
+              <CameraOutlined className={styles.change_avatar_image} />
+            </div>
           </div>
 
-          <div className={styles.user_actions}>
-            <Button type="primary" shape="round">
-              Follow
-            </Button>
-            <Button type="primary" shape="round">
-              Edit profile
-            </Button>
+          <div className={styles.user_content}>
+            <div className={styles.user_info}>
+              <div className={styles.heade_section}>
+                <div className={styles.left_side}>
+                  <p className={styles.fullname}>
+                    <span>John Doe</span>
+                  </p>
+                </div>
+                <div className={styles.right_side}>
+                  <p className={styles.rating}>
+                    <Rate
+                      disabled
+                      allowHalf
+                      defaultValue={3.5}
+                      style={{ color: '#fadb14', fontSize: '1em' }}
+                    />
+                    <span className={styles.rating_text}>3.5</span>
+                  </p>
+                </div>
+              </div>
+              {/* ==== */}
+            </div>
+            <div className={styles.bottom_section}>
+              <div className={styles.left_side}>
+                <div className={styles.user_actions}>
+                  <div className={styles.follow_actions}>
+                    <p className={styles.followers}>130 followers</p>
+                  </div>
+                  <p className={styles.followers_formobile}>
+                    130 followers / 232 following
+                  </p>
+                </div>
+              </div>
+              <div className={styles.right_side}>
+                <div className={styles.user_actions}>
+                  <p className={styles.followers}>232 following</p>
+                  <Button type="primary" shape="round" size="large">
+                    Follow
+                  </Button>
+                  <Button type="primary" shape="round" size="large">
+                    Edit profile
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

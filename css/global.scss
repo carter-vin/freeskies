@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import './mixins/responsive';
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -15,7 +16,50 @@ p {
   align-items: center;
 }
 
+// ==== Tabs =====
+.ant-tabs-top > .ant-tabs-nav::before {
+  border: none;
+}
+
 .ant-rate-star-first,
 .ant-rate-star-second {
   color: #ccc;
 }
+
+.ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab {
+  border-radius: 0;
+
+  background: rgb(255, 255, 255);
+  border-bottom: 1px solid initial;
+}
+
+.ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab-active {
+  background: #f0f0f0;
+  border-bottom-color: #f0f0f0;
+
+  .ant-tabs-tab-btn {
+    color: #407cff;
+  }
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #000;
+}
+
+.ant-tabs-nav-list {
+  @include mobile {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .ant-tabs-tab {
+    @include mobile {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      margin: 0 !important;
+    }
+  }
+}
+// ==== END Tabs =====
