@@ -42,6 +42,16 @@ export default function Profile() {
               <p className={styles.fullname}>
                 <span>John Doe</span>
               </p>
+              <div className={styles.user_actions}>
+                <div className={styles.follow_actions}>
+                  <Button type="primary" shape="round">
+                    Follow
+                  </Button>
+                  <p className={styles.followers}>
+                    232 following / 130 followers
+                  </p>
+                </div>
+              </div>
             </div>
             <div className={styles.right_side}>
               <p className={styles.rating}>
@@ -53,19 +63,12 @@ export default function Profile() {
                 />
                 <span className={styles.rating_text}>3.5</span>
               </p>
+              <div className={styles.user_actions}>
+                <Button type="primary" shape="round">
+                  Edit profile
+                </Button>
+              </div>
             </div>
-          </div>
-
-          <div className={styles.user_actions}>
-            <div className={styles.follow_actions}>
-              <Button type="primary" shape="round">
-                Follow
-              </Button>
-              <p className={styles.followers}>232 following / 130 followers</p>
-            </div>
-            {/* <Button type="primary" shape="round">
-              Edit profile
-            </Button> */}
           </div>
         </div>
       </div>

@@ -1,6 +1,20 @@
+@import 'css/mixins/responsive';
+
 .container {
   width: 70%;
   margin: auto;
+
+  @include desktop {
+    width: 80%;
+  }
+
+  @include tablet {
+    width: 90%;
+  }
+
+  @include mobile {
+    width: 95%;
+  }
 }
 
 .container_bg {
@@ -66,7 +80,14 @@
     justify-content: flex-start;
     margin-top: -75px;
     position: relative;
-    padding: 0 2em 1em 2em;
+    padding: 0 2em 0 2em;
+
+    @include mobile {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: calc(-30vw / 2);
+    }
 
     .avatar {
       width: 150px;
@@ -75,6 +96,11 @@
       border: 5px solid #fff;
       box-shadow: 0 2px 10px 0px rgb(0 0 0 / 0.15);
       overflow: hidden;
+
+      @include mobile {
+        width: 30vw;
+        height: 30vw;
+      }
 
       img {
         width: 100%;
@@ -87,18 +113,44 @@
       color: #212121;
       display: flex;
       flex: 1;
+      @include mobile {
+        flex-direction: column;
+      }
 
       .left_side,
       .right_side {
         flex: 1;
+        flex-direction: column;
       }
 
       .left_side {
         padding: 1.5em 0 0 1.5em;
+        flex: 2;
+
+        @include mobile {
+          padding: 0;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
       }
 
       .right_side {
         padding: 1.5em 0;
+
+        @include mobile {
+          padding: 0;
+          flex: 1;
+        }
+
+        .user_actions {
+          justify-content: flex-end;
+          padding-top: 3px;
+
+          @include mobile {
+            justify-content: center;
+          }
+        }
       }
 
       .fullname {
@@ -107,23 +159,22 @@
         color: #fff;
         text-shadow: 0 1px 2px #00000050;
         margin-bottom: 0.5em;
+
+        @include mobile {
+          color: #2b2b2b;
+          text-shadow: none;
+          font-size: 2em;
+        }
       }
 
       .rating {
-        font-size: 16px;
+        font-size: 1em;
         display: flex;
         justify-content: flex-end;
-        // margin-left: 5px;
-        // .rating_icon {
-        //   vertical-align: baseline;
-        //   color: #fca652;
-        //   font-size: 20px;
-        // }
-
-        // & > [class^='ant-rate-star-first'],
-        // & > [class^='ant-rate-star-second '] {
-        //   color: red;
-        // }
+        @include mobile {
+          justify-content: center;
+          margin-bottom: 10px;
+        }
 
         .rating_text {
           font-weight: bold;
@@ -131,6 +182,11 @@
           padding-top: 2px;
           color: #fff;
           text-shadow: 0 1px 2px #00000050;
+
+          @include mobile {
+            color: #2b2b2b;
+            text-shadow: none;
+          }
         }
       }
     }
@@ -141,22 +197,32 @@
     }
 
     .user_actions {
-      position: absolute;
-      right: 25px;
-      bottom: 30px;
-      margin: auto;
-      width: 83%;
+      margin-top: 30px;
 
       display: flex;
+      flex: 1;
       align-items: center;
       justify-content: space-between;
+
+      @include mobile {
+        margin-top: 0;
+      }
 
       .follow_actions {
         display: flex;
         align-items: center;
 
+        @include mobile {
+          flex-direction: column-reverse;
+        }
+
         & > * {
           margin-right: 15px;
+
+          @include mobile {
+            margin-bottom: 20px;
+            margin-right: 0;
+          }
         }
       }
     }
@@ -167,6 +233,10 @@
   display: flex;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+
+  @include mobile {
+    flex-direction: column;
+  }
 
   .section {
     background: #fff;
