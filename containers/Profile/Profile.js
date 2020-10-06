@@ -20,22 +20,10 @@ export default function Profile() {
 
         <div className={styles.profile}>
           <div className={styles.avatar}>
-            <img
-              src="https://api.adorable.io/avatars/128/adorable.png"
-              alt="avatar"
-            />
-          </div>
-
-          <div className={styles.user_info}>
-            <p className={styles.fullname}>
-              <span>John Doe</span>
-            </p>
-            <p className={styles.rating}>
-              <Rate
-                disabled
-                allowHalf
-                defaultValue={3.5}
-                style={{ color: '#fadb14', fontSize: '1em' }}
+            <div className={styles.avatar_image}>
+              <img
+                src="https://api.adorable.io/avatars/128/adorable.png"
+                alt="avatar"
               />
               <span className={styles.rating_text}>3.5</span>
             </p>
