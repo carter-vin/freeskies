@@ -1,6 +1,11 @@
 import styles from './styles/profile.module.scss';
 import classnames from 'classnames';
-import { StarFilled, LikeFilled, MessageFilled } from '@ant-design/icons';
+import {
+  StarFilled,
+  LikeFilled,
+  FormOutlined,
+  MessageFilled,
+} from '@ant-design/icons';
 import { Button, Input, Tabs, Rate } from 'antd';
 
 const { TextArea } = Input;
@@ -16,7 +21,13 @@ export default function Profile() {
             backgroundImage:
               'url(https://www.sleekcover.com/covers/water-drops-on-plant-facebook-cover.jpg)',
           }}
-        ></div>
+        >
+          <div className={styles.change_cover}>
+            <Button ghost type="dashed">
+              Change cover
+            </Button>
+          </div>
+        </div>
 
         <div className={styles.profile}>
           <div className={styles.avatar}>
@@ -27,28 +38,34 @@ export default function Profile() {
           </div>
 
           <div className={styles.user_info}>
-            <p className={styles.fullname}>
-              <span>John Doe</span>
-            </p>
-            <p className={styles.rating}>
-              <Rate
-                disabled
-                allowHalf
-                defaultValue={3.5}
-                style={{ color: '#fca652', fontSize: '1em' }}
-              />
-              <span className={styles.rating_text}>3.5</span>
-            </p>
-            <p className={styles.followers}>232 following / 130 followers</p>
+            <div className={styles.left_side}>
+              <p className={styles.fullname}>
+                <span>John Doe</span>
+              </p>
+            </div>
+            <div className={styles.right_side}>
+              <p className={styles.rating}>
+                <Rate
+                  disabled
+                  allowHalf
+                  defaultValue={3.5}
+                  style={{ color: '#fadb14', fontSize: '1em' }}
+                />
+                <span className={styles.rating_text}>3.5</span>
+              </p>
+            </div>
           </div>
 
           <div className={styles.user_actions}>
-            <Button type="primary" shape="round">
-              Follow
-            </Button>
-            <Button type="primary" shape="round">
+            <div className={styles.follow_actions}>
+              <Button type="primary" shape="round">
+                Follow
+              </Button>
+              <p className={styles.followers}>232 following / 130 followers</p>
+            </div>
+            {/* <Button type="primary" shape="round">
               Edit profile
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>
