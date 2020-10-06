@@ -41,35 +41,46 @@ export default function Profile() {
             </div>
           </div>
 
-          <div className={styles.user_info}>
-            <div className={styles.left_side}>
-              <p className={styles.fullname}>
-                <span>John Doe</span>
-              </p>
-              <div className={styles.user_actions}>
-                <div className={styles.follow_actions}>
-                  <p className={styles.followers}>130 followers</p>
+          <div className={styles.user_content}>
+            <div className={styles.user_info}>
+              <div className={styles.heade_section}>
+                <div className={styles.left_side}>
+                  <p className={styles.fullname}>
+                    <span>John Doe</span>
+                  </p>
+                </div>
+                <div className={styles.right_side}>
+                  <p className={styles.rating}>
+                    <Rate
+                      disabled
+                      allowHalf
+                      defaultValue={3.5}
+                      style={{ color: '#fadb14', fontSize: '1em' }}
+                    />
+                    <span className={styles.rating_text}>3.5</span>
+                  </p>
                 </div>
               </div>
+              {/* ==== */}
             </div>
-            <div className={styles.right_side}>
-              <p className={styles.rating}>
-                <Rate
-                  disabled
-                  allowHalf
-                  defaultValue={3.5}
-                  style={{ color: '#fadb14', fontSize: '1em' }}
-                />
-                <span className={styles.rating_text}>3.5</span>
-              </p>
-              <div className={styles.user_actions}>
-                <p className={styles.followers}>232 following</p>
-                <Button type="primary" shape="round" size="large">
-                  Follow
-                </Button>
-                <Button type="primary" shape="round" size="large">
-                  Edit profile
-                </Button>
+            <div className={styles.bottom_section}>
+              <div className={styles.left_side}>
+                <div className={styles.user_actions}>
+                  <div className={styles.follow_actions}>
+                    <p className={styles.followers}>130 followers</p>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.right_side}>
+                <div className={styles.user_actions}>
+                  <p className={styles.followers}>232 following</p>
+                  <Button type="primary" shape="round" size="large">
+                    Follow
+                  </Button>
+                  <Button type="primary" shape="round" size="large">
+                    Edit profile
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
