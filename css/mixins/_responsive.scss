@@ -5,7 +5,7 @@ $desktop-width: 1074px;
 $big-desktop-width: 1440px;
 
 @mixin extraSmall {
-  @media (max-width: #{$extra-small-width}) {
+  @media (min-width: 20px) and (max-width: #{$extra-small-width - 1px}) {
     @content;
   }
 }

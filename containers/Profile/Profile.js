@@ -71,6 +71,9 @@ export default function Profile() {
                   <div className={styles.follow_actions}>
                     <p className={styles.followers}>130 followers</p>
                   </div>
+                  <p className={styles.followers_formobile}>
+                    130 followers / 232 following
+                  </p>
                 </div>
               </div>
               <div className={styles.right_side}>
