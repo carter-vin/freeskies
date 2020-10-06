@@ -15,7 +15,28 @@ p {
   align-items: center;
 }
 
+// ==== Tabs =====
+.ant-tabs-top > .ant-tabs-nav::before {
+  border: none;
+}
+
 .ant-rate-star-first,
 .ant-rate-star-second {
   color: #ccc;
 }
+
+.ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab {
+  border-radius: 5px;
+  background: rgb(255, 255, 255);
+  border-bottom: 1px solid initial;
+}
+
+.ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab-active {
+  background: #f0f0f0;
+  border-bottom-color: #f0f0f0;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #000;
+}
+// ==== END Tabs =====

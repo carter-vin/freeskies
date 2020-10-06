@@ -44,7 +44,7 @@ export default function Profile() {
               </p>
               <div className={styles.user_actions}>
                 <div className={styles.follow_actions}>
-                  <Button type="primary" shape="round">
+                  <Button type="primary" shape="round" size="large">
                     Follow
                   </Button>
                   <p className={styles.followers}>
@@ -64,7 +64,7 @@ export default function Profile() {
                 <span className={styles.rating_text}>3.5</span>
               </p>
               <div className={styles.user_actions}>
-                <Button type="primary" shape="round">
+                <Button type="primary" shape="round" size="large">
                   Edit profile
                 </Button>
               </div>
