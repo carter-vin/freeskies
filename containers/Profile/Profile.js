@@ -5,6 +5,7 @@ import {
   LikeFilled,
   FormOutlined,
   MessageFilled,
+  CameraOutlined,
 } from '@ant-design/icons';
 import { Button, Input, Tabs, Rate } from 'antd';
 
@@ -35,6 +36,9 @@ export default function Profile() {
               src="https://api.adorable.io/avatars/128/adorable.png"
               alt="avatar"
             />
+            <div className={styles.change_avatar}>
+              <CameraOutlined className={styles.change_avatar_image} />
+            </div>
           </div>
 
           <div className={styles.user_info}>
