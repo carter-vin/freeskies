@@ -32,10 +32,12 @@ export default function Profile() {
 
         <div className={styles.profile}>
           <div className={styles.avatar}>
-            <img
-              src="https://api.adorable.io/avatars/128/adorable.png"
-              alt="avatar"
-            />
+            <div className={styles.avatar_image}>
+              <img
+                src="https://api.adorable.io/avatars/128/adorable.png"
+                alt="avatar"
+              />
+            </div>
             <div className={styles.change_avatar}>
               <CameraOutlined className={styles.change_avatar_image} />
             </div>
