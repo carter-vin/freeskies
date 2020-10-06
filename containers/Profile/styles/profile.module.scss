@@ -291,6 +291,12 @@
       grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
       gap: 10px 10px;
 
+      @include mobile {
+        grid-template-columns: 1fr 1fr;
+        height: 180px;
+        overflow-y: auto;
+      }
+
       @include tablet {
         grid-template-columns: 1fr 1fr;
       }
@@ -448,6 +454,7 @@
         overflow: hidden;
         position: relative;
         border-radius: 5px;
+        background: #cccccc25;
 
         @include mobile {
           width: 100%;
