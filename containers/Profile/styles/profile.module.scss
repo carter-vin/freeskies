@@ -152,17 +152,19 @@
 
       .left_side {
         padding: 1.5em 0 0 1.5em;
-        flex: 2;
+        flex: 1;
 
         @include mobile {
           padding: 0;
           flex: 1;
           display: flex;
           flex-direction: column;
+          align-items: center;
         }
       }
 
       .right_side {
+        flex: 1;
         padding: 1.5em 0;
 
         @include mobile {
@@ -176,6 +178,7 @@
 
           @include mobile {
             justify-content: center;
+            flex-direction: column;
           }
         }
       }
@@ -200,7 +203,8 @@
         justify-content: flex-end;
         @include mobile {
           justify-content: center;
-          margin-bottom: 10px;
+          margin-bottom: 20px;
+          font-size: 1.5em;
         }
 
         .rating_text {
@@ -238,18 +242,17 @@
       .follow_actions {
         display: flex;
         align-items: center;
+      }
+      & > * {
+        margin-right: 15px;
 
-        @include mobile {
-          flex-direction: column-reverse;
+        &:last-child {
+          margin-right: 0;
         }
 
-        & > * {
-          margin-right: 15px;
-
-          @include mobile {
-            margin-bottom: 20px;
-            margin-right: 0;
-          }
+        @include mobile {
+          margin-bottom: 20px;
+          margin-right: 0;
         }
       }
     }
