@@ -35,7 +35,7 @@ export default function Profile() {
                 disabled
                 allowHalf
                 defaultValue={3.5}
-                style={{ color: '#fca652', fontSize: '1em' }}
+                style={{ color: '#fadb14', fontSize: '1em' }}
               />
               <span className={styles.rating_text}>3.5</span>
             </p>
