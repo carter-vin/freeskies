@@ -1,18 +1,11 @@
 import classnames from 'classnames';
 import { useModal } from 'react-modal-hook';
-import PhotosModal from './PhotosModal';
+import PhotosModal from '../../components/profile/PhotosModal';
 import styles from './styles/photos.module.scss';
 
 export default function Photos() {
-  const [showModal, hideModal] = useModal(({ in: open, onExited }) => (
-    <>
-      <PhotosModal
-        title="Photo detail"
-        showModal={open}
-        onExited={onExited}
-        onClose={hideModal}
-      />
-    </>
+  const [showModal, hideModal] = useModal(({ in: open }) => (
+    <PhotosModal title="Photo detail" showModal={open} onClose={hideModal} />
   ));
 
   return (

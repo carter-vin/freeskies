@@ -8,6 +8,7 @@ import {
   CameraOutlined,
 } from '@ant-design/icons';
 import { Button, Input, Tabs, Rate } from 'antd';
+import PhotoSection from 'components/profile/PhotoSection';
 
 const { TextArea } = Input;
 const { TabPane } = Tabs;
@@ -100,23 +101,7 @@ export default function Profile() {
         )}
       >
         <div className={styles.profile_contents}>
-          <div className={classnames(styles.container_bg, styles.section)}>
-            <div className={styles.section_title}>
-              <p>Recent photos</p>
-              <Button type="link">All photos</Button>
-            </div>
-
-            <div className={classnames(styles.photos, styles.sections_content)}>
-              {[0, 0, 0, 0, 0, 0, 0, 0, 0].map((item, index) => (
-                <div className={styles.photo}>
-                  <img
-                    src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                    alt=""
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+          <PhotoSection />
           <div className={classnames(styles.container_bg, styles.section)}>
             <div className={styles.section_title}>
               <p>Friends</p>

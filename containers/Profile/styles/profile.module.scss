@@ -539,29 +539,6 @@
     }
   }
 
-  .photos {
-    .photo {
-      width: 140px;
-      height: 140px;
-      overflow: hidden;
-      position: relative;
-      border-radius: 5px;
-
-      @include mobile {
-        width: 100%;
-        height: 150px;
-      }
-
-      img {
-        width: 100%;
-        height: auto;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-  }
-
   .friends_list {
     .friend {
       @include mobile {
