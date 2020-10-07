@@ -1,3 +1,4 @@
 import Photos from './Photos';
+import PhotosModal from './PhotosModal';
 
-export { Photos };
+export { Photos, PhotosModal };
