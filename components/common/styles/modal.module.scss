@@ -1,0 +1,42 @@
+.modal_content {
+  width: 55%;
+  height: auto;
+  max-height: 80vh;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  backface-visibility: hidden;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 2em 1.5em;
+    border-bottom: 1px solid #cccccc50;
+
+    .title {
+      flex: 1;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+
+    .close {
+      font-size: 1.3em;
+      outline: none;
+    }
+  }
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+  }
+}
