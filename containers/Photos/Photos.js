@@ -6,7 +6,12 @@ import styles from './styles/photos.module.scss';
 export default function Photos() {
   const [showModal, hideModal] = useModal(({ in: open, onExited }) => (
     <>
-      <PhotosModal showModal={open} onExited={onExited} onClose={hideModal} />
+      <PhotosModal
+        title="Photo detail"
+        showModal={open}
+        onExited={onExited}
+        onClose={hideModal}
+      />
     </>
   ));
 
