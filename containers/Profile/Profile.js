@@ -1,18 +1,10 @@
 import styles from './styles/profile.module.scss';
 import classnames from 'classnames';
-import {
-  StarFilled,
-  LikeFilled,
-  FormOutlined,
-  MessageFilled,
-  CameraOutlined,
-} from '@ant-design/icons';
+import { CameraOutlined } from '@ant-design/icons';
 import { Button, Input, Tabs, Rate } from 'antd';
 import PhotoSection from 'components/profile/PhotoSection';
 import FeedPosts from 'components/profile/FeedPosts';
-
-const { TextArea } = Input;
-const { TabPane } = Tabs;
+import PostingPost from 'components/profile/PostingPost';
 
 export default function Profile() {
   return (
@@ -164,30 +156,7 @@ export default function Profile() {
         </div>
 
         <div className={styles.activity}>
-          <div className={styles.activity_posting}>
-            <Tabs defaultActiveKey="1" type="card" size={'small'}>
-              <TabPane tab="Text message" key="1">
-                <TextArea
-                  // value={value}
-                  // onChange={this.onChange}
-                  placeholder="Write a message"
-                  autoSize={{ minRows: 2, maxRows: 5 }}
-                />
-              </TabPane>
-              <TabPane tab="Text with media" key="2">
-                <TextArea
-                  // value={value}
-                  // onChange={this.onChange}
-                  placeholder="Write a message"
-                  autoSize={{ minRows: 2, maxRows: 5 }}
-                />
-              </TabPane>
-            </Tabs>
-
-            <div className={styles.actions_container}>
-              <Button type="primary">Post</Button>
-            </div>
-          </div>
+          <PostingPost />
           <FeedPosts />
         </div>
       </div>
