@@ -1,9 +1,50 @@
 import styles from './styles/header.module.scss';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import classnames from 'classnames';
+import _ from 'lodash';
 
 export default function Header({ withoutSearch }) {
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  const handleScroll = () => {
+    try {
+      const currentScrollPos = window.pageYOffset;
+      const visible = prevScrollPos > currentScrollPos;
+
+      setPrevScrollPos(currentScrollPos);
+      setVisible(visible);
+    } catch (error) {
+      // catch windiow === undefined error
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    try {
+      window.addEventListener('scroll', _.throttle(handleScroll, 250));
+    } catch (error) {
+      // catch windiow === undefined error
+      console.log(error);
+    }
+    return () => {
+      // unmount action
+      try {
+        window.removeEventListener('scroll', handleScroll);
+      } catch (error) {
+        // catch windiow === undefined error
+        console.log(error);
+      }
+    };
+  }, [prevScrollPos]);
+
   return (
-    <div className={styles.header}>
+    <div
+      className={classnames(styles.header, {
+        [styles.header_hidden]: !visible,
+      })}
+    >
       <div className={styles.container}>
         <div className={styles.logo}>
           <img src="/logo.png" alt="logo" />
