@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { useModal } from 'react-modal-hook';
-import PhotosModal from '../../components/profile/PhotosModal';
+import Header from 'components/header/Header';
+import PhotosModal from 'components/profile/PhotosModal';
 import styles from './styles/photos.module.scss';
 
 export default function Photos() {
@@ -10,6 +11,7 @@ export default function Photos() {
 
   return (
     <div>
+      <Header withoutSearch />
       <div
         className={classnames(
           styles.container,
