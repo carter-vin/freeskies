@@ -1,4 +1,18 @@
+@import 'css/mixins/responsive';
+
 .feed {
   width: 50%;
   margin: 20px auto;
+
+  @include mobile {
+    width: 90%;
+  }
+
+  @include tablet {
+    width: 80%;
+  }
+
+  @include desktop {
+    width: 60%;
+  }
 }
