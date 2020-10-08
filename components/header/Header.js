@@ -1,7 +1,7 @@
 import styles from './styles/header.module.scss';
 import { useRouter } from 'next/router';
 
-export default function Header() {
+export default function Header({ withoutSearch }) {
   const router = useRouter();
 
   return (
@@ -11,7 +11,7 @@ export default function Header() {
           <img src="/logo.png" alt="logo" />
         </div>
         <div className={styles.search}>
-          <input name="search" placeholder="Search ..." />
+          {!withoutSearch && <input name="search" placeholder="Search ..." />}
         </div>
         <div
           className={styles.profile}
