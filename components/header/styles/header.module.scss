@@ -1,0 +1,56 @@
+.header {
+  background: #fff;
+  border-bottom: 1px solid #edf0f5;
+  height: 80px;
+  display: flex;
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+  }
+
+  .logo {
+    height: 35px;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .search {
+    flex: 1;
+    padding: 0 30px;
+    display: flex;
+    align-self: stretch;
+
+    input {
+      flex: 1;
+      outline: none;
+      font-size: 1em;
+    }
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    background: #e6e6e670;
+    padding: 5px 15px 5px 5px;
+    border-radius: 40px;
+    cursor: pointer;
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      img {
+        border-radius: 50%;
+      }
+    }
+    .name {
+      margin-left: 10px;
+      color: #222;
+    }
+  }
+}
