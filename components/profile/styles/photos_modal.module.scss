@@ -1,3 +1,5 @@
+@import 'css/mixins/responsive';
+
 .container {
   padding: 20px;
   position: relative;
@@ -45,12 +47,20 @@
       display: flex;
       justify-content: flex-end;
 
+      @include tablet {
+        font-size: 2em;
+      }
+
+      @include mobile {
+        font-size: 2em;
+      }
+
       .rating_text {
         font-weight: bold;
         padding-left: 10px;
         // padding-top: 2px;
         color: #222;
-        line-height: 52px;
+        line-height: 2.2em;
       }
     }
   }
