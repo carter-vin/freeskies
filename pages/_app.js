@@ -1,7 +1,14 @@
 import Head from 'next/head';
+import { TransitionGroup } from 'react-transition-group';
+import Modal from 'react-modal';
+import { ModalProvider } from 'react-modal-hook';
 import 'css/tailwind.css';
 import 'antd/dist/antd.css';
+import 'react-alice-carousel/lib/alice-carousel.css';
+
 import 'css/global.scss';
+
+Modal.setAppElement('#modal_place');
 
 export default function App({ Component, pageProps }) {
   return (
@@ -10,7 +17,10 @@ export default function App({ Component, pageProps }) {
         <title>Freeskies</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Component {...pageProps} />
+      <ModalProvider rootComponent={TransitionGroup}>
+        <Component {...pageProps} />
+        <div id="modal_place"></div>
+      </ModalProvider>
     </>
   );
 }

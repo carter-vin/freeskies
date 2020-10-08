@@ -4,6 +4,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
+  background: #fbfbfd;
 }
 
 p {
@@ -11,7 +12,8 @@ p {
 }
 
 // temporary style
-.ant-message-custom-content {
+.ant-message-custom-content,
+.anticon-close-circle {
   display: flex;
   align-items: center;
 }
