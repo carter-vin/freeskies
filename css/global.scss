@@ -11,6 +11,10 @@ p {
   margin: 0 0 0 0;
 }
 
+.ReactModal__Overlay--after-open {
+  z-index: 99;
+}
+
 // temporary style
 .ant-message-custom-content,
 .anticon-close-circle {

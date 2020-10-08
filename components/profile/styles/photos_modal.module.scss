@@ -55,6 +55,10 @@
         font-size: 2em;
       }
 
+      @include extraSmall {
+        font-size: 1.5em;
+      }
+
       .rating_text {
         font-weight: bold;
         padding-left: 10px;
