@@ -40,27 +40,30 @@ export default function Header({ withoutSearch }) {
   }, [prevScrollPos]);
 
   return (
-    <div
-      className={classnames(styles.header, {
-        [styles.header_hidden]: !visible,
-      })}
-    >
-      <div className={styles.container}>
-        <div className={styles.logo}>
-          <img src="/logo.png" alt="logo" />
-        </div>
-        <div className={styles.search}>
-          {!withoutSearch && (
-            <>
-              <input name="search" placeholder="Search ..." />
+    <>
+      <div
+        className={classnames(styles.header, {
+          [styles.header_hidden]: !visible,
+        })}
+      >
+        <div className={styles.container}>
+          <div className={styles.logo}>
+            <img src="/logo.png" alt="logo" />
+          </div>
+          <div className={styles.search}>
+            {!withoutSearch && (
+              <>
+                <input name="search" placeholder="Search ..." />
 
-              <UserProfile />
-            </>
-          )}
+                <UserProfile />
+              </>
+            )}
+          </div>
+          <UserProfile />
         </div>
-        <UserProfile />
       </div>
-    </div>
+      <div className={styles.additional_header} />
+    </>
   );
 }
 

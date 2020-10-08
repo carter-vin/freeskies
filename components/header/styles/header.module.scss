@@ -1,5 +1,13 @@
 @import 'css/mixins/responsive';
 
+.additional_header {
+  height: 80px;
+
+  @include mobile {
+    height: auto;
+  }
+}
+
 .header {
   background: #fff;
   border-bottom: 1px solid #edf0f5;
