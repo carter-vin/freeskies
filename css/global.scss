@@ -15,6 +15,10 @@ p {
   z-index: 99999;
 }
 
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
 // temporary style
 .ant-message-custom-content,
 .anticon-close-circle {
