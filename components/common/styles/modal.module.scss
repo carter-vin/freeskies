@@ -1,3 +1,5 @@
+@import 'css/mixins/responsive';
+
 .modal_content {
   width: 55%;
   height: auto;
@@ -15,6 +17,22 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  @include desktop {
+    width: 80%;
+    max-height: 90vh;
+  }
+
+  @include tablet {
+    width: 90%;
+    max-height: 90vh;
+  }
+
+  @include mobile {
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+  }
 
   .header {
     height: 40px;
