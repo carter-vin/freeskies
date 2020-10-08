@@ -438,23 +438,6 @@
     @include tablet {
       flex: 2;
     }
-
-    &_posting {
-      border-radius: 10px;
-      background: #fff;
-      padding: 1em;
-
-      .actions_container {
-        margin-top: 1em;
-        display: flex;
-        justify-content: flex-end;
-        .button-container {
-          .ant-btn-primary {
-            background-color: palevioletred;
-          }
-        }
-      }
-    }
   }
 
   .friends_list {
