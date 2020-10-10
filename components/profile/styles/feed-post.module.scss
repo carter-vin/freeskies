@@ -1,4 +1,15 @@
 .activity_content {
+  .section_title {
+    display: flex;
+    padding: 1em;
+    align-items: center;
+    font-weight: bold;
+
+    p {
+      flex: 1;
+    }
+  }
+
   .post {
     background: #ffffff;
     border-radius: 10px;
