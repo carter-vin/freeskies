@@ -1,8 +1,34 @@
+@import 'css/mixins/responsive';
+
+.additional_header {
+  height: 80px;
+
+  @include mobile {
+    height: auto;
+  }
+}
+
 .header {
   background: #fff;
   border-bottom: 1px solid #edf0f5;
   height: 80px;
   display: flex;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: top 0.6s;
+
+  &.header_hidden {
+    top: -80px;
+  }
+
+  @include mobile {
+    height: auto;
+    padding: 18px 0;
+    position: initial;
+  }
 
   .container {
     width: 80%;
@@ -10,13 +36,24 @@
     display: flex;
     align-self: stretch;
     align-items: center;
+
+    @include mobile {
+      width: 95%;
+      flex-direction: column;
+    }
   }
 
   .logo {
+    width: 150px;
     height: 35px;
 
+    @include mobile {
+      margin-bottom: 10px;
+    }
+
     img {
-      height: 100%;
+      width: 100%;
+      // height: 100%;
     }
   }
 
@@ -26,13 +63,46 @@
     display: flex;
     justify-content: center;
 
+    .profile {
+      display: none;
+
+      @include mobile {
+        display: flex;
+        margin-left: 15px;
+      }
+
+      @include extraSmall {
+        padding: 5px;
+        margin-left: 5px;
+        .name {
+          display: none;
+        }
+      }
+    }
+
+    @include mobile {
+      width: 100%;
+    }
+
     input {
       flex: 0.5;
+      min-width: 50px;
       outline: none;
       font-size: 1em;
       padding: 0.5em 1em;
       border: 1px solid #cccccc70;
       border-radius: 10px;
+      @include desktop {
+        flex: 0.6;
+      }
+
+      @include tablet {
+        flex: 0.8;
+      }
+
+      @include mobile {
+        flex: 1;
+      }
     }
   }
 
@@ -43,6 +113,10 @@
     padding: 5px 10px 5px 5px;
     border-radius: 40px;
     cursor: pointer;
+
+    @include mobile {
+      display: none;
+    }
 
     .avatar {
       width: 40px;

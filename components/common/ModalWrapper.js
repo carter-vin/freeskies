@@ -10,7 +10,7 @@ const customStyles = {
     // margin: 'auto',
   },
   overlay: {
-    backgroundColor: 'rgba(50, 50, 50, 0.5)',
+    backgroundColor: 'rgba(50, 50, 50, .8)',
   },
 };
 

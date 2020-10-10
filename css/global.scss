@@ -11,6 +11,14 @@ p {
   margin: 0 0 0 0;
 }
 
+.ReactModal__Overlay--after-open {
+  z-index: 9999999999999;
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
 // temporary style
 .ant-message-custom-content,
 .anticon-close-circle {
