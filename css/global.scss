@@ -17,6 +17,10 @@ p {
 
 .ReactModal__Body--open {
   overflow: hidden;
+
+  #app_root {
+    filter: blur(3px);
+  }
 }
 
 // temporary style

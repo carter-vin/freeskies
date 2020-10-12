@@ -18,7 +18,9 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <ModalProvider rootComponent={TransitionGroup}>
-        <Component {...pageProps} />
+        <div id="app_root">
+          <Component {...pageProps} />
+        </div>
         <div id="modal_place"></div>
       </ModalProvider>
     </>
