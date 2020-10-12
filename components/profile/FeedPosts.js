@@ -1,9 +1,23 @@
 import { LikeFilled, MessageFilled } from '@ant-design/icons';
 import styles from './styles/feed-post.module.scss';
+import { Button } from 'antd';
+import { useRouter } from 'next/router';
 
 export default function FeedPosts() {
+  const router = useRouter();
+
+  const goToActivity = () => {
+    router.push('/activity');
+  };
+
   return (
     <div className={styles.activity_content}>
+      <div className={styles.section_title}>
+        <p>Activities</p>
+        <Button type="link" onClick={goToActivity}>
+          All activities
+        </Button>
+      </div>
       {[0, 0, 0, 0].map((item, index) => (
         <div className={styles.post}>
           <div className={styles.post_header}>

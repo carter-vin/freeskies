@@ -1,7 +1,7 @@
 const purgecss = [
   "@fullhuman/postcss-purgecss",
   {
-    content: ["./containers/**/*.js", "./node_modules/antd/es/**/*.css"],
+    content: ["./containers/**/*.js", "./components/**/*.js", "./node_modules/antd/es/**/*.css", "./node_modules/react-alice-carousel/**/*.css"],
     defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
   },
 ];
