@@ -90,6 +90,19 @@ export default function TimelinePosts() {
               )}
             </div>
           </div>
+          <div className={styles.comments}>
+            <div className={styles.comment_item}>
+              <div className={styles.avatar}>
+                <img
+                  src={`https://api.adorable.io/avatars/50/adorable${
+                    index + 5
+                  }.png`}
+                  alt="avatar"
+                />
+              </div>
+              <div className={styles.message}>message</div>
+            </div>
+          </div>
           <div className={styles.post_actions}>
             <div>
               <LikeFilled />
