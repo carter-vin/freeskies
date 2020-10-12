@@ -1,10 +1,15 @@
 import ReactModal from 'react-modal';
 import AliceCarousel from 'react-alice-carousel';
 import styles from './styles/photos_modal.module.scss';
-import ModalWrapper from 'components/common/ModalWrapper';
+import PhotoModalWrapper from 'components/common/PhotoModalWrapper';
 import { Rate } from 'antd';
 import { useState } from 'react';
-import { LeftCircleFilled, RightCircleFilled } from '@ant-design/icons';
+import {
+  LeftCircleFilled,
+  RightCircleFilled,
+  LeftOutlined,
+  RightOutlined,
+} from '@ant-design/icons';
 
 export default function PhotosModal({ ...rest }) {
   const [sliderIndex, setSliderIndex] = useState(0);
@@ -15,14 +20,14 @@ export default function PhotosModal({ ...rest }) {
   const onSlideChanged = (e) => setSliderIndex(e.item);
 
   return (
-    <ModalWrapper {...rest}>
+    <PhotoModalWrapper {...rest}>
       <div className={styles.container}>
         <div className={styles.actions}>
-          <LeftCircleFilled
+          <LeftOutlined
             className={styles.prev_action}
             onClick={() => slidePrev()}
           />
-          <RightCircleFilled
+          <RightOutlined
             className={styles.next_action}
             onClick={() => slideNext()}
           />
@@ -56,6 +61,6 @@ export default function PhotosModal({ ...rest }) {
           ))}
         </AliceCarousel>
       </div>
-    </ModalWrapper>
+    </PhotoModalWrapper>
   );
 }
