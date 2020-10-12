@@ -1,8 +1,9 @@
 import { Rate, Slider } from 'antd';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './styles/rating.module.scss';
 
 export default function RatingSlide() {
+  const sliderRef = useRef(null);
   const [rate, setRate] = useState(0);
 
   return (
@@ -17,10 +18,14 @@ export default function RatingSlide() {
 
         <div className={styles.slider}>
           <Slider
+            ref={sliderRef}
             min={0}
             max={5}
             onChange={setRate}
             tooltipVisible={false}
+            onAfterChange={() => {
+              sliderRef.current.blur(); // fix mozilla problem
+            }}
             value={rate}
             step={0.5}
           />
