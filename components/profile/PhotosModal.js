@@ -48,18 +48,18 @@ export default function PhotosModal({ ...rest }) {
                   alt=""
                 />
               </div>
-              <div className={styles.rating}>
-                <Rate
-                  // disabled
-                  allowHalf
-                  defaultValue={3.5}
-                  style={{ color: '#fadb14', fontSize: '1.2em' }}
-                />
-                <span className={styles.rating_text}>3.5</span>
-              </div>
             </div>
           ))}
         </AliceCarousel>
+        <div className={styles.rating}>
+          <Rate
+            // disabled
+            allowHalf
+            defaultValue={3.5}
+            style={{ color: '#fadb14', fontSize: '1.2em' }}
+          />
+          <span className={styles.rating_text}>3.5</span>
+        </div>
       </div>
     </PhotoModalWrapper>
   );
