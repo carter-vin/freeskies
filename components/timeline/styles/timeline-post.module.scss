@@ -87,6 +87,7 @@
           position: relative;
           overflow: hidden;
           cursor: pointer;
+          min-width: 50%;
 
           &:hover::after {
             opacity: 1;
@@ -112,11 +113,6 @@
             left: 0;
             transform: translateY(-50%);
           }
-        }
-
-        img {
-          height: 100%;
-          width: auto;
         }
       }
     }

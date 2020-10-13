@@ -40,10 +40,12 @@ export default function TimelinePosts() {
               })}
             >
               {(index === 0 || index > 2) && (
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
+                <div className={styles.image_item}>
+                  <img
+                    src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                    alt=""
+                  />
+                </div>
               )}
 
               {index === 1 && (
