@@ -14,6 +14,7 @@
       height: 35px;
       margin-right: 1em;
     }
+
     .message_container {
       flex: 1;
     }
@@ -63,5 +64,23 @@
         }
       }
     }
+  }
+}
+
+.comment_box {
+  border-top: 1px solid #e9e8e880;
+  padding: 1em 1.5em;
+  display: flex;
+
+  .avatar {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 35px;
+    height: 35px;
+    margin-right: 1em;
+  }
+
+  .input {
+    flex: 1;
   }
 }

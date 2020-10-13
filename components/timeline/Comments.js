@@ -1,5 +1,8 @@
+import { Input } from 'antd';
 import styles from './styles/comment.module.scss';
 import classnames from 'classnames';
+
+const { TextArea } = Input;
 
 export default function Comments({ show }) {
   if (!show) return null;
@@ -34,6 +37,18 @@ export default function Comments({ show }) {
         <div className={styles.message}>
           <span className={styles.author}>John Doe</span>
           <p>message</p>
+        </div>
+      </div>
+
+      <div className={styles.comment_box}>
+        <div className={styles.avatar}>
+          <img
+            src={`https://api.adorable.io/avatars/50/adorable.png`}
+            alt="avatar"
+          />
+        </div>
+        <div className={styles.input}>
+          <TextArea placeholder="What do you mean?" rows={2} />
         </div>
       </div>
     </div>
