@@ -1,9 +1,14 @@
-import { LikeFilled, MessageFilled } from '@ant-design/icons';
 import styles from './styles/timeline-post.module.scss';
 import classnames from 'classnames';
 import Comments from './Comments';
+import { useState } from 'react';
+import Actions from './Actions';
 
 export default function TimelinePosts() {
+  const [commentShow, setCommentShow] = useState(false);
+
+  const toggleCommentShow = () => setCommentShow((state) => !state);
+
   return (
     <div className={styles.activity_content}>
       {[0, 0, 0, 0].map((item, index) => (
@@ -86,18 +91,8 @@ export default function TimelinePosts() {
               )}
             </div>
           </div>
-          <Comments />
-          {/*  */}
-          <div className={styles.post_actions}>
-            <div>
-              <LikeFilled />
-              <span>Like</span>
-            </div>
-            <div>
-              <MessageFilled />
-              <span>Comment</span>
-            </div>
-          </div>
+          <Comments show={commentShow} />
+          <Actions actions={{ toggleCommentShow }} />
         </div>
       ))}
     </div>

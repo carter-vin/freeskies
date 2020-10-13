@@ -120,32 +120,5 @@
         }
       }
     }
-
-    &_actions {
-      display: flex;
-      border-top: 1px solid #e9e8e880;
-      cursor: pointer;
-
-      & > * {
-        display: flex;
-        flex: 1;
-        justify-content: center;
-        align-items: center;
-        height: 60px;
-        border-right: 1px solid #e9e8e880;
-
-        &:last-child {
-          border-right: none;
-        }
-
-        & > [class^='anticon'] {
-          color: #555555;
-        }
-
-        span {
-          margin-left: 15px;
-        }
-      }
-    }
   }
 }

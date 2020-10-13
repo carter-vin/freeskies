@@ -1,0 +1,36 @@
+.post_actions {
+  display: flex;
+  border-top: 1px solid #e9e8e880;
+  cursor: pointer;
+
+  & > * {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    border-right: 1px solid #e9e8e880;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    & > [class^='anticon'] {
+      color: #555555;
+    }
+
+    &:hover p {
+      color: rgb(103, 169, 255);
+    }
+
+    p {
+      margin-left: 15px;
+      transition: color 0.2s ease-in;
+
+      span {
+        opacity: 0.5;
+        font-size: 0.8em;
+      }
+    }
+  }
+}
