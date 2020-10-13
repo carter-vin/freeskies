@@ -1,3 +1,5 @@
+@import 'css/mixins/responsive';
+
 .activity_content {
   .section_title {
     display: flex;
@@ -48,6 +50,10 @@
     }
 
     &_content {
+      @include mobile {
+        overflow: hidden;
+      }
+
       .description {
         padding: 1em;
         font-size: 0.9em;
@@ -58,13 +64,29 @@
         height: 350px;
         display: flex;
         justify-content: center;
+        overflow: hidden;
+
+        @include tablet {
+          height: 500px;
+        }
+
+        @include mobile {
+          min-width: 75vh;
+        }
 
         &.grid_2 {
-          display: grid;
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           grid-template-rows: 1fr;
           grid-column-gap: 3px;
+
+          @include mobile {
+            height: 85vh;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-column-gap: 0;
+            grid-row-gap: 3px;
+          }
         }
 
         &.grid_3 {
@@ -81,6 +103,16 @@
           .main_photo {
             grid-area: main_photo;
           }
+
+          @include mobile {
+            height: 85vh;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-areas:
+              'main_photo'
+              '.'
+              '.';
+          }
         }
 
         .image_item {
@@ -88,6 +120,14 @@
           overflow: hidden;
           cursor: pointer;
           min-width: 50%;
+
+          @include tablet {
+            min-width: 70%;
+          }
+
+          @include mobile {
+            min-width: 100%;
+          }
 
           &:hover::after {
             opacity: 1;
