@@ -49,7 +49,7 @@ export default function Login() {
 
         message.success('Authentication successful');
 
-        router.push('/profile');
+        router.push('/timeline');
       } else {
         message.error(data?.message || 'Something wrong');
       }
