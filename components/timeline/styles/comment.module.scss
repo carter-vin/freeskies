@@ -22,6 +22,12 @@
       padding: 0.7em 1em;
       position: relative;
       min-height: 40px;
+      max-width: 45%;
+      margin-bottom: 20px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       &::after {
         content: '';
@@ -36,6 +42,29 @@
         border-left: 5px solid transparent;
         border-right: 5px solid #f0f0f0;
         transform: translateX(-100%);
+      }
+    }
+
+    &.not_mine {
+      flex-direction: row-reverse;
+
+      .avatar {
+        margin-left: 1em;
+      }
+
+      .message {
+        padding: 0.7em 1em;
+        position: relative;
+
+        &::after {
+          left: auto;
+          right: 0;
+          border-top: 5px solid transparent;
+          border-bottom: 5px solid transparent;
+          border-left: 5px solid #f0f0f0;
+          border-right: 5px solid transparent;
+          transform: translateX(100%);
+        }
       }
     }
   }
