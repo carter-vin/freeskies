@@ -1,11 +1,7 @@
 import { LikeFilled, MessageFilled } from '@ant-design/icons';
 import styles from './styles/timeline-post.module.scss';
 import classnames from 'classnames';
-
-// temporary data
-const image1 = [0];
-const image2 = [0, 0];
-const image3 = [0, 0, 0];
+import Comments from './Comments';
 
 export default function TimelinePosts() {
   return (
@@ -90,19 +86,8 @@ export default function TimelinePosts() {
               )}
             </div>
           </div>
-          <div className={styles.comments}>
-            <div className={styles.comment_item}>
-              <div className={styles.avatar}>
-                <img
-                  src={`https://api.adorable.io/avatars/50/adorable${
-                    index + 5
-                  }.png`}
-                  alt="avatar"
-                />
-              </div>
-              <div className={styles.message}>message</div>
-            </div>
-          </div>
+          <Comments />
+          {/*  */}
           <div className={styles.post_actions}>
             <div>
               <LikeFilled />
