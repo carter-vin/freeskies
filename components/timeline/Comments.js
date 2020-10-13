@@ -4,8 +4,8 @@ import classnames from 'classnames';
 
 const { TextArea } = Input;
 
-export default function Comments({ show }) {
-  if (!show) return null;
+export default function Comments({ show, index }) {
+  if (show !== index) return null;
   return (
     <div className={styles.comments}>
       <div className={styles.comment_item}>

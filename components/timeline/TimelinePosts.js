@@ -5,9 +5,10 @@ import { useState } from 'react';
 import Actions from './Actions';
 
 export default function TimelinePosts() {
-  const [commentShow, setCommentShow] = useState(false);
+  const [commentShow, setCommentShow] = useState(null);
 
-  const toggleCommentShow = () => setCommentShow((state) => !state);
+  const toggleCommentShow = (index) =>
+    setCommentShow(commentShow === index ? null : index);
 
   return (
     <div className={styles.activity_content}>
@@ -93,8 +94,8 @@ export default function TimelinePosts() {
               )}
             </div>
           </div>
-          <Comments show={commentShow} />
-          <Actions actions={{ toggleCommentShow }} />
+          <Comments index={index} show={commentShow} />
+          <Actions index={index} actions={{ toggleCommentShow }} />
         </div>
       ))}
     </div>
