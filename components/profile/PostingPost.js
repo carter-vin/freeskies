@@ -1,4 +1,7 @@
 import { Button, Tabs, Input } from 'antd';
+import { useRef } from 'react';
+import { FileDrop } from 'components/forms';
+
 import styles from './styles/posting-post.module.scss';
 
 const { TextArea } = Input;
@@ -23,6 +26,10 @@ export default function PostingPost() {
             placeholder="Write a message"
             autoSize={{ minRows: 2, maxRows: 5 }}
           />
+
+          <div className={styles.file_place}>
+            <FileDrop />
+          </div>
         </TabPane>
       </Tabs>
 

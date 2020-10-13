@@ -11,6 +11,7 @@ p {
   margin: 0 0 0 0;
 }
 
+// ===== Modals =====
 .ReactModal__Overlay--after-open {
   z-index: 9999999999999;
 }
@@ -22,15 +23,48 @@ p {
     filter: blur(3px);
   }
 }
+// ===== END Modals =====
+
+// ===== File drop =====
+.file-drop {
+  overflow: hidden;
+  cursor: pointer;
+
+  & > .file-drop-target {
+    position: relative;
+
+    display: flex;
+    height: 100px;
+    width: 100%;
+    background: #f2f2f2;
+    border-radius: 10px;
+    transition: background 0.1s ease-in;
+    overflow: hidden;
+
+    &:hover {
+      background: #e9e9e9;
+    }
+
+    &.file-drop-dragging-over-frame {
+      background: #00000030;
+
+      [class*='icon'] {
+        color: #e9e9e9;
+      }
+    }
+  }
+}
+// ===== END File drop =====
 
 // temporary style
 .ant-message-custom-content,
-.anticon-close-circle {
+.anticon-close-circle,
+.anticon-file {
   display: flex;
   align-items: center;
 }
 
-// ==== Tabs =====
+// ===== Tabs =====
 .ant-tabs-top > .ant-tabs-nav::before {
   border: none;
 }
