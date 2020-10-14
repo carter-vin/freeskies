@@ -52,7 +52,10 @@ export default function PhotosModal({ ...rest }) {
             </div>
           ))}
         </AliceCarousel>
-        <RatingSlide />
+
+        <div className={styles.rating_wrapper}>
+          <RatingSlide />
+        </div>
       </div>
     </PhotoModalWrapper>
   );
