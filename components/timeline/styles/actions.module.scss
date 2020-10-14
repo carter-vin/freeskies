@@ -17,9 +17,12 @@
 
     & > [class^='anticon'] {
       color: #555555;
+      font-size: 1.4em;
+      transition: 0.15s ease-in;
     }
 
-    &:hover p {
+    &:hover p,
+    &:hover > [class^='anticon'] {
       color: rgb(103, 169, 255);
     }
 
