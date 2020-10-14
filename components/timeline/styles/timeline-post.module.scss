@@ -33,7 +33,7 @@
         overflow: hidden;
         border: 3px solid #fff;
         margin-right: 1em;
-        margin-left: 1em;
+        margin-left: 15px;
 
         img {
           width: 100%;
@@ -59,9 +59,10 @@
     }
 
     .date {
-      font-size: 0.9em;
-      padding: 0 1em;
+      font-size: 0.8em;
+      padding: 0 15px;
       color: rgb(82, 82, 82);
+      font-weight: bold;
     }
 
     &_content {
@@ -125,6 +126,21 @@
           }
         }
 
+        &.grid_4 {
+          height: 600px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr 1fr;
+          grid-column-gap: 3px;
+          grid-row-gap: 3px;
+
+          @include mobile {
+            height: 85vh;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+          }
+        }
+
         .image_item {
           position: relative;
           overflow: hidden;
@@ -143,6 +159,21 @@
             opacity: 1;
           }
 
+          .show_more {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #00000035;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+          }
+
           &::after {
             content: '';
             position: absolute;
@@ -153,6 +184,7 @@
             background: rgba(#000, 0.2);
             transition: opacity 0.2s ease-in;
             opacity: 0;
+            z-index: 1;
           }
 
           img {

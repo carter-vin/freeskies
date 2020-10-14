@@ -20,6 +20,7 @@ export default function TimelinePosts() {
               className={classnames(styles.image, {
                 [styles.grid_2]: index === 1,
                 [styles.grid_3]: index === 2,
+                [styles.grid_4]: index === 3,
               })}
             >
               {(index === 0 || index > 2) && (
@@ -67,6 +68,32 @@ export default function TimelinePosts() {
                     />
                   </div>
                   <div className={styles.image_item}>
+                    <img
+                      src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                      alt=""
+                    />
+                  </div>
+                </>
+              )}
+
+              {index === 3 && (
+                <>
+                  <div className={styles.image_item}>
+                    <img
+                      src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                      alt=""
+                    />
+                  </div>
+                  <div className={styles.image_item}>
+                    <img
+                      src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                      alt=""
+                    />
+                  </div>
+                  <div className={styles.image_item}>
+                    <div className={styles.show_more}>
+                      <span>+4</span>
+                    </div>
                     <img
                       src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
                       alt=""
