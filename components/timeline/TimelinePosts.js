@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import Comments from './Comments';
 import { useState } from 'react';
 import Actions from './Actions';
+import TrimText from '../common/TrimText';
 
 export default function TimelinePosts() {
   const [commentShow, setCommentShow] = useState(null);
@@ -14,26 +15,7 @@ export default function TimelinePosts() {
     <div className={styles.activity_content}>
       {[0, 0, 0, 0].map((item, index) => (
         <div className={styles.post} key={index}>
-          <div className={styles.post_header}>
-            <div className={styles.avatar}>
-              <img
-                src={`https://api.adorable.io/avatars/50/adorable${
-                  index + 5
-                }.png`}
-                alt="avatar"
-              />
-            </div>
-            <div className={styles.user_info}>
-              <p className={styles.user_name}>John Doe</p>
-              <p className={styles.date}>3 jun, 2020 - 10:30 AM</p>
-            </div>
-          </div>
           <div className={styles.post_content}>
-            <p className={styles.description}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
-            </p>
             <div
               className={classnames(styles.image, {
                 [styles.grid_2]: index === 1,
@@ -94,6 +76,35 @@ export default function TimelinePosts() {
               )}
             </div>
           </div>
+          <div className={styles.post_header}>
+            <div className={styles.avatar}>
+              <img
+                src={`https://api.adorable.io/avatars/50/adorable${
+                  index + 5
+                }.png`}
+                alt="avatar"
+              />
+            </div>
+            <div className={styles.user_info}>
+              <p className={styles.user_name}>John Doe</p>
+            </div>
+          </div>
+          <p className={styles.date}>3 jun, 2020 - 10:30 AM</p>
+
+          <p className={styles.description}>
+            <TrimText limit={110}>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </TrimText>
+          </p>
           <Comments index={index} show={commentShow} />
           <Actions index={index} actions={{ toggleCommentShow }} />
         </div>
