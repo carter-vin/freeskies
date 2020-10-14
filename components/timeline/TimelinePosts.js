@@ -6,6 +6,7 @@ import Actions from './Actions';
 import TrimText from '../common/TrimText';
 import { useModal } from 'react-modal-hook';
 import CommentsModal from './CommentsModal';
+import PhotosModal from '../profile/PhotosModal';
 
 export default function TimelinePosts() {
   const [commentShow, setCommentShow] = useState(null);
@@ -14,6 +15,14 @@ export default function TimelinePosts() {
       title="Comments"
       showModal={open}
       onClose={hideCommentModal}
+    />
+  ));
+
+  const [showPhotoModal, hidePhotoModal] = useModal(({ in: open }) => (
+    <PhotosModal
+      title="Photo detail"
+      showModal={open}
+      onClose={hidePhotoModal}
     />
   ));
 
@@ -32,8 +41,8 @@ export default function TimelinePosts() {
                 [styles.grid_4]: index === 3,
               })}
             >
-              {(index === 0 || index > 2) && (
-                <div className={styles.image_item}>
+              {index === 0 && (
+                <div className={styles.image_item} onClick={showPhotoModal}>
                   <img
                     src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
                     alt=""
@@ -45,13 +54,14 @@ export default function TimelinePosts() {
                 <>
                   <div
                     className={classnames(styles.image_item, styles.main_photo)}
+                    onClick={showPhotoModal}
                   >
                     <img
                       src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
                       alt=""
                     />
                   </div>
-                  <div className={styles.image_item}>
+                  <div className={styles.image_item} onClick={showPhotoModal}>
                     <img
                       src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
                       alt=""
@@ -64,19 +74,20 @@ export default function TimelinePosts() {
                 <>
                   <div
                     className={classnames(styles.image_item, styles.main_photo)}
+                    onClick={showPhotoModal}
                   >
                     <img
                       src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
                       alt=""
                     />
                   </div>
-                  <div className={styles.image_item}>
+                  <div className={styles.image_item} onClick={showPhotoModal}>
                     <img
                       src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
                       alt=""
                     />
                   </div>
-                  <div className={styles.image_item}>
+                  <div className={styles.image_item} onClick={showPhotoModal}>
                     <img
                       src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
                       alt=""
@@ -87,19 +98,25 @@ export default function TimelinePosts() {
 
               {index === 3 && (
                 <>
-                  <div className={styles.image_item}>
+                  <div className={styles.image_item} onClick={showPhotoModal}>
                     <img
                       src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
                       alt=""
                     />
                   </div>
-                  <div className={styles.image_item}>
+                  <div className={styles.image_item} onClick={showPhotoModal}>
                     <img
                       src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
                       alt=""
                     />
                   </div>
-                  <div className={styles.image_item}>
+                  <div className={styles.image_item} onClick={showPhotoModal}>
+                    <img
+                      src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                      alt=""
+                    />
+                  </div>
+                  <div className={styles.image_item} onClick={showPhotoModal}>
                     <div className={styles.show_more}>
                       <span>+4</span>
                     </div>

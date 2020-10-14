@@ -66,6 +66,8 @@
     }
 
     &_content {
+      width: 100%;
+
       @include mobile {
         overflow: hidden;
       }
@@ -82,7 +84,7 @@
         }
 
         @include mobile {
-          min-width: 75vh;
+          // min-width: 75vh;
         }
 
         &.grid_2 {
