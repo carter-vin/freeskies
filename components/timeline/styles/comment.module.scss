@@ -1,6 +1,14 @@
 .comments {
   border-top: 1px solid #e9e8e880;
   border-bottom: 1px solid #e9e8e880;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .comments_wrapper {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
 
   .comment_item {
     display: flex;

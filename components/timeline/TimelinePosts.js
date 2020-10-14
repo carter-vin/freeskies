@@ -4,9 +4,18 @@ import Comments from './Comments';
 import { useState } from 'react';
 import Actions from './Actions';
 import TrimText from '../common/TrimText';
+import { useModal } from 'react-modal-hook';
+import CommentsModal from './CommentsModal';
 
 export default function TimelinePosts() {
   const [commentShow, setCommentShow] = useState(null);
+  const [showCommentModal, hideCommentModal] = useModal(({ in: open }) => (
+    <CommentsModal
+      title="Comments"
+      showModal={open}
+      onClose={hideCommentModal}
+    />
+  ));
 
   const toggleCommentShow = (index) =>
     setCommentShow(commentShow === index ? null : index);
@@ -133,7 +142,10 @@ export default function TimelinePosts() {
             </TrimText>
           </p>
           <Comments index={index} show={commentShow} />
-          <Actions index={index} actions={{ toggleCommentShow }} />
+          <Actions
+            index={index}
+            actions={{ toggleCommentShow, showCommentModal }}
+          />
         </div>
       ))}
     </div>
