@@ -26,7 +26,7 @@ export default function Actions({ actions, index }) {
         </div>
       </Tooltip>
       <Tooltip placement="top" title={'Comments'}>
-        <div onClick={() => actions.toggleCommentShow(index)}>
+        <div onClick={() => actions.showCommentModal()}>
           <MessageFilled />
           <p>
             <span>(2)</span>
