@@ -1,13 +1,19 @@
 import { Rate, Slider } from 'antd';
 import { useRef, useState } from 'react';
 import styles from './styles/rating.module.scss';
+import classnames from 'classnames';
 
-export default function RatingSlide() {
+export default function RatingSlide({ dark, size }) {
   const sliderRef = useRef(null);
   const [rate, setRate] = useState(0);
 
   return (
-    <div className={styles.rating}>
+    <div
+      className={classnames(styles.rating, {
+        [styles.dark]: dark,
+        [styles[size]]: size,
+      })}
+    >
       <div className={styles.star_container}>
         <Rate
           disabled
