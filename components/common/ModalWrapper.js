@@ -1,6 +1,7 @@
 import ReactModal from 'react-modal';
 import { CloseOutlined, CloseCircleFilled } from '@ant-design/icons';
 import styles from './styles/modal.module.scss';
+import classnames from 'classnames';
 
 const customStyles = {
   content: {
@@ -14,12 +15,20 @@ const customStyles = {
   },
 };
 
-export default function ModalWrapper({ children, showModal, title, ...rest }) {
+export default function ModalWrapper({
+  children,
+  showModal,
+  narrow_container,
+  title,
+  ...rest
+}) {
   return (
     <ReactModal
       isOpen={showModal}
       style={customStyles}
-      className={styles.modal_content}
+      className={classnames(styles.modal_content, {
+        [styles.narrow]: narrow_container,
+      })}
       shouldCloseOnOverlayClick
       onRequestClose={rest.onClose}
     >
