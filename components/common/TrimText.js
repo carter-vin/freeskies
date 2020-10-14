@@ -15,7 +15,7 @@ export default function TrimText({ limit = 80, children }) {
   }
 
   return (
-    <>
+    <span>
       {trimText}{' '}
       <span
         className="read-more-btn"
@@ -24,6 +24,6 @@ export default function TrimText({ limit = 80, children }) {
       >
         {readMore ? 'Read more' : 'Read less'}
       </span>
-    </>
+    </span>
   );
 }
