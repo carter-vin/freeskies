@@ -5,10 +5,11 @@ export default function TrimText({ limit = 80, children }) {
 
   const handleToggle = () => setReadMore((state) => !state);
 
-  const text = children.toString();
+  let text = '';
   let trimText = text;
 
   try {
+    text = children.toString();
     trimText = text.substr(0, readMore ? limit : text.length);
   } catch (error) {
     console.log(error);
@@ -17,13 +18,15 @@ export default function TrimText({ limit = 80, children }) {
   return (
     <span>
       {trimText}{' '}
-      <span
-        className="read-more-btn"
-        onClick={handleToggle}
-        style={{ cursor: 'pointer', color: '#2378f8' }}
-      >
-        {readMore ? 'Read more' : 'Read less'}
-      </span>
+      {text.length > limit && (
+        <span
+          className="read-more-btn"
+          onClick={handleToggle}
+          style={{ cursor: 'pointer', color: '#2378f8' }}
+        >
+          {readMore ? 'Read more' : 'Read less'}
+        </span>
+      )}
     </span>
   );
 }

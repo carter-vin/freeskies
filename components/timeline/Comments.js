@@ -2,8 +2,9 @@ import { Input, Popover } from 'antd';
 import styles from './styles/comment.module.scss';
 import classnames from 'classnames';
 import { useState } from 'react';
-import RatingSlide from '../forms/rating/RatingSlide';
+import { RatingSlide } from 'components/forms';
 import { StarFilled } from '@ant-design/icons';
+import TrimText from 'components/common/TrimText';
 
 const { TextArea } = Input;
 
@@ -43,7 +44,9 @@ function CommentItem({ message, mine }) {
       <div className={styles.message_container}>
         <div className={styles.message}>
           <span className={styles.author}>John Doe</span>
-          <p>{message}</p>
+          <p>
+            <TrimText limit={110}>{message}</TrimText>
+          </p>
         </div>
       </div>
     </div>

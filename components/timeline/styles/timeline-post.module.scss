@@ -17,6 +17,7 @@
     border-radius: 10px;
     margin: 20px 0;
     overflow: hidden;
+    box-shadow: 0 2px 8px 0px #00000020;
 
     &_header {
       // padding: 1em 1.5em;
@@ -93,8 +94,14 @@
           grid-template-rows: 1fr;
           grid-column-gap: 3px;
 
+          img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover;
+          }
+
           @include mobile {
-            height: 85vh;
+            // height: 85vh;
             grid-template-columns: 1fr;
             grid-template-rows: 1fr 1fr;
             grid-column-gap: 0;
@@ -103,7 +110,7 @@
         }
 
         &.grid_3 {
-          height: 500px;
+          // height: 500px;
           display: grid;
           grid-template-columns: 1fr 1fr;
           grid-template-rows: 1fr 1fr;
@@ -115,31 +122,58 @@
 
           .main_photo {
             grid-area: main_photo;
+            max-height: 100%;
+          }
+
+          img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover;
           }
 
           @include mobile {
-            height: 85vh;
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
+            // max-height: 180px;
+
+            // height: 85vh;
+            grid-template-rows: 2fr 1fr;
             grid-template-areas:
-              'main_photo'
-              '.'
-              '.';
+              'main_photo main_photo'
+              '. .';
           }
         }
 
         &.grid_4 {
-          height: 600px;
+          // height: 600px;
           display: grid;
           grid-template-columns: 1fr 1fr;
           grid-template-rows: 1fr 1fr;
           grid-column-gap: 3px;
           grid-row-gap: 3px;
+          grid-template-areas:
+            'main_photo . '
+            '. . ';
+
+          .main_photo {
+            grid-area: main_photo;
+            max-height: 100%;
+            // min-height: 300px;
+          }
+
+          img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover;
+          }
 
           @include mobile {
-            height: 85vh;
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr 1fr 1fr 1fr;
+            // max-height: 180px;
+            // height: 85vh;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 2fr 1fr;
+
+            grid-template-areas:
+              'main_photo main_photo main_photo'
+              '. . .';
           }
         }
 
