@@ -5,8 +5,12 @@ import { ModalProvider } from 'react-modal-hook';
 import 'css/tailwind.css';
 import 'antd/dist/antd.css';
 import 'react-alice-carousel/lib/alice-carousel.css';
-
 import 'css/global.scss';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { far } from '@fortawesome/free-regular-svg-icons';
+
+library.add(far);
 
 Modal.setAppElement('#modal_place');
 
