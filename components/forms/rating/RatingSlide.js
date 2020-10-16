@@ -1,11 +1,16 @@
 import { Rate, Slider } from 'antd';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './styles/rating.module.scss';
 import classnames from 'classnames';
 
-export default function RatingSlide({ dark, size }) {
+export default function RatingSlide({ dark, size, defaultRate = 0 }) {
   const sliderRef = useRef(null);
+
   const [rate, setRate] = useState(0);
+
+  useEffect(() => {
+    setRate(defaultRate);
+  }, [defaultRate]);
 
   return (
     <div

@@ -5,6 +5,13 @@
   display: flex;
   flex-direction: column;
 
+  &.modal_mode {
+    border-color: #fff;
+    border-bottom: none;
+    border-radius: 0;
+    // background: #000;
+  }
+
   .comments_wrapper {
     flex-grow: 1;
     overflow-y: auto;
@@ -18,34 +25,6 @@
     .avatar {
       display: flex;
       flex-direction: column;
-
-      img {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-      }
-
-      .rate {
-        cursor: pointer;
-        display: flex;
-        font-size: 0.8em;
-        align-items: center;
-        margin-top: 0.8em;
-        padding: 3px 5px;
-        background: #f1f1f1;
-        border-radius: 8px;
-
-        .icon {
-          margin-right: 3px;
-          line-height: 1;
-          color: #fadb14;
-        }
-
-        .rate_text {
-          line-height: 1.2;
-          padding-top: 2px;
-        }
-      }
     }
 
     .message {
@@ -104,10 +83,10 @@
   display: flex;
 
   .avatar {
-    border-radius: 50%;
-    overflow: hidden;
-    width: 35px;
-    height: 35px;
+    // border-radius: 50%;
+    // overflow: hidden;
+    // width: 35px;
+    // height: 35px;
     margin-right: 1em;
   }
 

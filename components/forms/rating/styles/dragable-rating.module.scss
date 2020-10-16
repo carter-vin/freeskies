@@ -1,0 +1,67 @@
+.rate_container {
+  position: relative;
+  margin-top: 0.8em;
+  font-size: 0.8em;
+
+  .popover {
+    position: absolute;
+    bottom: 0;
+    // transform: translateY(-50%);
+    background: #fff;
+    left: 0;
+    width: 180px;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+    box-shadow: 1px 0 4px rgba(#000, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  .dragable_area {
+    position: absolute;
+    cursor: pointer;
+    z-index: 5;
+    left: 0;
+    bottom: 0;
+    // padding: 0 15px;
+
+    width: 100%;
+    height: 100%;
+    user-select: none;
+
+    // opacity: 0.2;
+    // background: green;
+
+    &.active {
+      width: 170px;
+      height: 90px;
+    }
+  }
+}
+
+.rate {
+  cursor: pointer;
+  display: flex;
+
+  align-items: center;
+  padding: 3px 5px;
+  background: #f1f1f1;
+  border-radius: 8px;
+  user-select: none;
+
+  .icon {
+    margin-right: 3px;
+    line-height: 1;
+    color: #fadb14;
+  }
+
+  .rate_text {
+    line-height: 1.2;
+    padding-top: 2px;
+  }
+}

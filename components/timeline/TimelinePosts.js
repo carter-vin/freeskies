@@ -7,6 +7,7 @@ import TrimText from '../common/TrimText';
 import { useModal } from 'react-modal-hook';
 import CommentsModal from './CommentsModal';
 import PhotosModal from '../profile/PhotosModal';
+import Avatar from '../common/Avatar';
 
 export default function TimelinePosts() {
   const [commentShow, setCommentShow] = useState(null);
@@ -134,13 +135,27 @@ export default function TimelinePosts() {
           </div>
           <div className={styles.post_header}>
             <div className={styles.avatar}>
+              <Avatar
+                text="John Doe"
+                url={
+                  index === 0
+                    ? null
+                    : `https://api.adorable.io/avatars/50/adorable${
+                        index + 5
+                      }.png`
+                }
+                size={80}
+                borderSize={3}
+              />
+            </div>
+            {/* <div className={styles.avatar}>
               <img
                 src={`https://api.adorable.io/avatars/50/adorable${
                   index + 5
                 }.png`}
                 alt="avatar"
               />
-            </div>
+            </div> */}
             <div className={styles.user_info}>
               <p className={styles.user_name}>John Doe</p>
             </div>

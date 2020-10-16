@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { RatingSlide } from 'components/forms';
 import { StarFilled } from '@ant-design/icons';
 import TrimText from 'components/common/TrimText';
+import Avatar from '../common/Avatar';
+import DragableRating from '../forms/rating/DragableRating';
 
 const { TextArea } = Input;
 
@@ -20,12 +22,14 @@ function CommentItem({ message, mine }) {
       })}
     >
       <div className={styles.avatar}>
-        <img
-          src={`https://api.adorable.io/avatars/50/adorable.png`}
-          alt="avatar"
+        <Avatar
+          url={mine ? 'https://api.adorable.io/avatars/50/adorable.png' : null}
+          size={45}
+          text="John"
         />
+        <DragableRating />
 
-        <Popover
+        {/* <Popover
           content={() => <RatingSlide dark size="medium" />}
           // title="Title"
           placement="right"
@@ -39,7 +43,7 @@ function CommentItem({ message, mine }) {
             </span>
             <span className={styles.rate_text}>4.5</span>
           </div>
-        </Popover>
+        </Popover> */}
       </div>
       <div className={styles.message_container}>
         <div className={styles.message}>
@@ -53,30 +57,66 @@ function CommentItem({ message, mine }) {
   );
 }
 
-export default function Comments({ show, index }) {
+export default function Comments({ show, index, modalMode = false }) {
   // if (show !== index) return null;
-  return (
-    <div className={styles.comments}>
-      <div className={styles.comments_wrapper}>
-        <CommentItem
-          mine
-          message="Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s"
-        />
+  const [commentText, setCommentText] = useState('');
+  const [commentList, setCommentList] = useState([
+    {
+      mine: true,
+      message: `Lorem Ipsum is simply dummy text of the printing and typesetting
+  industry. Lorem Ipsum has been the industry's standard dummy text
+  ever since the 1500s`,
+    },
+    { message: 'message' },
+  ]);
 
-        <CommentItem message="message" />
+  const handleEnterKey = (e) => {
+    if (e.nativeEvent.keyCode === 13) {
+      e.preventDefault();
+      console.log('object');
+      setCommentList((comments) => [
+        ...comments,
+        {
+          mine: true,
+          message: commentText,
+        },
+      ]);
+      setCommentText('');
+    }
+  };
+
+  const handleChangeText = (e) => {
+    setCommentText(e.target.value);
+  };
+
+  return (
+    <div
+      className={classnames(styles.comments, {
+        [styles.modal_mode]: modalMode,
+      })}
+    >
+      <div className={styles.comments_wrapper}>
+        {commentList.map((item, index) => (
+          <CommentItem mine={item.mine} message={item.message} />
+        ))}
       </div>
 
       <div className={styles.comment_box}>
         <div className={styles.avatar}>
-          <img
-            src={`https://api.adorable.io/avatars/50/adorable.png`}
-            alt="avatar"
+          <Avatar
+            url={'https://api.adorable.io/avatars/50/adorable.png'}
+            size={45}
+            text="John"
           />
         </div>
         <div className={styles.input}>
-          <TextArea placeholder="What do you mean?" rows={2} />
+          <TextArea
+            value={commentText}
+            placeholder="What do you mean?"
+            rows={2}
+            onChange={handleChangeText}
+            onKeyDown={handleEnterKey}
+          />
         </div>
       </div>
     </div>

@@ -19,7 +19,10 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <title>Freeskies</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
       </Head>
       <ModalProvider rootComponent={TransitionGroup}>
         <div id="app_root">
