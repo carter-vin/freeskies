@@ -5,6 +5,7 @@ import { Button, Input, Tabs, Rate } from 'antd';
 import PhotoSection from 'components/profile/PhotoSection';
 import FeedPosts from 'components/profile/FeedPosts';
 import PostingPost from 'components/profile/PostingPost';
+import RatedSection from '../../components/profile/RatedSection';
 
 export default function Profile() {
   return (
@@ -28,7 +29,7 @@ export default function Profile() {
           <div className={styles.avatar}>
             <div className={styles.avatar_image}>
               <img
-                src="https://api.adorable.io/avatars/128/adorable.png"
+                src="https://api.adorable.io/avatars/128/adorable1.png"
                 alt="avatar"
               />
             </div>
@@ -123,36 +124,7 @@ export default function Profile() {
               })}
             </div>
           </div>
-          <div className={classnames(styles.container_bg, styles.section)}>
-            <div className={styles.section_title}>
-              <p>Rated</p>
-              <Button type="link">My rates</Button>
-            </div>
-            <div
-              className={classnames(
-                styles.friends_list,
-                styles.sections_content
-              )}
-            >
-              {[0, 0, 0, 0, 0, 0, 0, 0].map((item, index) => {
-                return (
-                  <div className={styles.friend} key={index}>
-                    <div className={styles.avatar}>
-                      <img
-                        src={`https://api.adorable.io/avatars/128/adorable${
-                          index + 1
-                        }.png`}
-                        alt=""
-                      />
-                    </div>
-                    <div className={styles.friend_name}>
-                      <span>John Doe</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <RatedSection />
         </div>
 
         <div className={styles.activity}>
