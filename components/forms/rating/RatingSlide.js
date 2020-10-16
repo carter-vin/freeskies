@@ -5,6 +5,7 @@ import classnames from 'classnames';
 
 export default function RatingSlide({ dark, size }) {
   const sliderRef = useRef(null);
+
   const [rate, setRate] = useState(0);
 
   return (
