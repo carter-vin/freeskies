@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { RatingSlide } from 'components/forms';
 import { StarFilled } from '@ant-design/icons';
 import TrimText from 'components/common/TrimText';
+import Avatar from '../common/Avatar';
 
 const { TextArea } = Input;
 
@@ -20,9 +21,10 @@ function CommentItem({ message, mine }) {
       })}
     >
       <div className={styles.avatar}>
-        <img
-          src={`https://api.adorable.io/avatars/50/adorable.png`}
-          alt="avatar"
+        <Avatar
+          url={mine ? 'https://api.adorable.io/avatars/50/adorable.png' : null}
+          size={35}
+          text="John"
         />
 
         <Popover
@@ -55,6 +57,36 @@ function CommentItem({ message, mine }) {
 
 export default function Comments({ show, index, modalMode = false }) {
   // if (show !== index) return null;
+  const [commentText, setCommentText] = useState('');
+  const [commentList, setCommentList] = useState([
+    {
+      mine: true,
+      message: `Lorem Ipsum is simply dummy text of the printing and typesetting
+  industry. Lorem Ipsum has been the industry's standard dummy text
+  ever since the 1500s`,
+    },
+    { message: 'message' },
+  ]);
+
+  const handleEnterKey = (e) => {
+    if (e.nativeEvent.keyCode === 13) {
+      e.preventDefault();
+      console.log('object');
+      setCommentList((comments) => [
+        ...comments,
+        {
+          mine: true,
+          message: commentText,
+        },
+      ]);
+      setCommentText('');
+    }
+  };
+
+  const handleChangeText = (e) => {
+    setCommentText(e.target.value);
+  };
+
   return (
     <div
       className={classnames(styles.comments, {
@@ -62,14 +94,9 @@ export default function Comments({ show, index, modalMode = false }) {
       })}
     >
       <div className={styles.comments_wrapper}>
-        <CommentItem
-          mine
-          message="Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s"
-        />
-
-        <CommentItem message="message" />
+        {commentList.map((item, index) => (
+          <CommentItem mine={item.mine} message={item.message} />
+        ))}
       </div>
 
       <div className={styles.comment_box}>
@@ -80,7 +107,13 @@ export default function Comments({ show, index, modalMode = false }) {
           />
         </div>
         <div className={styles.input}>
-          <TextArea placeholder="What do you mean?" rows={2} />
+          <TextArea
+            value={commentText}
+            placeholder="What do you mean?"
+            rows={2}
+            onChange={handleChangeText}
+            onKeyDown={handleEnterKey}
+          />
         </div>
       </div>
     </div>
