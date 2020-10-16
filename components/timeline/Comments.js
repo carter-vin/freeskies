@@ -6,6 +6,7 @@ import { RatingSlide } from 'components/forms';
 import { StarFilled } from '@ant-design/icons';
 import TrimText from 'components/common/TrimText';
 import Avatar from '../common/Avatar';
+import DragableRating from '../forms/rating/DragableRating';
 
 const { TextArea } = Input;
 
@@ -26,8 +27,9 @@ function CommentItem({ message, mine }) {
           size={45}
           text="John"
         />
+        <DragableRating />
 
-        <Popover
+        {/* <Popover
           content={() => <RatingSlide dark size="medium" />}
           // title="Title"
           placement="right"
@@ -41,7 +43,7 @@ function CommentItem({ message, mine }) {
             </span>
             <span className={styles.rate_text}>4.5</span>
           </div>
-        </Popover>
+        </Popover> */}
       </div>
       <div className={styles.message_container}>
         <div className={styles.message}>
