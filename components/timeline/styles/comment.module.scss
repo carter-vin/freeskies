@@ -26,12 +26,6 @@
       display: flex;
       flex-direction: column;
 
-      img {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-      }
-
       .rate {
         cursor: pointer;
         display: flex;
@@ -111,10 +105,10 @@
   display: flex;
 
   .avatar {
-    border-radius: 50%;
-    overflow: hidden;
-    width: 35px;
-    height: 35px;
+    // border-radius: 50%;
+    // overflow: hidden;
+    // width: 35px;
+    // height: 35px;
     margin-right: 1em;
   }
 

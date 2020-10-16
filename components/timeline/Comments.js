@@ -23,7 +23,7 @@ function CommentItem({ message, mine }) {
       <div className={styles.avatar}>
         <Avatar
           url={mine ? 'https://api.adorable.io/avatars/50/adorable.png' : null}
-          size={35}
+          size={45}
           text="John"
         />
 
@@ -101,9 +101,10 @@ export default function Comments({ show, index, modalMode = false }) {
 
       <div className={styles.comment_box}>
         <div className={styles.avatar}>
-          <img
-            src={`https://api.adorable.io/avatars/50/adorable.png`}
-            alt="avatar"
+          <Avatar
+            url={'https://api.adorable.io/avatars/50/adorable.png'}
+            size={45}
+            text="John"
           />
         </div>
         <div className={styles.input}>
