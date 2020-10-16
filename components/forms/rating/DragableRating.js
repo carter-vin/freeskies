@@ -16,6 +16,11 @@ export default function DragableRating() {
   const [holdMouse, setHoldMouse] = useState(false);
   const [rate, setRate] = useState(0);
 
+  const handleCancelRate = () => {
+    setRate(0);
+    setHoldMouse(false);
+  };
+
   const onMouseUp = (e) => {
     e.preventDefault();
     // console.log('onMouseUp', e);
@@ -30,52 +35,66 @@ export default function DragableRating() {
 
   const onMouseMove = (e) => {
     if (holdMouse) {
-      const { layerX, layerY, target } = e.nativeEvent;
-      // console.log(
-      //   'mousemove',
-      //   layerX,
-      //   layerY,
-      //   target.offsetWidth,
-      //   e.nativeEvent
-      // );
+      const { layerX, target } = e.nativeEvent;
+      // touchevent variables
+      let startElement, moveX;
+      if (e.type === 'touchmove') {
+        startElement =
+          e.nativeEvent.targetTouches[0].target.offsetParent.offsetLeft;
+        moveX = e.nativeEvent.targetTouches[0].clientX;
+      }
 
-      const rateCalculate = convertRange(
-        layerX,
-        [0, target.offsetWidth],
-        [0, 5]
-      ).toFixed(1);
+      const value = e.type === 'touchmove' ? moveX - startElement : layerX;
+      const rateCalculate =
+        Math.round(
+          convertRange(value, [20, target.offsetWidth - 20], [0, 5]) * 100
+        ) / 100;
 
-      setRate(Number(rateCalculate));
+      let rateRountCalculate = Math.round(rateCalculate);
 
-      console.log(typeof rateCalculate);
+      if (rateRountCalculate < rateCalculate) {
+        rateRountCalculate += 0.5;
+      }
+      if (rateCalculate < 0) {
+        rateRountCalculate = 0;
+      }
+      if (rateCalculate > 5) {
+        rateRountCalculate = 5;
+      }
+
+      setRate(Number(rateRountCalculate));
     }
   };
 
   return (
-    <Popover
-      content={() => <RatingSlide defaultRate={rate} dark size="medium" />}
-      // title="Title"
-      placement="topLeft"
-      trigger="click"
-      visible={holdMouse}
-      // onVisibleChange={handleRateVisibleToggle}
-    >
-      <div className={styles.rate_container}>
-        <div
-          className={classnames(styles.dragable_area, {
-            [styles.active]: holdMouse,
-          })}
-          onMouseDown={onMouseHold}
-          onMouseUp={onMouseUp}
-          onMouseMove={onMouseMove}
-        />
-        <div className={styles.rate}>
-          <span className={styles.icon}>
-            <StarFilled />
-          </span>
-          <span className={styles.rate_text}>4.5</span>
-        </div>
+    <div className={styles.rate_container}>
+      <div
+        className={classnames(styles.dragable_area, {
+          [styles.active]: holdMouse,
+        })}
+        onMouseDown={onMouseHold}
+        onMouseUp={onMouseUp}
+        onMouseMove={onMouseMove}
+        onTouchStart={onMouseHold}
+        onTouchEnd={onMouseUp}
+        onTouchMove={onMouseMove}
+        onMouseLeave={handleCancelRate}
+      />
+
+      <div
+        className={classnames(styles.popover, {
+          [styles.active]: holdMouse,
+        })}
+      >
+        <RatingSlide defaultRate={rate} dark size="medium" />
       </div>
-    </Popover>
+
+      <div className={styles.rate}>
+        <span className={styles.icon}>
+          <StarFilled />
+        </span>
+        <span className={styles.rate_text}>4.5</span>
+      </div>
+    </div>
   );
 }
