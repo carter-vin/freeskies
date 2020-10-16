@@ -16,6 +16,10 @@
     font-size: 1em;
   }
 
+  &.large {
+    font-size: 1.3em;
+  }
+
   @include tablet {
     font-size: 2em;
   }
