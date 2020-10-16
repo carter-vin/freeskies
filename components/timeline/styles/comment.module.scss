@@ -5,6 +5,13 @@
   display: flex;
   flex-direction: column;
 
+  &.modal_mode {
+    border-color: #fff;
+    border-bottom: none;
+    border-radius: 0;
+    // background: #000;
+  }
+
   .comments_wrapper {
     flex-grow: 1;
     overflow-y: auto;

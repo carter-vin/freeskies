@@ -1,10 +1,10 @@
-import ModalWrapper from 'components/common/ModalWrapper';
+import ModalWrapperComment from 'components/common/ModalWrapperComment';
 import Comments from './Comments';
 
 export default function CommentsModal({ ...rest }) {
   return (
-    <ModalWrapper narrow_container {...rest}>
-      <Comments />
-    </ModalWrapper>
+    <ModalWrapperComment narrow_container {...rest}>
+      <Comments modalMode />
+    </ModalWrapperComment>
   );
 }

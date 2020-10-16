@@ -53,10 +53,14 @@ function CommentItem({ message, mine }) {
   );
 }
 
-export default function Comments({ show, index }) {
+export default function Comments({ show, index, modalMode = false }) {
   // if (show !== index) return null;
   return (
-    <div className={styles.comments}>
+    <div
+      className={classnames(styles.comments, {
+        [styles.modal_mode]: modalMode,
+      })}
+    >
       <div className={styles.comments_wrapper}>
         <CommentItem
           mine
