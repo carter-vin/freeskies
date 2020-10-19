@@ -7,6 +7,7 @@ import API from 'configs/API';
 import { message } from 'antd';
 import { TimeLineContext } from './storage/TimelineContext';
 import { setLoading, setTimelineData } from './actions';
+import LoadingWrapper from 'components/common/LoadingWrapper';
 
 // TODO: temporary variable
 const token =
@@ -23,7 +24,6 @@ export default function TimelinePage() {
         url: '/accounts/timeline',
         headers: { 'x-token': token },
       });
-      console.log('request', data, status);
 
       if (status === 200) {
         dispatch(setTimelineData(data));
@@ -31,10 +31,10 @@ export default function TimelinePage() {
         message.error(data?.message || 'Something wrong');
       }
 
-      setLoading(false);
+      dispatch(setLoading(false));
     } catch (error) {
       console.log(error);
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
@@ -52,7 +52,9 @@ export default function TimelinePage() {
       <div className={styles.timeline}>
         <div className={styles.feed_container}>
           <PostingPost />
-          <TimelinePosts data={storage.timelineData} />
+          <LoadingWrapper loading={storage.loading}>
+            <TimelinePosts data={storage.timelineData} />
+          </LoadingWrapper>
         </div>
       </div>
     </>
