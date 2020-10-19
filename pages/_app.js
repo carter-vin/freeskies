@@ -9,6 +9,7 @@ import 'css/global.scss';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
+import { AuthProvider } from '../helpers/services/UserController';
 
 library.add(far);
 
@@ -25,10 +26,12 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
       <ModalProvider rootComponent={TransitionGroup}>
-        <div id="app_root">
-          <Component {...pageProps} />
-        </div>
-        <div id="modal_place"></div>
+        <AuthProvider>
+          <div id="app_root">
+            <Component {...pageProps} />
+          </div>
+          <div id="modal_place"></div>
+        </AuthProvider>
       </ModalProvider>
     </>
   );

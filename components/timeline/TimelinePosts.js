@@ -11,7 +11,6 @@ import PhotosModal from '../profile/PhotosModal';
 import Avatar from '../common/Avatar';
 
 export default function TimelinePosts({ data }) {
-  console.log('data', data);
   const [commentShow, setCommentShow] = useState(null);
   const [showCommentModal, hideCommentModal] = useModal(({ in: open }) => (
     <CommentsModal

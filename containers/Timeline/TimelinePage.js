@@ -8,25 +8,29 @@ import { message } from 'antd';
 import { TimeLineContext } from './storage/TimelineContext';
 import { setLoading, setTimelineData } from './actions';
 import LoadingWrapper from 'components/common/LoadingWrapper';
+import withAuth from 'helpers/hoc/withAuth';
 
-// TODO: temporary variable
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjlDOEJEQzUzLTlFQ0MtNDFDOS05OTdELTlERkI1NkIwQzdDMSIsImNyZWF0ZWRBdCI6IjIwMjAtMTAtMTZUMTQ6MjQ6NTkuMloiLCJ1c2VybmFtZSI6ImFsZXg0IiwiZmlyc3ROYW1lIjoiQWxleCIsImxhc3ROYW1lIjoiSyIsImZlbWFsZSI6ZmFsc2UsImVtYWlsIjoiYUBhLmFhIiwicGhvbmUiOiIrMTIwMjU1NTAxNTYiLCJEb0IiOiIyMDIwLTA5LTMwIiwiaWF0IjoxNjAzMTMyMDAzLCJleHAiOjE2MDMxMzU2MDN9.3Wm6oCOxg6-8_2pM-bSah8f9KYPspOUTnrd7KmU1MEw';
-
-export default function TimelinePage() {
+function TimelinePage({ authServices, auth }) {
   const [storage, dispatch] = useContext(TimeLineContext);
 
-  const getTimeline = async () => {
+  const getTimeline = async (token) => {
+    // console.warn(authServices.auth, authServices.localstorage);
     try {
       dispatch(setLoading(true));
-      const { data, status } = await API({
+      const request = await API({
         method: 'post',
         url: '/accounts/timeline',
         headers: { 'x-token': token },
       });
+      const { data, status } = request;
 
       if (status === 200) {
         dispatch(setTimelineData(data));
+        console.log('=========');
+      } else if (status === 403) {
+        console.log('================= Refresh token !');
+
+        authServices.refreshToken(getTimeline);
       } else {
         message.error(data?.message || 'Something wrong');
       }
@@ -39,12 +43,12 @@ export default function TimelinePage() {
   };
 
   useEffect(() => {
-    getTimeline();
+    getTimeline(auth.token);
   }, []);
 
-  useEffect(() => {
-    console.log('storage', storage);
-  }, [storage]);
+  // useEffect(() => {
+  //   console.log('storage', storage);
+  // }, [storage]);
 
   return (
     <>
@@ -60,3 +64,5 @@ export default function TimelinePage() {
     </>
   );
 }
+
+export default withAuth(TimelinePage);
