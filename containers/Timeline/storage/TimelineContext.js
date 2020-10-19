@@ -15,7 +15,7 @@ function reducer(state, { type, payload }) {
       return { ...state, loading: payload };
 
     case SET_TIMELINE_DATA:
-      return { ...state, data: payload };
+      return { ...state, timelineData: [...state.timelineData, ...payload] };
 
     default:
       return state;
@@ -26,7 +26,6 @@ export const TimeLineContext = createContext([{}, () => {}]);
 
 export const TimeLineProvider = ({ children }) => {
   const value = useReducer(reducer, initialState);
-
   return (
     <TimeLineContext.Provider value={value}>
       {children}
