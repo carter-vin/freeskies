@@ -52,7 +52,7 @@ export default function TimelinePage() {
       <div className={styles.timeline}>
         <div className={styles.feed_container}>
           <PostingPost />
-          <TimelinePosts />
+          <TimelinePosts data={storage.timelineData} />
         </div>
       </div>
     </>

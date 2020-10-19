@@ -15,7 +15,7 @@ function reducer(state, { type, payload }) {
       return { ...state, loading: payload };
 
     case SET_TIMELINE_DATA:
-      return { ...state, timelineData: [...state.timelineData, ...payload] };
+      return { ...state, timelineData: payload };
 
     default:
       return state;

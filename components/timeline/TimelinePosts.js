@@ -9,7 +9,8 @@ import CommentsModal from './CommentsModal';
 import PhotosModal from '../profile/PhotosModal';
 import Avatar from '../common/Avatar';
 
-export default function TimelinePosts() {
+export default function TimelinePosts({ data }) {
+  console.log('data', data);
   const [commentShow, setCommentShow] = useState(null);
   const [showCommentModal, hideCommentModal] = useModal(({ in: open }) => (
     <CommentsModal
@@ -32,6 +33,7 @@ export default function TimelinePosts() {
 
   return (
     <div className={styles.activity_content}>
+      {JSON.stringify(data)}
       {[0, 0, 0, 0].map((item, index) => (
         <div className={styles.post} key={index}>
           <div className={styles.post_content}>
