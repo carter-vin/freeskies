@@ -1,7 +1,7 @@
 import { Input, Popover } from 'antd';
 import styles from './styles/comment.module.scss';
 import classnames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RatingSlide } from 'components/forms';
 import { StarFilled } from '@ant-design/icons';
 import TrimText from 'components/common/TrimText';
@@ -10,10 +10,11 @@ import DragableRating from '../forms/rating/DragableRating';
 
 const { TextArea } = Input;
 
-function CommentItem({ message, mine }) {
+function CommentItem({ message, mine, author, rating }) {
   const [rateVisible, setRateVisible] = useState(false);
 
   const handleRateVisibleToggle = () => setRateVisible((state) => !state);
+  const fullName = `${author.firstName} ${author.lastName}`;
 
   return (
     <div
@@ -27,7 +28,7 @@ function CommentItem({ message, mine }) {
           size={45}
           text="John"
         />
-        <DragableRating />
+        <DragableRating rating={rating} />
 
         {/* <Popover
           content={() => <RatingSlide dark size="medium" />}
@@ -47,7 +48,7 @@ function CommentItem({ message, mine }) {
       </div>
       <div className={styles.message_container}>
         <div className={styles.message}>
-          <span className={styles.author}>John Doe</span>
+          <span className={styles.author}>{fullName}</span>
           <p>
             <TrimText limit={110}>{message}</TrimText>
           </p>
@@ -57,18 +58,22 @@ function CommentItem({ message, mine }) {
   );
 }
 
-export default function Comments({ show, index, modalMode = false }) {
+export default function Comments({ data = [], modalMode = false }) {
   // if (show !== index) return null;
   const [commentText, setCommentText] = useState('');
   const [commentList, setCommentList] = useState([
-    {
-      mine: true,
-      message: `Lorem Ipsum is simply dummy text of the printing and typesetting
-  industry. Lorem Ipsum has been the industry's standard dummy text
-  ever since the 1500s`,
-    },
-    { message: 'message' },
+    //   {
+    //     mine: true,
+    //     message: `Lorem Ipsum is simply dummy text of the printing and typesetting
+    // industry. Lorem Ipsum has been the industry's standard dummy text
+    // ever since the 1500s`,
+    //   },
+    //   { message: 'message' },
   ]);
+
+  useEffect(() => {
+    setCommentList(data);
+  }, [data]);
 
   const handleEnterKey = (e) => {
     if (e.nativeEvent.keyCode === 13) {
@@ -96,8 +101,14 @@ export default function Comments({ show, index, modalMode = false }) {
       })}
     >
       <div className={styles.comments_wrapper}>
-        {commentList.map((item, index) => (
-          <CommentItem mine={item.mine} message={item.message} />
+        {commentList.map((item) => (
+          <CommentItem
+            key={item.id}
+            mine={item.mine}
+            message={item.text}
+            author={item.account}
+            rating={item.rating}
+          />
         ))}
       </div>
 

@@ -12,7 +12,7 @@ function convertRange(value, r1, r2) {
 
 // convertRange(328.17, [300.77, 559.22], [1, 10]);
 
-export default function DragableRating() {
+export default function DragableRating({ rating = 0 }) {
   const [holdMouse, setHoldMouse] = useState(false);
   const [rate, setRate] = useState(0);
 
@@ -93,7 +93,7 @@ export default function DragableRating() {
         <span className={styles.icon}>
           <StarFilled />
         </span>
-        <span className={styles.rate_text}>4.5</span>
+        <span className={styles.rate_text}>{rating || 0}</span>
       </div>
     </div>
   );
