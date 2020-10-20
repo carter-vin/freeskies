@@ -52,8 +52,7 @@ function TimelinePage({ authServices, auth }) {
         url = '/posts';
         reqData.text = dataForRequest;
       } else if (type === 'textMedia') {
-        // TODO: with media api
-        throw new Error();
+        url = '/photos';
       }
 
       const request = await API({
@@ -108,6 +107,7 @@ function TimelinePage({ authServices, auth }) {
 
       if (status === 201) {
         onUpdateTimeline();
+        message.success('Evaluate successfully');
       } else {
         message.error(data?.message || 'Something wrong');
       }
