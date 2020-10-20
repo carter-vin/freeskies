@@ -10,9 +10,7 @@ function convertRange(value, r1, r2) {
   return ((value - r1[0]) * (r2[1] - r2[0])) / (r1[1] - r1[0]) + r2[0];
 }
 
-// convertRange(328.17, [300.77, 559.22], [1, 10]);
-
-export default function DragableRating() {
+export default function DragableRating({ rating = 0, handleRateComment }) {
   const [holdMouse, setHoldMouse] = useState(false);
   const [rate, setRate] = useState(0);
 
@@ -24,6 +22,7 @@ export default function DragableRating() {
   const onMouseUp = (e) => {
     e.preventDefault();
     // console.log('onMouseUp', e);
+    handleRateComment(rate);
     setHoldMouse(false);
   };
 
@@ -93,7 +92,7 @@ export default function DragableRating() {
         <span className={styles.icon}>
           <StarFilled />
         </span>
-        <span className={styles.rate_text}>4.5</span>
+        <span className={styles.rate_text}>{rating || 0}</span>
       </div>
     </div>
   );

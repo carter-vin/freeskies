@@ -2,6 +2,7 @@ import styles from './styles/timeline-post.module.scss';
 import classnames from 'classnames';
 import Comments from './Comments';
 import { useState } from 'react';
+import moment from 'moment';
 import Actions from './Actions';
 import TrimText from '../common/TrimText';
 import { useModal } from 'react-modal-hook';
@@ -9,10 +10,12 @@ import CommentsModal from './CommentsModal';
 import PhotosModal from '../profile/PhotosModal';
 import Avatar from '../common/Avatar';
 
-export default function TimelinePosts() {
-  const [commentShow, setCommentShow] = useState(null);
+export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
+  const [activePostData, setActivePostData] = useState({});
   const [showCommentModal, hideCommentModal] = useModal(({ in: open }) => (
     <CommentsModal
+      postData={activePostData}
+      onUpdateTimeline={onUpdateTimeline}
       title="Comments"
       showModal={open}
       onClose={hideCommentModal}
@@ -27,12 +30,92 @@ export default function TimelinePosts() {
     />
   ));
 
+  const handleShowCommentModal = (data) => {
+    console.log(data);
+    setActivePostData(data);
+    showCommentModal();
+  };
+
   const toggleCommentShow = (index) =>
     setCommentShow(commentShow === index ? null : index);
 
   return (
     <div className={styles.activity_content}>
-      {[0, 0, 0, 0].map((item, index) => (
+      {data.map((item, index) => {
+        const { account, profilePhoto, createdAt, type, comments } = item;
+        const fullName = `${account?.firstName} ${account?.lastName}`;
+        return (
+          <div className={styles.post} key={item.id}>
+            <div className={styles.post_content}>
+              <div
+                className={classnames(styles.image, {
+                  // [styles.grid_2]: index === 1,
+                  // [styles.grid_3]: index === 2,
+                  // [styles.grid_4]: index === 3,
+                })}
+              >
+                {type === 'Photo' && (
+                  <div className={styles.image_item} onClick={showPhotoModal}>
+                    <img src={item.src} alt="" />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className={styles.post_header}>
+              <div className={styles.avatar}>
+                <Avatar
+                  text={fullName}
+                  url={profilePhoto}
+                  size={80}
+                  borderSize={3}
+                />
+              </div>
+
+              <div className={styles.user_info}>
+                <p className={styles.user_name}>{fullName}</p>
+              </div>
+            </div>
+            <p className={styles.date}>
+              {moment(createdAt).format('MMM DD, YYYY - HH:mm A')}
+            </p>
+
+            <p className={styles.description}>
+              <TrimText limit={110}>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into
+                electronic typesetting, remaining essentially unchanged. It was
+                popularised in the 1960s with the release of Letraset sheets
+                containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of
+                Lorem Ipsum.
+              </TrimText>
+            </p>
+            <Comments
+              id={item.id}
+              type={item.type}
+              data={comments}
+              onUpdateTimeline={onUpdateTimeline}
+            />
+            <Actions
+              id={item.id}
+              type={item.type}
+              postRate={item.rating}
+              comments={comments}
+              onRatePost={onRatePost}
+              index={index}
+              actions={{
+                handleShowCommentModal: () => {
+                  handleShowCommentModal(item);
+                },
+              }}
+            />
+          </div>
+        );
+      })}
+      {/* {[0, 0, 0, 0].map((item, index) => (
         <div className={styles.post} key={index}>
           <div className={styles.post_content}>
             <div
@@ -148,14 +231,7 @@ export default function TimelinePosts() {
                 borderSize={3}
               />
             </div>
-            {/* <div className={styles.avatar}>
-              <img
-                src={`https://api.adorable.io/avatars/50/adorable${
-                  index + 5
-                }.png`}
-                alt="avatar"
-              />
-            </div> */}
+
             <div className={styles.user_info}>
               <p className={styles.user_name}>John Doe</p>
             </div>
@@ -182,7 +258,7 @@ export default function TimelinePosts() {
             actions={{ toggleCommentShow, showCommentModal }}
           />
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
