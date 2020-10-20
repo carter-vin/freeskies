@@ -1,8 +1,25 @@
-import { SET_LOADING } from '../storage/TimelineContext';
+import { SET_LOADING, SET_POSTING_LOADING } from '../storage/TimelineContext';
 
-const setLoading = (state) => {
+function getLoadingType(type) {
+  switch (type) {
+    case 'timeline':
+      return SET_LOADING;
+    case 'posting':
+      return SET_POSTING_LOADING;
+    default:
+      return '';
+  }
+}
+
+/**
+ *
+ * @param  {boolean} state
+ * @param  {string} type ["timeline", "posting"]
+ * @return
+ */
+const setLoading = (state, type = 'timeline') => {
   return {
-    type: SET_LOADING,
+    type: getLoadingType(type),
     payload: state,
   };
 };
