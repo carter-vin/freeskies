@@ -8,6 +8,7 @@ import API from 'configs/API';
 import { message } from 'antd';
 import DragableRating from '../forms/rating/DragableRating';
 import withAuth from 'helpers/hoc/withAuth';
+import RatingSlide from '../forms/rating/RatingSlide';
 
 const { TextArea } = Input;
 
@@ -30,7 +31,14 @@ function CommentItem({ message, mine, author, rating, id, onRateComment }) {
           size={45}
           text={fullName}
         />
-        <DragableRating rating={rating} handleRateComment={handleRateComment} />
+        <RatingSlide
+          defaultRate={rating}
+          withoutText
+          dark
+          size="small"
+          onChange={handleRateComment}
+        />
+        {/* <DragableRating rating={rating} handleRateComment={handleRateComment} /> */}
       </div>
       <div className={styles.message_container}>
         <div className={styles.message}>

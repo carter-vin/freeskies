@@ -3,7 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './styles/rating.module.scss';
 import classnames from 'classnames';
 
-export default function RatingSlide({ dark, size, defaultRate = 0, onChange }) {
+export default function RatingSlide({
+  dark,
+  size,
+  defaultRate = 0,
+  onChange,
+  withoutText,
+}) {
   const sliderRef = useRef(null);
 
   const [rate, setRate] = useState(0);
@@ -57,7 +63,9 @@ export default function RatingSlide({ dark, size, defaultRate = 0, onChange }) {
           />
         </div>
       </div>
-      <span className={styles.rating_text}>{rate.toFixed(1)}</span>
+      {!withoutText && (
+        <span className={styles.rating_text}>{rate.toFixed(1)}</span>
+      )}
     </div>
   );
 }
