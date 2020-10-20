@@ -51,6 +51,9 @@ function TimelinePage({ authServices, auth }) {
       if (type === 'text') {
         url = '/posts';
         reqData.text = dataForRequest;
+      } else if (type === 'textMedia') {
+        // TODO: with media api
+        throw new Error();
       }
 
       const request = await API({
