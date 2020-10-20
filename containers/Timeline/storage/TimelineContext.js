@@ -2,16 +2,21 @@ import { createContext, useReducer, useState } from 'react';
 
 // Actions Type
 export const SET_LOADING = 'timeline/SET_LOADING';
+export const SET_POSTING_LOADING = 'timeline/SET_POSTING_LOADING';
 export const SET_TIMELINE_DATA = 'timeline/SET_TIMELINE_DATA';
 
 const initialState = {
   loading: false,
+  postingLoading: false,
   timelineData: [],
 };
 
 function reducer(state, { type, payload }) {
   switch (type) {
     case SET_LOADING:
+      return { ...state, loading: payload };
+
+    case SET_POSTING_LOADING:
       return { ...state, loading: payload };
 
     case SET_TIMELINE_DATA:
