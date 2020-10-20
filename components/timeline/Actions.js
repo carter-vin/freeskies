@@ -17,6 +17,7 @@ export default function Actions({
   onRatePost,
   id,
   type,
+  comments,
 }) {
   const [rateVisible, setRateVisible] = useState(false);
   const handleRateVisibleToggle = () => setRateVisible((state) => !state);
@@ -62,11 +63,11 @@ export default function Actions({
       <Tooltip placement="top" title={'Comments'}>
         <div
           className={styles.icon_container}
-          onClick={() => actions.showCommentModal()}
+          onClick={actions.showCommentModal}
         >
           <FontAwesomeIcon icon={['far', 'comment-alt']} />
           {/* <MessageFilled /> */}
-          <span className={styles.comment_count}>2</span>
+          <span className={styles.comment_count}>{comments.length}</span>
         </div>
       </Tooltip>
     </div>

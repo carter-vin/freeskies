@@ -95,9 +95,10 @@ export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
               id={item.id}
               type={item.type}
               postRate={item.rating}
+              comments={comments}
               onRatePost={onRatePost}
               index={index}
-              actions={{ toggleCommentShow, showCommentModal }}
+              actions={{ showCommentModal }}
             />
           </div>
         );
