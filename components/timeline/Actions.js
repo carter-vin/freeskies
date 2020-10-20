@@ -63,7 +63,7 @@ export default function Actions({
       <Tooltip placement="top" title={'Comments'}>
         <div
           className={styles.icon_container}
-          onClick={actions.showCommentModal}
+          onClick={actions.handleShowCommentModal}
         >
           <FontAwesomeIcon icon={['far', 'comment-alt']} />
           {/* <MessageFilled /> */}

@@ -11,9 +11,11 @@ import PhotosModal from '../profile/PhotosModal';
 import Avatar from '../common/Avatar';
 
 export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
-  const [commentShow, setCommentShow] = useState(null);
+  const [activePostData, setActivePostData] = useState({});
   const [showCommentModal, hideCommentModal] = useModal(({ in: open }) => (
     <CommentsModal
+      postData={activePostData}
+      onUpdateTimeline={onUpdateTimeline}
       title="Comments"
       showModal={open}
       onClose={hideCommentModal}
@@ -27,6 +29,12 @@ export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
       onClose={hidePhotoModal}
     />
   ));
+
+  const handleShowCommentModal = (data) => {
+    console.log(data);
+    setActivePostData(data);
+    showCommentModal();
+  };
 
   const toggleCommentShow = (index) =>
     setCommentShow(commentShow === index ? null : index);
@@ -98,7 +106,11 @@ export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
               comments={comments}
               onRatePost={onRatePost}
               index={index}
-              actions={{ showCommentModal }}
+              actions={{
+                handleShowCommentModal: () => {
+                  handleShowCommentModal(item);
+                },
+              }}
             />
           </div>
         );
