@@ -76,7 +76,7 @@ export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
               </div>
             </div>
             <p className={styles.date}>
-              {moment(createdAt).format('DD MMM YYYY - HH:mm A')}
+              {moment(createdAt).format('MMM DD, YYYY - HH:mm A')}
             </p>
 
             <p className={styles.description}>
