@@ -13,10 +13,10 @@ import withAuth from 'helpers/hoc/withAuth';
 function TimelinePage({ authServices, auth }) {
   const [storage, dispatch] = useContext(TimeLineContext);
 
-  const getTimeline = async (token) => {
+  const getTimeline = async (token, withoutLoading = false) => {
     // console.warn(authServices.auth, authServices.localstorage);
     try {
-      dispatch(setLoading(true));
+      if (!withoutLoading) dispatch(setLoading(true));
       const request = await API({
         method: 'post',
         url: '/accounts/timeline',
@@ -35,10 +35,37 @@ function TimelinePage({ authServices, auth }) {
         message.error(data?.message || 'Something wrong');
       }
 
-      dispatch(setLoading(false));
+      if (!withoutLoading) dispatch(setLoading(false));
     } catch (error) {
       console.log(error);
-      dispatch(setLoading(false));
+      if (!withoutLoading) dispatch(setLoading(false));
+    }
+  };
+
+  const createPost = async (text) => {
+    try {
+      dispatch(setLoading(true, 'posting'));
+      const request = await API({
+        method: 'post',
+        url: '/posts',
+        data: {
+          text,
+        },
+        headers: { 'x-token': auth.token },
+      });
+      const { data, status } = request;
+
+      console.warn('createPost', data, status);
+
+      if (status === 200) {
+        getTimeline(auth.token, true);
+      } else {
+        message.error(data?.message || 'Something wrong');
+      }
+
+      dispatch(setLoading(false, 'posting'));
+    } catch (error) {
+      dispatch(setLoading(false, 'posting'));
     }
   };
 
@@ -55,7 +82,7 @@ function TimelinePage({ authServices, auth }) {
       <Header />
       <div className={styles.timeline}>
         <div className={styles.feed_container}>
-          <PostingPost />
+          <PostingPost onPosting={createPost} />
           <LoadingWrapper loading={storage.loading}>
             <TimelinePosts data={storage.timelineData} />
           </LoadingWrapper>
