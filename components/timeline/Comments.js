@@ -65,7 +65,7 @@ function Comments({
 
   useEffect(() => {
     setCommentList(data);
-  }, [data]);
+  }, []);
 
   const handleEnterKey = (e) => {
     if (e.nativeEvent.keyCode === 13) {
@@ -82,7 +82,7 @@ function Comments({
   };
 
   const onComment = async (type, postId, text) => {
-    console.log(type, text, postId);
+    // console.log(type, text, postId);
     try {
       let url = '';
 
@@ -152,7 +152,7 @@ function Comments({
       })}
     >
       <div className={styles.comments_wrapper}>
-        {commentList.map((item) => (
+        {(modalMode ? commentList : commentList.slice(0, 2)).map((item) => (
           <CommentItem
             key={item.id}
             id={item.id}
