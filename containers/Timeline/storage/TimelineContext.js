@@ -17,7 +17,7 @@ function reducer(state, { type, payload }) {
       return { ...state, loading: payload };
 
     case SET_POSTING_LOADING:
-      return { ...state, loading: payload };
+      return { ...state, postingLoading: payload };
 
     case SET_TIMELINE_DATA:
       return { ...state, timelineData: payload };

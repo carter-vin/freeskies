@@ -42,28 +42,36 @@ function TimelinePage({ authServices, auth }) {
     }
   };
 
-  const createPost = async (text) => {
+  const createPost = async (dataForRequest, type) => {
     try {
       dispatch(setLoading(true, 'posting'));
+      let reqData = {};
+      let url = '';
+
+      if (type === 'text') {
+        url = '/posts';
+        reqData.text = dataForRequest;
+      }
+
       const request = await API({
         method: 'post',
-        url: '/posts',
-        data: {
-          text,
-        },
+        url,
+        data: reqData,
         headers: { 'x-token': auth.token },
       });
       const { data, status } = request;
 
       console.warn('createPost', data, status);
 
-      if (status === 200) {
+      if (status === 201) {
         getTimeline(auth.token, true);
       } else {
         message.error(data?.message || 'Something wrong');
       }
 
       dispatch(setLoading(false, 'posting'));
+
+      return await request;
     } catch (error) {
       dispatch(setLoading(false, 'posting'));
     }
@@ -82,7 +90,10 @@ function TimelinePage({ authServices, auth }) {
       <Header />
       <div className={styles.timeline}>
         <div className={styles.feed_container}>
-          <PostingPost onPosting={createPost} />
+          <PostingPost
+            loading={storage.postingLoading}
+            onPosting={createPost}
+          />
           <LoadingWrapper loading={storage.loading}>
             <TimelinePosts data={storage.timelineData} />
           </LoadingWrapper>
