@@ -10,7 +10,14 @@ import styles from './styles/actions.module.scss';
 import RatingSlide from '../forms/rating/RatingSlide';
 import { useState } from 'react';
 
-export default function Actions({ actions, index }) {
+export default function Actions({
+  actions,
+  index,
+  postRate,
+  onRatePost,
+  id,
+  type,
+}) {
   const [rateVisible, setRateVisible] = useState(false);
   const handleRateVisibleToggle = () => setRateVisible((state) => !state);
 
@@ -18,7 +25,16 @@ export default function Actions({ actions, index }) {
     <div className={styles.post_actions}>
       <Tooltip placement="top" title={'Rating'}>
         <Popover
-          content={() => <RatingSlide dark size="large" />}
+          content={() => (
+            <RatingSlide
+              dark
+              size="large"
+              defaultRate={postRate}
+              onChange={(rate) => {
+                onRatePost(type, id, rate);
+              }}
+            />
+          )}
           // title="Title"
           placement="topLeft"
           trigger="click"
@@ -27,7 +43,7 @@ export default function Actions({ actions, index }) {
         >
           <div className={styles.icon_container}>
             <FontAwesomeIcon icon={['far', 'star']} />
-            {/* <StarFilled /> */}
+            <span style={{ marginLeft: 5 }}>{postRate || 0}</span>
           </div>
         </Popover>
       </Tooltip>

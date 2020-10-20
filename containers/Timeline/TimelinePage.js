@@ -80,6 +80,46 @@ function TimelinePage({ authServices, auth }) {
     }
   };
 
+  const ratePost = async (type, postId, rate) => {
+    try {
+      dispatch(setLoading(true, 'posting'));
+      let url = '';
+
+      if (type === 'Photo') {
+        url = '/photos/rate';
+      } else if (type === 'VideoClip') {
+        url = '/video-clips/rate';
+      } else if (type === 'Item') {
+        url = '/items/rate';
+      }
+
+      const request = await API({
+        method: 'post',
+        url,
+        data: {
+          rated: postId,
+          rating: rate,
+        },
+        headers: { 'x-token': auth.token },
+      });
+      const { data, status } = request;
+
+      console.warn('ratePost', data, status);
+
+      if (status === 201) {
+        onUpdateTimeline();
+      } else {
+        message.error(data?.message || 'Something wrong');
+      }
+
+      dispatch(setLoading(false, 'posting'));
+
+      return await request;
+    } catch (error) {
+      dispatch(setLoading(false, 'posting'));
+    }
+  };
+
   const onUpdateTimeline = () => {
     getTimeline(auth.token, true);
   };
@@ -105,6 +145,7 @@ function TimelinePage({ authServices, auth }) {
             <TimelinePosts
               data={storage.timelineData}
               onUpdateTimeline={onUpdateTimeline}
+              onRatePost={ratePost}
             />
           </LoadingWrapper>
         </div>

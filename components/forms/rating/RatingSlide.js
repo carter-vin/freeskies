@@ -3,13 +3,28 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './styles/rating.module.scss';
 import classnames from 'classnames';
 
-export default function RatingSlide({ dark, size, defaultRate = 0 }) {
+export default function RatingSlide({ dark, size, defaultRate = 0, onChange }) {
   const sliderRef = useRef(null);
 
   const [rate, setRate] = useState(0);
+  const [blockRequest, setBlockRequest] = useState(true);
+
+  const handleChange = (value) => {
+    setBlockRequest(false);
+    setRate(value);
+  };
+
+  const handleChangeRate = () => {
+    if (!blockRequest && onChange) onChange(rate);
+    setBlockRequest(true);
+
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > 0) {
+      sliderRef.current.blur(); // fix mozilla problem
+    }
+  };
 
   useEffect(() => {
-    setRate(defaultRate);
+    setRate(defaultRate || 0);
   }, [defaultRate]);
 
   return (
@@ -32,10 +47,10 @@ export default function RatingSlide({ dark, size, defaultRate = 0 }) {
             ref={sliderRef}
             min={0}
             max={5}
-            onChange={setRate}
+            onChange={handleChange}
             tooltipVisible={false}
             onAfterChange={() => {
-              sliderRef.current.blur(); // fix mozilla problem
+              handleChangeRate();
             }}
             value={rate}
             step={0.5}

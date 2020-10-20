@@ -10,7 +10,7 @@ import CommentsModal from './CommentsModal';
 import PhotosModal from '../profile/PhotosModal';
 import Avatar from '../common/Avatar';
 
-export default function TimelinePosts({ data, onUpdateTimeline }) {
+export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
   const [commentShow, setCommentShow] = useState(null);
   const [showCommentModal, hideCommentModal] = useModal(({ in: open }) => (
     <CommentsModal
@@ -92,6 +92,10 @@ export default function TimelinePosts({ data, onUpdateTimeline }) {
               onUpdateTimeline={onUpdateTimeline}
             />
             <Actions
+              id={item.id}
+              type={item.type}
+              postRate={item.rating}
+              onRatePost={onRatePost}
               index={index}
               actions={{ toggleCommentShow, showCommentModal }}
             />
