@@ -67,7 +67,7 @@ function TimelinePage({ authServices, auth }) {
       console.warn('createPost', data, status);
 
       if (status === 201) {
-        getTimeline(auth.token, true);
+        onUpdateTimeline();
       } else {
         message.error(data?.message || 'Something wrong');
       }
@@ -78,6 +78,10 @@ function TimelinePage({ authServices, auth }) {
     } catch (error) {
       dispatch(setLoading(false, 'posting'));
     }
+  };
+
+  const onUpdateTimeline = () => {
+    getTimeline(auth.token, true);
   };
 
   useEffect(() => {
@@ -98,7 +102,10 @@ function TimelinePage({ authServices, auth }) {
             onPosting={createPost}
           />
           <LoadingWrapper loading={storage.loading}>
-            <TimelinePosts data={storage.timelineData} />
+            <TimelinePosts
+              data={storage.timelineData}
+              onUpdateTimeline={onUpdateTimeline}
+            />
           </LoadingWrapper>
         </div>
       </div>

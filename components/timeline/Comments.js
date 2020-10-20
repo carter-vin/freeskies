@@ -2,19 +2,21 @@ import { Input, Popover } from 'antd';
 import styles from './styles/comment.module.scss';
 import classnames from 'classnames';
 import { useEffect, useState } from 'react';
-import { RatingSlide } from 'components/forms';
-import { StarFilled } from '@ant-design/icons';
 import TrimText from 'components/common/TrimText';
 import Avatar from '../common/Avatar';
+import API from 'configs/API';
+import { message } from 'antd';
 import DragableRating from '../forms/rating/DragableRating';
+import withAuth from 'helpers/hoc/withAuth';
 
 const { TextArea } = Input;
 
-function CommentItem({ message, mine, author, rating }) {
-  const [rateVisible, setRateVisible] = useState(false);
+function CommentItem({ message, mine, author, rating, id, onRateComment }) {
+  const fullName = `${author?.firstName} ${author?.lastName}`;
 
-  const handleRateVisibleToggle = () => setRateVisible((state) => !state);
-  const fullName = `${author.firstName} ${author.lastName}`;
+  const handleRateComment = (rate) => {
+    onRateComment(id, rate);
+  };
 
   return (
     <div
@@ -26,25 +28,9 @@ function CommentItem({ message, mine, author, rating }) {
         <Avatar
           url={mine ? 'https://api.adorable.io/avatars/50/adorable.png' : null}
           size={45}
-          text="John"
+          text={fullName}
         />
-        <DragableRating rating={rating} />
-
-        {/* <Popover
-          content={() => <RatingSlide dark size="medium" />}
-          // title="Title"
-          placement="right"
-          trigger="click"
-          visible={rateVisible}
-          onVisibleChange={handleRateVisibleToggle}
-        >
-          <div className={styles.rate}>
-            <span className={styles.icon}>
-              <StarFilled />
-            </span>
-            <span className={styles.rate_text}>4.5</span>
-          </div>
-        </Popover> */}
+        <DragableRating rating={rating} handleRateComment={handleRateComment} />
       </div>
       <div className={styles.message_container}>
         <div className={styles.message}>
@@ -58,8 +44,14 @@ function CommentItem({ message, mine, author, rating }) {
   );
 }
 
-export default function Comments({ data = [], modalMode = false }) {
-  // if (show !== index) return null;
+function Comments({
+  data = [],
+  modalMode = false,
+  id,
+  type,
+  auth,
+  onUpdateTimeline,
+}) {
   const [commentText, setCommentText] = useState('');
   const [commentList, setCommentList] = useState([
     //   {
@@ -78,20 +70,79 @@ export default function Comments({ data = [], modalMode = false }) {
   const handleEnterKey = (e) => {
     if (e.nativeEvent.keyCode === 13) {
       e.preventDefault();
-      console.log('object');
-      setCommentList((comments) => [
-        ...comments,
-        {
-          mine: true,
-          message: commentText,
-        },
-      ]);
+
+      onComment(type, id, commentText);
+
       setCommentText('');
     }
   };
 
   const handleChangeText = (e) => {
     setCommentText(e.target.value);
+  };
+
+  const onComment = async (type, postId, text) => {
+    console.log(type, text, postId);
+    try {
+      let url = '';
+
+      if (type === 'Photo') {
+        url = '/photos/comment';
+      } else if (type === 'VideoClip') {
+        url = '/video-clips/comment';
+      } else if (type === 'Item') {
+        url = '/items/comment';
+      }
+
+      const request = await API({
+        method: 'post',
+        url,
+        data: {
+          text,
+          commented: postId,
+        },
+        headers: { 'x-token': auth.token },
+      });
+      const { data, status } = request;
+
+      if (status === 201) {
+        onUpdateTimeline();
+        message.success('Your comment published successfuly');
+      } else {
+        message.error(data?.message || 'Something wrong');
+        throw new Error();
+      }
+
+      return await request;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onRateComment = async (commentId, rate) => {
+    console.log(commentId, rate);
+    try {
+      const request = await API({
+        method: 'post',
+        url: '/comments/rate',
+        data: {
+          rated: commentId,
+          rating: rate,
+        },
+        headers: { 'x-token': auth.token },
+      });
+      const { data, status } = request;
+
+      if (status === 201) {
+        onUpdateTimeline();
+        message.success('Your comment published successfuly');
+      } else {
+        message.error(data?.message || 'Something wrong');
+        throw new Error();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -104,10 +155,12 @@ export default function Comments({ data = [], modalMode = false }) {
         {commentList.map((item) => (
           <CommentItem
             key={item.id}
+            id={item.id}
             mine={item.mine}
             message={item.text}
             author={item.account}
             rating={item.rating}
+            onRateComment={onRateComment}
           />
         ))}
       </div>
@@ -133,3 +186,5 @@ export default function Comments({ data = [], modalMode = false }) {
     </div>
   );
 }
+
+export default withAuth(Comments);

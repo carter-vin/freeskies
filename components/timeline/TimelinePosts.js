@@ -10,7 +10,7 @@ import CommentsModal from './CommentsModal';
 import PhotosModal from '../profile/PhotosModal';
 import Avatar from '../common/Avatar';
 
-export default function TimelinePosts({ data }) {
+export default function TimelinePosts({ data, onUpdateTimeline }) {
   const [commentShow, setCommentShow] = useState(null);
   const [showCommentModal, hideCommentModal] = useModal(({ in: open }) => (
     <CommentsModal
@@ -85,7 +85,12 @@ export default function TimelinePosts({ data }) {
                 Lorem Ipsum.
               </TrimText>
             </p>
-            <Comments data={comments} />
+            <Comments
+              id={item.id}
+              type={item.type}
+              data={comments}
+              onUpdateTimeline={onUpdateTimeline}
+            />
             <Actions
               index={index}
               actions={{ toggleCommentShow, showCommentModal }}
