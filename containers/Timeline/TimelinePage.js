@@ -8,7 +8,7 @@ import { message } from 'antd';
 import { TimeLineContext } from './storage/TimelineContext';
 import { setLoading, setTimelineData } from './actions';
 import LoadingWrapper from 'components/common/LoadingWrapper';
-import withAuth from 'helpers/hoc/withAuth';
+import requireAuth from '../../helpers/hoc/requireAuth';
 
 function TimelinePage({ authServices, auth }) {
   const [storage, dispatch] = useContext(TimeLineContext);
@@ -154,4 +154,4 @@ function TimelinePage({ authServices, auth }) {
   );
 }
 
-export default withAuth(TimelinePage);
+export default requireAuth(TimelinePage);
