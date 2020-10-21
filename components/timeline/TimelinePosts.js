@@ -25,7 +25,6 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
   ));
 
   const handleShowCommentModal = (selectedPost) => {
-    console.log('comments', selectedPost.comments);
     setActivePostId(selectedPost.id);
     modalActions.show('commentModal', { foo: 'bar' });
   };

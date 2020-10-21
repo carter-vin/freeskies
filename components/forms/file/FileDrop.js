@@ -1,21 +1,20 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FileDrop as FileDropWrapper } from 'react-file-drop';
 import styles from './styles/file-drop.module.scss';
 import { FileFilled, DeleteFilled } from '@ant-design/icons';
 
-export default function FileDrop() {
+export default function FileDrop({ onChange, files }) {
   const [fileStorage, setFileStorage] = useState([]);
   const fileInputRef = useRef(null);
 
   const handleChangeFileStorage = (newFiles) => {
     const fileArr = [...newFiles];
-    console.warn(fileArr);
 
     setFileStorage((state) => [...state, ...fileArr]);
   };
 
   const handleRemoveFile = (index) => {
-    const cpFilesArr = [...fileStorage];
+    const cpFilesArr = [...files];
 
     cpFilesArr.splice(index, 1);
 
@@ -23,13 +22,17 @@ export default function FileDrop() {
   };
 
   const onFileInputChange = (event) => {
-    const { files } = event.target;
-    handleChangeFileStorage(files);
+    const fileFromInput = event.target.files;
+    handleChangeFileStorage(fileFromInput);
   };
 
   const onTargetClick = () => {
     fileInputRef.current.click();
   };
+
+  useEffect(() => {
+    if (onChange) onChange(fileStorage);
+  }, [fileStorage]);
 
   return (
     <div>
