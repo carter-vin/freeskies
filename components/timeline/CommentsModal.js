@@ -3,8 +3,9 @@ import ModalWrapperComment from 'components/common/ModalWrapperComment';
 import Comments from './Comments';
 
 function CommentsModal({ postData, activePostId, onUpdateTimeline, ...rest }) {
-  const data = postData.filter((d) => d.id)[0];
+  const data = postData.filter((d) => d.id === activePostId)[0];
   console.log('@===', postData, activePostId, data);
+  console.log('####', rest);
   return (
     <ModalWrapperComment narrow_container {...rest}>
       <Comments
