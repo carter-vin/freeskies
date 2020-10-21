@@ -3,6 +3,8 @@ import { CloseOutlined, CloseCircleFilled } from '@ant-design/icons';
 import styles from './styles/modal.module.scss';
 import classnames from 'classnames';
 
+ReactModal.setAppElement('#modal_place');
+
 const customStyles = {
   content: {
     // width: '50%',
