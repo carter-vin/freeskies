@@ -3,8 +3,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import _ from 'lodash';
+import { connect } from 'react-redux';
+import Avatar from '../common/Avatar';
 
-export default function Header({ withoutSearch }) {
+function Header({ withoutSearch, user }) {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -59,7 +61,7 @@ export default function Header({ withoutSearch }) {
               </>
             )}
           </div>
-          <UserProfile />
+          <UserProfile user={user} />
         </div>
       </div>
       <div className={styles.additional_header} />
@@ -67,7 +69,7 @@ export default function Header({ withoutSearch }) {
   );
 }
 
-function UserProfile() {
+function UserProfile({ user = {} }) {
   const router = useRouter();
   return (
     <div
@@ -77,12 +79,19 @@ function UserProfile() {
       }}
     >
       <div className={styles.avatar}>
-        <img
+        <Avatar size={40} text={user?.firstName} />
+        {/* <img
           src="https://api.adorable.io/avatars/128/adorable.png"
           alt="avatar"
-        />
+        /> */}
       </div>
-      <span className={styles.name}>John</span>
+      <span className={styles.name}>{`${user?.firstName}`}</span>
     </div>
   );
 }
+
+const mapStateToProps = (store) => ({
+  user: store.auth.user,
+});
+
+export default connect(mapStateToProps)(Header);
