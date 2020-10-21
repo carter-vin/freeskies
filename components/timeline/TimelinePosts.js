@@ -9,18 +9,12 @@ import { useModal } from 'react-modal-hook';
 import CommentsModal from './CommentsModal';
 import PhotosModal from '../profile/PhotosModal';
 import Avatar from '../common/Avatar';
+import { show } from 'redux-modal';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
-  const [activePostData, setActivePostData] = useState({});
-  const [showCommentModal, hideCommentModal] = useModal(({ in: open }) => (
-    <CommentsModal
-      postData={activePostData}
-      onUpdateTimeline={onUpdateTimeline}
-      title="Comments"
-      showModal={open}
-      onClose={hideCommentModal}
-    />
-  ));
+function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
+  const [activePostId, setActivePostId] = useState(null);
 
   const [showPhotoModal, hidePhotoModal] = useModal(({ in: open }) => (
     <PhotosModal
@@ -30,10 +24,10 @@ export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
     />
   ));
 
-  const handleShowCommentModal = (data) => {
-    console.log(data);
-    setActivePostData(data);
-    showCommentModal();
+  const handleShowCommentModal = (selectedPost) => {
+    console.log(selectedPost);
+    setActivePostId(selectedPost.id);
+    modalActions.show('commentModal');
   };
 
   const toggleCommentShow = (index) =>
@@ -115,6 +109,15 @@ export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
           </div>
         );
       })}
+
+      <CommentsModal
+        activePostId={activePostId}
+        postData={data}
+        onUpdateTimeline={onUpdateTimeline}
+        title="Comments"
+        // showModal={open}
+        // onClose={hideCommentModal}
+      />
       {/* {[0, 0, 0, 0].map((item, index) => (
         <div className={styles.post} key={index}>
           <div className={styles.post_content}>
@@ -262,3 +265,9 @@ export default function TimelinePosts({ data, onUpdateTimeline, onRatePost }) {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  modalActions: bindActionCreators({ show }, dispatch),
+});
+
+export default connect(null, mapDispatchToProps)(TimelinePosts);
