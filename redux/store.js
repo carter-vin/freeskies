@@ -21,5 +21,5 @@ const enhacer = () => {
 
 export const makeStore = (context) => createStore(rootReducer, enhacer());
 
-export const wrapper = createWrapper(makeStore, { debug: true });
+export const wrapper = createWrapper(makeStore, { debug: false });
 makeStore().dispatch({ type: '@@redux/INIT' });
