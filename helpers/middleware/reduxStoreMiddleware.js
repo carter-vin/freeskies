@@ -5,7 +5,26 @@ import {
   SET_AUTHORIZED,
   SET_USER_DATA,
 } from '../../redux/reducers/authReducer';
+import Router from 'next/router';
 import { saveSession } from 'helpers/services/session';
+
+function getRedirectTo() {
+  if (typeof window !== 'undefined' && window.location) {
+    return window.location;
+  }
+  return {};
+}
+
+const redirectToLogin = () => {
+  const redir = getRedirectTo();
+  Router.replace(
+    `/login?r=${redir.pathname + encodeURIComponent(redir.search)}`,
+    '/login',
+    { shallow: true }
+  );
+
+  setLocalStorage({});
+};
 
 const getUserData = async (store) => {
   try {
@@ -35,7 +54,7 @@ const getUserData = async (store) => {
       store.dispatch({ type: '@@auth/REFRESH_TOKEN', payload: getUserData });
     }
 
-    console.log('getUserData', data);
+    // console.log('getUserData', data);
     return request;
   } catch (error) {
     console.log('getUserData', error);
@@ -70,7 +89,7 @@ const refreshToken = async (store, callback) => {
       throw new Error();
     }
   } catch (error) {
-    // redirectToLogin();
+    redirectToLogin();
     console.error('refreshToken', error);
   }
 };
