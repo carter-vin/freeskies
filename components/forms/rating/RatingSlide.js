@@ -59,7 +59,7 @@ export default function RatingSlide({
               handleChangeRate();
             }}
             value={rate}
-            step={0.5}
+            step={1}
           />
         </div>
       </div>
