@@ -3,8 +3,9 @@ import { useModal } from 'react-modal-hook';
 import Header from 'components/header/Header';
 import PhotosModal from 'components/profile/PhotosModal';
 import styles from './styles/photos.module.scss';
+import requireAuth from 'helpers/hoc/requireAuth';
 
-export default function Photos() {
+function Photos({ auth: { user } }) {
   const [showModal, hideModal] = useModal(({ in: open }) => (
     <PhotosModal title="Photo detail" showModal={open} onClose={hideModal} />
   ));
@@ -22,17 +23,14 @@ export default function Photos() {
         <div className={styles.page_title}>Photos</div>
 
         <div className={styles.content}>
-          {[0, 0, 0, 0, 0, 0, 0, 0, 0].map((item, index) => (
+          {user?.recentPhotos.map((item) => (
             <div
               className={styles.photo_container}
-              key={index}
+              key={item.id}
               onClick={showModal}
             >
               <div className={styles.photo}>
-                <img
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
+                <img src={item.src} alt="" />
               </div>
             </div>
           ))}
@@ -41,3 +39,5 @@ export default function Photos() {
     </div>
   );
 }
+
+export default requireAuth(Photos);
