@@ -78,12 +78,13 @@ function Profile({ auth: { user } }) {
               </div>
               <div className={styles.right_side}>
                 <div className={styles.user_actions}>
-                  <p className={styles.followers}>
+                  {/* TODO: show this button and followers text another user page */}
+                  {/* <p className={styles.followers}>
                     {user?.followingCount} following
-                  </p>
-                  <Button type="primary" shape="round" size="large">
+                  </p> */}
+                  {/* <Button type="primary" shape="round" size="large">
                     Follow
-                  </Button>
+                  </Button> */}
                   <Button type="primary" shape="round" size="large">
                     Edit profile
                   </Button>
@@ -102,7 +103,7 @@ function Profile({ auth: { user } }) {
         )}
       >
         <div className={styles.profile_contents}>
-          <PhotoSection />
+          <PhotoSection user={user} />
           <div className={classnames(styles.container_bg, styles.section)}>
             <div className={styles.section_title}>
               <p>Friends</p>
