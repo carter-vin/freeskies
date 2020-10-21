@@ -143,7 +143,7 @@ function Comments({
 
       if (status === 201) {
         onUpdateTimeline();
-        message.success('Your comment published successfuly');
+        message.success('Evaluate successfully');
       } else {
         message.error(data?.message || 'Something wrong');
         throw new Error();
