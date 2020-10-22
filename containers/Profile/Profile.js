@@ -5,9 +5,12 @@ import { Button, Input, Tabs, Rate } from 'antd';
 import PhotoSection from 'components/profile/PhotoSection';
 import FeedPosts from 'components/profile/FeedPosts';
 import PostingPost from 'components/profile/PostingPost';
-import RatedSection from '../../components/profile/RatedSection';
+import RatedSection from 'components/profile/RatedSection';
+import requireAuth from 'helpers/hoc/requireAuth';
+import { connect } from 'react-redux';
+import Avatar from '../../components/common/Avatar';
 
-export default function Profile() {
+function Profile({ auth: { user } }) {
   return (
     <div>
       <div className={classnames(styles.container, styles.user_profile)}>
@@ -28,10 +31,7 @@ export default function Profile() {
         <div className={styles.profile}>
           <div className={styles.avatar}>
             <div className={styles.avatar_image}>
-              <img
-                src="https://api.adorable.io/avatars/128/adorable1.png"
-                alt="avatar"
-              />
+              <Avatar size={140} text={user?.firstName} />
             </div>
             <div className={styles.change_avatar}>
               <CameraOutlined className={styles.change_avatar_image} />
@@ -43,7 +43,7 @@ export default function Profile() {
               <div className={styles.heade_section}>
                 <div className={styles.left_side}>
                   <p className={styles.fullname}>
-                    <span>John Doe</span>
+                    <span>{`${user?.firstName} ${user?.lastName}`}</span>
                   </p>
                 </div>
                 <div className={styles.right_side}>
@@ -51,10 +51,12 @@ export default function Profile() {
                     <Rate
                       disabled
                       allowHalf
-                      defaultValue={3.5}
+                      defaultValue={Math.round(user?.rating || 0)}
                       style={{ color: '#fadb14', fontSize: '1em' }}
                     />
-                    <span className={styles.rating_text}>3.5</span>
+                    <span className={styles.rating_text}>
+                      {Math.round(user?.rating || 0)}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -64,19 +66,25 @@ export default function Profile() {
               <div className={styles.left_side}>
                 <div className={styles.user_actions}>
                   <div className={styles.follow_actions}>
-                    <p className={styles.followers}>130 followers</p>
+                    <p className={styles.followers}>
+                      {user?.followersCount} followers
+                    </p>
                   </div>
                   <p className={styles.followers_formobile}>
-                    130 followers / 232 following
+                    {user?.followersCount} followers / {user?.followingCount}{' '}
+                    following
                   </p>
                 </div>
               </div>
               <div className={styles.right_side}>
                 <div className={styles.user_actions}>
-                  <p className={styles.followers}>232 following</p>
-                  <Button type="primary" shape="round" size="large">
+                  {/* TODO: show this button and followers text another user page */}
+                  {/* <p className={styles.followers}>
+                    {user?.followingCount} following
+                  </p> */}
+                  {/* <Button type="primary" shape="round" size="large">
                     Follow
-                  </Button>
+                  </Button> */}
                   <Button type="primary" shape="round" size="large">
                     Edit profile
                   </Button>
@@ -95,7 +103,7 @@ export default function Profile() {
         )}
       >
         <div className={styles.profile_contents}>
-          <PhotoSection />
+          <PhotoSection user={user} />
           <div className={classnames(styles.container_bg, styles.section)}>
             <div className={styles.section_title}>
               <p>Friends</p>
@@ -135,3 +143,5 @@ export default function Profile() {
     </div>
   );
 }
+
+export default requireAuth(Profile);

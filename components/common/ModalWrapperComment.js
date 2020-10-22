@@ -17,14 +17,15 @@ const customStyles = {
 
 export default function ModalWrapperComment({
   children,
-  showModal,
   narrow_container,
   title,
+  show,
+  handleHide,
   ...rest
 }) {
   return (
     <ReactModal
-      isOpen={showModal}
+      isOpen={show}
       style={customStyles}
       className={classnames(
         styles.modal_content,
@@ -35,10 +36,10 @@ export default function ModalWrapperComment({
         }
       )}
       shouldCloseOnOverlayClick
-      onRequestClose={rest.onClose}
+      onRequestClose={handleHide}
     >
       <div className={styles.header}>
-        <button className={styles.close} type="button" onClick={rest.onClose}>
+        <button className={styles.close} type="button" onClick={handleHide}>
           <CloseOutlined />
         </button>
       </div>

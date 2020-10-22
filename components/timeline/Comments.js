@@ -7,8 +7,8 @@ import Avatar from '../common/Avatar';
 import API from 'configs/API';
 import { message } from 'antd';
 import DragableRating from '../forms/rating/DragableRating';
-import withAuth from 'helpers/hoc/withAuth';
 import RatingSlide from '../forms/rating/RatingSlide';
+import { connect } from 'react-redux';
 
 const { TextArea } = Input;
 
@@ -59,6 +59,7 @@ function Comments({
   type,
   auth,
   onUpdateTimeline,
+  token,
 }) {
   const [commentText, setCommentText] = useState('');
   const [commentList, setCommentList] = useState([
@@ -109,7 +110,7 @@ function Comments({
           text,
           commented: postId,
         },
-        headers: { 'x-token': auth.token },
+        headers: { 'x-token': token },
       });
       const { data, status } = request;
 
@@ -137,13 +138,13 @@ function Comments({
           rated: commentId,
           rating: rate,
         },
-        headers: { 'x-token': auth.token },
+        headers: { 'x-token': token },
       });
       const { data, status } = request;
 
       if (status === 201) {
         onUpdateTimeline();
-        message.success('Your comment published successfuly');
+        message.success('Evaluate successfully');
       } else {
         message.error(data?.message || 'Something wrong');
         throw new Error();
@@ -195,4 +196,8 @@ function Comments({
   );
 }
 
-export default withAuth(Comments);
+const mapStateToProps = (store) => ({
+  token: store.auth.token,
+});
+
+export default connect(mapStateToProps)(Comments);

@@ -47,6 +47,7 @@
     position: relative;
     border-radius: 5px;
     cursor: pointer;
+    background: #cccccc25;
 
     @include mobile {
       width: 100%;

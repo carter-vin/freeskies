@@ -1,5 +1,5 @@
 import { Button, Tabs, Input } from 'antd';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FileDrop } from 'components/forms';
 import { message } from 'antd';
 
@@ -10,7 +10,8 @@ const { TabPane } = Tabs;
 
 export default function PostingPost({ onPosting, loading }) {
   const [text, setText] = useState('');
-  const [activeType, setActiveType] = useState('text');
+  const [files, setFiles] = useState([]);
+  // const [activeType, setActiveType] = useState('text');
 
   const handleChangeText = (e) => {
     setText(e.target.value);
@@ -22,6 +23,11 @@ export default function PostingPost({ onPosting, loading }) {
 
   const handleSubmit = async () => {
     try {
+      let activeType = 'text';
+      if (files.length > 0) {
+        activeType = 'textMedia';
+      }
+
       const response = await onPosting(text, activeType);
       const { status, data } = response;
 
@@ -36,35 +42,25 @@ export default function PostingPost({ onPosting, loading }) {
     }
   };
 
+  const handleChangeFile = (files) => {
+    // console.log('onchangefile', files);
+    setFiles(files);
+  };
+
   return (
     <div className={styles.activity_posting}>
-      <Tabs
-        onChange={handleChangeTabActive}
-        activeKey={activeType}
-        type="card"
-        size={'small'}
-      >
-        <TabPane tab="Text message" key="text">
-          <TextArea
-            value={text}
-            onChange={handleChangeText}
-            placeholder="Write a message"
-            autoSize={{ minRows: 2, maxRows: 5 }}
-          />
-        </TabPane>
-        <TabPane tab="Text with media" key="textMedia">
-          <TextArea
-            value={text}
-            onChange={handleChangeText}
-            placeholder="Write a message"
-            autoSize={{ minRows: 2, maxRows: 5 }}
-          />
+      <div>
+        <TextArea
+          value={text}
+          onChange={handleChangeText}
+          placeholder="Write a message"
+          autoSize={{ minRows: 2, maxRows: 5 }}
+        />
 
-          <div className={styles.file_place}>
-            <FileDrop />
-          </div>
-        </TabPane>
-      </Tabs>
+        <div className={styles.file_place}>
+          <FileDrop files={files} onChange={handleChangeFile} />
+        </div>
+      </div>
 
       <div className={styles.actions_container}>
         <Button type="primary" loading={loading} onClick={handleSubmit}>

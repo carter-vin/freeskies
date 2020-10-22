@@ -1,0 +1,19 @@
+import { AnyAction } from 'redux';
+import { HYDRATE } from 'next-redux-wrapper';
+
+const nextReducer = (state = { app: 'init', page: 'init' }, action) => {
+  switch (action.type) {
+    case HYDRATE:
+      if (action.payload.app === 'init') delete action.payload.app;
+      if (action.payload.page === 'init') delete action.payload.page;
+      return { ...state, ...action.payload };
+    case 'APP':
+      return { ...state, app: action.payload };
+    case 'PAGE':
+      return { ...state, page: action.payload };
+    default:
+      return state;
+  }
+};
+
+export default nextReducer;
