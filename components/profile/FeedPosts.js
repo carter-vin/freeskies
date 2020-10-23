@@ -19,7 +19,7 @@ export default function FeedPosts() {
         </Button>
       </div>
       {[0, 0, 0, 0].map((item, index) => (
-        <div className={styles.post}>
+        <div className={styles.post} key={index}>
           <div className={styles.post_header}>
             <div className={styles.avatar}>
               <img

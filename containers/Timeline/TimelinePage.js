@@ -23,7 +23,6 @@ function TimelinePage({ authServices, auth }) {
         headers: { 'x-token': token },
       });
       const { data, status } = request;
-
       if (status === 200) {
         dispatch(setTimelineData(data));
         console.log('=========');
