@@ -15,7 +15,7 @@ import Avatar from '../../components/common/Avatar';
 
 function Profile({ auth }) {
   const [storage, dispatch] = useContext(ProfileContext);
-console.log('storage', storage)
+  // console.log('storage', storage, 'auth', auth)
   const getFriends = async (token, withoutLoading = false) => {
     // console.warn(authServices.auth, authServices.localstorage);
     try {
