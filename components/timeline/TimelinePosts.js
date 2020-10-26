@@ -49,7 +49,7 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
               >
                 {type === 'Photo' && (
                   <div className={styles.image_item} onClick={showPhotoModal}>
-                    <img src={item.src} alt="" />
+                    <img src={`https://freeskies.com/static/${item.src}`} alt="" />
                   </div>
                 )}
               </div>

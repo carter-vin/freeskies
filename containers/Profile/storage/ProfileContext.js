@@ -3,6 +3,7 @@ import { createContext, useReducer } from 'react';
 // Actions Type
 export const SET_LOADING = 'profile/SET_LOADING';
 export const SET_FRIENDS_DATA = 'profile/SET_FRIENDS_DATA';
+export const SET_ACCOUNTS_DATA = 'profile/SET_ACCOUNTS_DATA';
 
 const initialState = {
   loading: false,
@@ -16,6 +17,9 @@ function reducer(state, { type, payload }) {
 
     case SET_FRIENDS_DATA:
       return { ...state, friendData: payload };
+
+    case SET_ACCOUNTS_DATA:
+      return { ...state, accountData: payload };
 
     default:
       return state;

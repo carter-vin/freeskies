@@ -5,7 +5,7 @@ import styles from './styles/rated-section.module.scss';
 import PhotosModal from './PhotosModal';
 import { useModal } from 'react-modal-hook';
 
-export default function RatedSection() {
+export default function RatedSection({ user }) {
   const [showModal, hideModal] = useModal(({ in: open }) => (
     <PhotosModal title="Photo detail" showModal={open} onClose={hideModal} />
   ));
@@ -17,25 +17,22 @@ export default function RatedSection() {
         <Button type="link">My rates</Button>
       </div>
       <div className={classnames(styles.my_rates)}>
-        {[0, 0, 0, 0, 0].map((item, index) => {
+        {user?.recentRated.map((item, index) => {
           return (
             <div className={styles.log_item} key={index}>
               <div className={styles.image} onClick={showModal}>
-                <img
-                  src={`https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80`}
-                  alt=""
-                />
+              <img src={`https://freeskies.com/static/${item.rated.src}`} alt="" />
               </div>
               <div className={styles.info}>
-                <span className={styles.name}>John Doe</span>
+                <span className={styles.name}>{item.rated.caption}</span>
                 <p className={styles.rating}>
                   <Rate
                     disabled
                     allowHalf
-                    defaultValue={3.5}
+                    defaultValue={item.givenRating}
                     style={{ color: '#fadb14', fontSize: '1em' }}
                   />
-                  <span className={styles.rating_text}>3.5</span>
+                  <span className={styles.rating_text}>{item.givenRating}</span>
                 </p>
               </div>
             </div>
