@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from 'react';
+import { createContext, useReducer } from 'react';
 
 // Actions Type
 export const SET_LOADING = 'timeline/SET_LOADING';
