@@ -151,9 +151,11 @@ function Profile({ auth }) {
     getAccount(auth.token);
   }, []);
 
-  console.log('store', storage)
+  // console.log('store', storage)
 
   const { accountData } = storage
+
+  const isMobile = window.matchMedia('only screen and (max-width: 640px)').matches
 
   return (
 
@@ -178,7 +180,7 @@ function Profile({ auth }) {
           <div className={styles.avatar}>
             <div className={styles.avatar_image}>
               <Avatar
-                size={140}
+                size={isMobile ? 70 : 140}
                 url={accountData?.profilePhoto}
                 text={accountData?.username}
               />
