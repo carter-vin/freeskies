@@ -44,12 +44,10 @@ function TimelinePage({ authServices, auth }) {
   const createPost = async (dataForRequest, type) => {
     try {
       dispatch(setLoading(true, 'posting'));
-      let reqData = {};
       let url = '';
 
       if (type === 'text') {
         url = '/posts';
-        reqData.text = dataForRequest;
       } else if (type === 'textMedia') {
         url = '/photos';
       }
@@ -57,12 +55,10 @@ function TimelinePage({ authServices, auth }) {
       const request = await API({
         method: 'post',
         url,
-        data: reqData,
+        data: dataForRequest,
         headers: { 'x-token': auth.token },
       });
       const { data, status } = request;
-
-      console.warn('createPost', data, status);
 
       if (status === 201) {
         onUpdateTimeline();

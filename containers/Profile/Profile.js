@@ -1,5 +1,5 @@
 import styles from './styles/profile.module.scss';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import classnames from 'classnames';
 import { CameraOutlined } from '@ant-design/icons';
 import { Button, Upload, message, Input, Tabs, Rate } from 'antd';
@@ -13,45 +13,11 @@ import { ProfileContext } from './storage/ProfileContext';
 import { setLoading, setFriendsData, setAccountsData } from './actions';
 import Avatar from '../../components/common/Avatar';
 
-const uploadCoverOptions = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-
-const uploadAvatarOptions = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-
 function Profile({ auth }) {
+  const [fileList, setFileList ] = useState([]);
   const [storage, dispatch] = useContext(ProfileContext);
   // console.log('storage', storage, 'auth', auth)
+
   const getFriends = async (token, withoutLoading = false) => {
     // console.warn(authServices.auth, authServices.localstorage);
     try {
@@ -112,12 +78,10 @@ function Profile({ auth }) {
   const createPost = async (dataForRequest, type) => {
     try {
       dispatch(setLoading(true, 'posting'));
-      let reqData = {};
       let url = '';
 
       if (type === 'text') {
         url = '/posts';
-        reqData.text = dataForRequest;
       } else if (type === 'textMedia') {
         url = '/photos';
       }
@@ -125,15 +89,13 @@ function Profile({ auth }) {
       const request = await API({
         method: 'post',
         url,
-        data: reqData,
+        data: dataForRequest,
         headers: { 'x-token': auth.token },
       });
       const { data, status } = request;
 
-      console.warn('createPost', data, status);
-
       if (status === 201) {
-        getAccount(auth.token);
+        onUpdateTimeline();
       } else {
         message.error(data?.message || 'Something wrong');
       }
@@ -157,6 +119,58 @@ function Profile({ auth }) {
 
   const isMobile = window.matchMedia('only screen and (max-width: 640px)').matches
 
+  const props = {
+    onRemove: file => {
+      const index = fileList.indexOf(file);
+      const newFileList = fileList.slice();
+      const result = newFileList.splice(index, 1);
+      setFileList(result)
+    },
+    beforeUpload: file => {
+      setFileList([...fileList, file])
+      return false;
+    },
+    fileList,
+  };
+
+  const handleUploadCover = async ({ fileList }) => {
+    const formData = new FormData();
+    fileList.forEach(file => {
+      formData.append('profileBackgroundImage', file.originFileObj);
+    });
+
+    const request = await API({
+      method: 'put',
+      url: '/accounts',
+      data: formData,
+      headers: { 'x-token': auth.token },
+    });
+    const { data, status } = request;
+
+    console.log(fileList, data, status)
+
+    getAccount(auth.token);
+  }
+
+  const handleUploadAvatar = async ({ fileList }) => {
+    const formData = new FormData();
+    fileList.forEach(file => {
+      formData.append('profilePhoto', file.originFileObj);
+    });
+
+    const request = await API({
+      method: 'put',
+      url: '/accounts',
+      data: formData,
+      headers: { 'x-token': auth.token },
+    });
+    const { data, status } = request;
+
+    console.log(fileList, data, status)
+
+    getAccount(auth.token);
+  }
+
   return (
 
     <div>
@@ -164,11 +178,11 @@ function Profile({ auth }) {
         <div
           className={styles.cover}
           style={{
-            backgroundImage: `url(${accountData?.profileBackgroundImage})`,
+            backgroundImage: `url(${accountData?.profileBackgroundImage.src})`,
           }}
         >
           <div className={styles.change_cover}>
-            <Upload {...uploadCoverOptions}>
+            <Upload {...props} onChange={handleUploadCover}>
               <Button ghost type="dashed">
                 Change cover
               </Button>
@@ -181,12 +195,12 @@ function Profile({ auth }) {
             <div className={styles.avatar_image}>
               <Avatar
                 size={isMobile ? 70 : 140}
-                url={accountData?.profilePhoto}
+                url={accountData?.profilePhoto.src}
                 text={accountData?.username}
               />
             </div>
             <div className={styles.change_avatar}>
-              <Upload {...uploadAvatarOptions}>
+              <Upload {...props} onChange={handleUploadAvatar}>
                 <CameraOutlined className={styles.change_avatar_image} />
               </Upload>
             </div>
