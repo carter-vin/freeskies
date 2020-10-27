@@ -23,12 +23,23 @@ export default function PostingPost({ onPosting, loading }) {
 
   const handleSubmit = async () => {
     try {
-      let activeType = 'text';
+      let dataForRequest;
+      let activeType;
+
       if (files.length > 0) {
         activeType = 'textMedia';
+        const formData = new FormData;
+        for (var i = 0; i < files.length; i++) {
+          formData.append('file[]', files[i]);
+        }
+        formData.append('caption', text)
+        dataForRequest = formData
+      } else {
+        activeType = 'text';
+        dataForRequest = { text }
       }
 
-      const response = await onPosting(text, activeType);
+      const response = await onPosting(dataForRequest, activeType);
       const { status, data } = response;
 
       if (status === 201) {

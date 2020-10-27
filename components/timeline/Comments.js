@@ -27,9 +27,9 @@ function CommentItem({ message, mine, author, rating, id, onRateComment }) {
     >
       <div className={styles.avatar}>
         <Avatar
-          url={mine ? 'https://api.adorable.io/avatars/50/adorable.png' : null}
-          size={45}
-          text={fullName}
+          size={50}
+          url={author?.profilePhoto}
+          text={author?.username}
         />
         <RatingSlide
           defaultRate={rating}
@@ -177,9 +177,9 @@ function Comments({
       <div className={styles.comment_box}>
         <div className={styles.avatar}>
           <Avatar
-            url={'https://api.adorable.io/avatars/50/adorable.png'}
             size={45}
-            text="John"
+            url={auth.user?.profilePhoto}
+            text={auth.user?.username}
           />
         </div>
         <div className={styles.input}>
@@ -198,6 +198,7 @@ function Comments({
 
 const mapStateToProps = (store) => ({
   token: store.auth.token,
+  auth: store.auth,
 });
 
 export default connect(mapStateToProps)(Comments);
