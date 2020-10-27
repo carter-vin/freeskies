@@ -171,15 +171,17 @@ function Profile({ auth }) {
     getAccount(auth.token);
   }
 
-  return (
+  const coverUrl = `url(https://freeskies.com/static/${accountData !== null && accountData !== undefined ? accountData.profileBackgroundImage?.src : ''})`
+  const profileUrl = accountData !== null && accountData !== undefined ? `https://freeskies.com/static/${accountData.profilePhoto?.src}` : null
 
+  console.log('url', coverUrl, profileUrl)
+
+  return (
     <div>
       <div className={classnames(styles.container, styles.user_profile)}>
         <div
           className={styles.cover}
-          style={{
-            backgroundImage: `url(${accountData?.profileBackgroundImage.src})`,
-          }}
+          style={{ backgroundImage: coverUrl }}
         >
           <div className={styles.change_cover}>
             <Upload {...props} onChange={handleUploadCover}>
@@ -195,7 +197,7 @@ function Profile({ auth }) {
             <div className={styles.avatar_image}>
               <Avatar
                 size={isMobile ? 70 : 140}
-                url={accountData?.profilePhoto.src}
+                url={profileUrl}
                 text={accountData?.username}
               />
             </div>
