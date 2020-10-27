@@ -49,7 +49,7 @@ function TimelinePage({ authServices, auth }) {
       if (type === 'text') {
         url = '/posts';
       } else if (type === 'textMedia') {
-        url = '/photos';
+        url = '/posts';
       }
 
       const request = await API({

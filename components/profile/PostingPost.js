@@ -26,17 +26,19 @@ export default function PostingPost({ onPosting, loading }) {
       let dataForRequest;
       let activeType;
 
+      const formData = new FormData;
+
       if (files.length > 0) {
         activeType = 'textMedia';
-        const formData = new FormData;
         for (var i = 0; i < files.length; i++) {
-          formData.append('file[]', files[i]);
+          formData.append('images', files[i]);
         }
-        formData.append('caption', text)
+        formData.append('text', text)
         dataForRequest = formData
       } else {
         activeType = 'text';
-        dataForRequest = { text }
+        formData.append('text', text)
+        dataForRequest = formData
       }
 
       const response = await onPosting(dataForRequest, activeType);
@@ -44,6 +46,7 @@ export default function PostingPost({ onPosting, loading }) {
 
       if (status === 201) {
         message.success('Your post published successfuly');
+        setFiles([])
         setText('');
       } else {
         message.error(data?.message || 'Something wrong');
