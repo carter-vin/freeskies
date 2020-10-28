@@ -26,8 +26,6 @@ export default function PhotosModal({ data, onRatePost, ...rest }) {
 
   const roundRating = data.length !== 0 ? Math.round(data[sliderIndex]?.rating || 0) : 0
 
-  console.log(data)
-
   return (
     <PhotoModalWrapper {...rest}>
       <div className={styles.container}>

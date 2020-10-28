@@ -1,23 +1,36 @@
 import React from 'react';
 import classnames from 'classnames';
-import styles from './styles/photo-section.module.scss';
 import { Button } from 'antd';
 import { useModal } from 'react-modal-hook';
 import { useRouter } from 'next/router';
 import PhotosModal from './PhotosModal';
+import styles from './styles/photo-section.module.scss';
 
-export default function PhotoSection({ user, onRatePost }) {
-  const router = useRouter();
-  const imagesList = [].concat.apply([], user?.recentPhotos.map(item => item.images))
+const ImageList = ({ images, onRatePost }) => {
   const [showModal, hideModal] = useModal(({ in: open }) => (
     <PhotosModal
       title="Photo detail"
       showModal={open}
       onClose={hideModal}
-      data={imagesList}
+      data={images}
       onRatePost={onRatePost}
     />
   ));
+
+  return (
+    <div className={classnames(styles.photos, styles.sections_content)}>
+      {images.map((item) => (
+        <div className={styles.photo} onClick={showModal} key={item.id}>
+          <img src={`https://www.freeskies.com/static/${item.src}`} alt="" />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default function PhotoSection({ user, onRatePost }) {
+  const router = useRouter();
+  const images = user?.recentPhotos
 
   const goToPhotos = () => {
     router.push('/photos');
@@ -30,14 +43,12 @@ export default function PhotoSection({ user, onRatePost }) {
           All photos
         </Button>
       </div>
-
-      <div className={classnames(styles.photos, styles.sections_content)}>
-        {user?.recentPhotos.length !== 0 && user?.recentPhotos.map((item) => (
-          <div className={styles.photo} onClick={showModal} key={item.id}>
-            <img src={`https://www.freeskies.com/static/${item.src}`} alt="" />
-          </div>
-        ))}
-      </div>
+      {images && images.length !== 0 && (
+        <ImageList
+          images={images}
+          onRatePost={onRatePost}
+        />
+      )}
     </div>
   );
 }

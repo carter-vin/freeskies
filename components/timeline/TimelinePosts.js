@@ -38,7 +38,6 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
     <div className={styles.activity_content}>
       {data.map((item, index) => {
         const { account, createdAt, type, comments, text, images, videos } = item;
-        // const { profilePhoto } = item.account;
         const profileUrl = account !== null && account !== undefined ? `${account.profilePhoto?.src}` : null
         const fullName = `${account?.firstName} ${account?.lastName}`;
         return (
