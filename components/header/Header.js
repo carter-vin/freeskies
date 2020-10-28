@@ -79,11 +79,15 @@ function UserProfile({ user = {} }) {
       }}
     >
       <div className={styles.avatar}>
-        <Avatar size={40} text={user?.firstName} />
-        {/* <img
-          src="https://api.adorable.io/avatars/128/adorable.png"
-          alt="avatar"
-        /> */}
+        { user?.profilePhoto ? (
+            <Avatar
+              size={40}
+              url={user?.profilePhoto.src}
+              text={user?.username}
+            />
+          ) : (
+          <Avatar size={40} text={user?.firstName} />
+        )}
       </div>
       <span className={styles.name}>{`${user?.firstName}`}</span>
     </div>

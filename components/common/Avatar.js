@@ -26,7 +26,7 @@ export default function Avatar({ text = '', url, size = 40, borderSize = 0 }) {
         ...(!url ? backgroundLinear : {}),
       }}
     >
-      {url && <img src={url} alt="avatar" />}
+      {url && <img src={`https://www.freeskies.com/static/${url}`} alt="avatar" />}
 
       {!url && <span className={styles.name_char}>{textChar}</span>}
     </div>

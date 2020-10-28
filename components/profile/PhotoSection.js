@@ -27,7 +27,7 @@ export default function PhotoSection({ user }) {
       <div className={classnames(styles.photos, styles.sections_content)}>
         {user?.recentPhotos.map((item) => (
           <div className={styles.photo} onClick={showModal} key={item.id}>
-            <img src={`https://freeskies.com/static/${item.src}`} alt="" />
+            <img src={`https://www.freeskies.com/static/${item.src}`} alt="" />
           </div>
         ))}
       </div>

@@ -171,8 +171,8 @@ function Profile({ auth }) {
     getAccount(auth.token);
   }
 
-  const coverUrl = accountData !== null && accountData !== undefined ? `url(https://freeskies.com/static/${accountData.profileBackgroundImage?.src})` : null
-  const profileUrl = accountData !== null && accountData !== undefined ? `https://freeskies.com/static/${accountData.profilePhoto?.src}` : null
+  const coverUrl = accountData !== null && accountData !== undefined ? `url(https://www.freeskies.com/static/${accountData.profileBackgroundImage?.src})` : null
+  const profileUrl = accountData !== null && accountData !== undefined ? `${accountData.profilePhoto?.src}` : null
 
   return (
     <div>
@@ -194,7 +194,7 @@ function Profile({ auth }) {
           <div className={styles.avatar}>
             <div className={styles.avatar_image}>
               <Avatar
-                size={isMobile ? 70 : 140}
+                size={isMobile ? 100 : 140}
                 url={profileUrl}
                 text={accountData?.username}
               />

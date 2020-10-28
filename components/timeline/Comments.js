@@ -14,7 +14,6 @@ const { TextArea } = Input;
 
 function CommentItem({ message, mine, author, rating, id, onRateComment }) {
   const fullName = `${author?.firstName} ${author?.lastName}`;
-
   const handleRateComment = (rate) => {
     onRateComment(id, rate);
   };
@@ -28,7 +27,7 @@ function CommentItem({ message, mine, author, rating, id, onRateComment }) {
       <div className={styles.avatar}>
         <Avatar
           size={50}
-          url={author?.profilePhoto}
+          url={author?.profilePhoto.src}
           text={author?.username}
         />
         <RatingSlide
@@ -178,7 +177,7 @@ function Comments({
         <div className={styles.avatar}>
           <Avatar
             size={45}
-            url={auth.user?.profilePhoto}
+            url={auth.user?.profilePhoto.src}
             text={auth.user?.username}
           />
         </div>

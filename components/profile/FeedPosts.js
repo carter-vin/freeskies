@@ -6,7 +6,6 @@ import Avatar from '../../components/common/Avatar';
 
 export default function FeedPosts({ user }) {
   const router = useRouter();
-
   const goToActivity = () => {
     router.push('/activity');
   };
@@ -25,7 +24,7 @@ export default function FeedPosts({ user }) {
             <div className={styles.avatar}>
               <Avatar
                 size={50}
-                url={user?.profilePhoto}
+                url={user?.profilePhoto.src}
                 text={user?.username}
               />
             </div>
@@ -41,7 +40,7 @@ export default function FeedPosts({ user }) {
             </p>
             {item.type === 'Photo' && (
               <div className={styles.image}>
-                <img src={`https://freeskies.com/static/${item.src}`} alt="" />
+                <img src={`https://www.freeskies.com/static/${item.src}`} alt="" />
               </div>
             )}
           </div>
