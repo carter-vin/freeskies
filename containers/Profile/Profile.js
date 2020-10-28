@@ -338,7 +338,7 @@ function Profile({ auth }) {
               })}
             </div>
           </div>
-          <RatedSection user={accountData} />
+          <RatedSection user={accountData} onRatePost={ratePost} />
         </div>
 
         <div className={styles.activity}>
