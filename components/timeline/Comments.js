@@ -196,7 +196,7 @@ function Comments({
         <div className={styles.avatar}>
           <Avatar
             size={45}
-            url={auth.user?.profilePhoto.src}
+            url={auth.user?.profilePhoto?.src}
             text={auth.user?.username}
           />
         </div>
