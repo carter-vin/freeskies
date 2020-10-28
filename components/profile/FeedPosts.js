@@ -41,7 +41,7 @@ export default function FeedPosts({ user }) {
             </p>
             {item.type === 'Photo' && (
               <div className={styles.image}>
-                <img src={`https://freeskies.com/static/${item.src}`} alt="" />
+                <img src={`https://www.freeskies.com/static/${item.src}`} alt="" />
               </div>
             )}
           </div>

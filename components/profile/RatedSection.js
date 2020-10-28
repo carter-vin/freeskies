@@ -21,7 +21,7 @@ export default function RatedSection({ user }) {
           return (
             <div className={styles.log_item} key={index}>
               <div className={styles.image} onClick={showModal}>
-              <img src={`https://freeskies.com/static/${item.rated.src}`} alt="" />
+              <img src={`https://www.freeskies.com/static/${item.rated.src}`} alt="" />
               </div>
               <div className={styles.info}>
                 <span className={styles.name}>{item.rated.caption}</span>
