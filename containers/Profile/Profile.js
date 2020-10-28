@@ -172,7 +172,7 @@ function Profile({ auth }) {
   }
 
   const coverUrl = accountData !== null && accountData !== undefined ? `url(https://www.freeskies.com/static/${accountData.profileBackgroundImage?.src})` : null
-  const profileUrl = accountData !== null && accountData !== undefined ? `https://www.freeskies.com/static/${accountData.profilePhoto?.src}` : null
+  const profileUrl = accountData !== null && accountData !== undefined ? `${accountData.profilePhoto?.src}` : null
 
   return (
     <div>
