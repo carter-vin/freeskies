@@ -4,14 +4,16 @@ import { Button } from 'antd';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import Avatar from '../../components/common/Avatar';
+import TimelinePosts from '../../components/timeline/TimelinePosts'
 
-export default function FeedPosts({ user }) {
+export default function FeedPosts({ user, onRatePost }) {
   const router = useRouter();
   const goToActivity = () => {
     router.push('/activity');
   };
 
-  const profileUrl = user !== null && user !== undefined ? `https://freeskies.com/static/${user.profilePhoto?.src}` : null
+  // const profileUrl = user !== null && user !== undefined ? `https://freeskies.com/static/${user.profilePhoto?.src}` : null
+  const profileFeed = user !== null && user !== undefined ? user?.recentActivity.map(item => { item.account = user; return item }) : []
 
   return (
     <div className={styles.activity_content}>
@@ -21,7 +23,14 @@ export default function FeedPosts({ user }) {
           All activities
         </Button>
       </div>
-      {user?.recentActivity.map((item, index) => (
+      {profileFeed.length !== 0 && (
+        <TimelinePosts
+          data={profileFeed}
+          onRatePost={onRatePost}
+        />
+      )}
+
+      {/* {user?.recentActivity.map((item, index) => (
         <div className={styles.post} key={index}>
           <div className={styles.post_header}>
             <div className={styles.avatar}>
@@ -65,7 +74,7 @@ export default function FeedPosts({ user }) {
             </div>
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }

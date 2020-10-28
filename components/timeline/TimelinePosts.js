@@ -35,11 +35,12 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
     <div className={styles.activity_content}>
       {data.map((item, index) => {
         const { account, createdAt, type, comments, text, images, videos } = item;
-        const { profilePhoto } = item.account;
+        // const { profilePhoto } = item.account;
+        const profileUrl = account !== null && account !== undefined ? `https://freeskies.com/static/${account.profilePhoto?.src}` : null
         const fullName = `${account?.firstName} ${account?.lastName}`;
         return (
           <div className={styles.post} key={item.id}>
-            {images && images.length > 0 && (
+            {images && images.length > 0 ? (
               <div className={styles.post_content}>
                 <div
                   className={classnames(styles.image, {
@@ -109,12 +110,14 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
                   )}
                 </div>
               </div>
+            ) : (
+              <div style={{ height: 50 }} />
             )}
             <div className={styles.post_header}>
               <div className={styles.avatar}>
                 <Avatar
                   text={fullName}
-                  url={profilePhoto.src}
+                  url={profileUrl}
                   size={80}
                   borderSize={3}
                 />

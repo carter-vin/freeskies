@@ -24,29 +24,28 @@ export default function PostingPost({ onPosting, loading }) {
   const handleSubmit = async () => {
     try {
       let dataForRequest;
-      let activeType;
-
       const formData = new FormData;
 
-      if (files.length > 0) {
-        activeType = 'textMedia';
-        for (var i = 0; i < files.length; i++) {
+      for (var i = 0; i < files.length; i++) {
+        if (files[i].type.split('/')[0] === 'image') {
           formData.append('images', files[i]);
+        } else {
+          formData.append('videos', files[i]);
         }
-        formData.append('text', text)
-        dataForRequest = formData
-      } else {
-        activeType = 'text';
-        formData.append('text', text)
-        dataForRequest = formData
       }
+      
+      if (text.length !== 0) {
+        formData.append('text', text)
+      }
+      
+      dataForRequest = formData
 
-      const response = await onPosting(dataForRequest, activeType);
+      const response = await onPosting(dataForRequest);
       const { status, data } = response;
 
       if (status === 201) {
         message.success('Your post published successfuly');
-        setFiles([])
+        handleChangeFile([])
         setText('');
       } else {
         message.error(data?.message || 'Something wrong');

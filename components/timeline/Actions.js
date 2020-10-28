@@ -67,7 +67,7 @@ export default function Actions({
         >
           <FontAwesomeIcon icon={['far', 'comment-alt']} />
           {/* <MessageFilled /> */}
-          <span className={styles.comment_count}>{comments.length}</span>
+          <span className={styles.comment_count}>{comments && comments.length}</span>
         </div>
       </Tooltip>
     </div>

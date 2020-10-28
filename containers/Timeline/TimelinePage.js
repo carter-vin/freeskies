@@ -41,20 +41,13 @@ function TimelinePage({ authServices, auth }) {
     }
   };
 
-  const createPost = async (dataForRequest, type) => {
+  const createPost = async (dataForRequest) => {
     try {
       dispatch(setLoading(true, 'posting'));
-      let url = '';
-
-      if (type === 'text') {
-        url = '/posts';
-      } else if (type === 'textMedia') {
-        url = '/posts';
-      }
 
       const request = await API({
         method: 'post',
-        url,
+        url: '/posts',
         data: dataForRequest,
         headers: { 'x-token': auth.token },
       });

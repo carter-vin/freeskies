@@ -75,27 +75,63 @@ function Profile({ auth }) {
     }
   }
 
-  const createPost = async (dataForRequest, type) => {
+  const createPost = async (dataForRequest) => {
     try {
       dispatch(setLoading(true, 'posting'));
-      let url = '';
-
-      if (type === 'text') {
-        url = '/posts';
-      } else if (type === 'textMedia') {
-        url = '/photos';
-      }
 
       const request = await API({
         method: 'post',
-        url,
+        url: '/posts',
         data: dataForRequest,
         headers: { 'x-token': auth.token },
       });
       const { data, status } = request;
 
+      console.log(data, status)
+
+      if (status === 201) {
+        getAccount();
+      } else {
+        message.error(data?.message || 'Something wrong');
+      }
+
+      dispatch(setLoading(false, 'posting'));
+
+      return await request;
+    } catch (error) {
+      dispatch(setLoading(false, 'posting'));
+    }
+  };
+
+  const ratePost = async (type, postId, rate) => {
+    try {
+      dispatch(setLoading(true, 'posting'));
+      let url = '';
+
+      if (type === 'Photo') {
+        url = '/photos/rate';
+      } else if (type === 'VideoClip') {
+        url = '/video-clips/rate';
+      } else if (type === 'Item') {
+        url = '/items/rate';
+      }
+
+      const request = await API({
+        method: 'post',
+        url,
+        data: {
+          rated: postId,
+          rating: rate,
+        },
+        headers: { 'x-token': auth.token },
+      });
+      const { data, status } = request;
+
+      console.warn('ratePost', data, status);
+
       if (status === 201) {
         onUpdateTimeline();
+        message.success('Evaluate successfully');
       } else {
         message.error(data?.message || 'Something wrong');
       }
@@ -119,7 +155,7 @@ function Profile({ auth }) {
 
   const isMobile = window.matchMedia('only screen and (max-width: 640px)').matches
 
-  const props = {
+  const imageUploadParams = {
     onRemove: file => {
       const index = fileList.indexOf(file);
       const newFileList = fileList.slice();
@@ -182,7 +218,7 @@ function Profile({ auth }) {
           style={coverUrl !== null ? { backgroundImage: coverUrl } : null}
         >
           <div className={styles.change_cover}>
-            <Upload {...props} onChange={handleUploadCover}>
+            <Upload {...imageUploadParams} onChange={handleUploadCover}>
               <Button ghost type="dashed">
                 Change cover
               </Button>
@@ -200,7 +236,7 @@ function Profile({ auth }) {
               />
             </div>
             <div className={styles.change_avatar}>
-              <Upload {...props} onChange={handleUploadAvatar}>
+              <Upload {...imageUploadParams} onChange={handleUploadAvatar}>
                 <CameraOutlined className={styles.change_avatar_image} />
               </Upload>
             </div>
@@ -307,7 +343,10 @@ function Profile({ auth }) {
             loading={storage.postingLoading}
             onPosting={createPost}
           />
-          <FeedPosts user={accountData} />
+          <FeedPosts
+            user={accountData}
+            onRatePost={ratePost}
+          />
         </div>
       </div>
     </div>

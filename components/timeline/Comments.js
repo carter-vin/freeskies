@@ -17,6 +17,7 @@ function CommentItem({ message, mine, author, rating, id, onRateComment }) {
   const handleRateComment = (rate) => {
     onRateComment(id, rate);
   };
+  const profileUrl = author !== null && author !== undefined ? `https://freeskies.com/static/${author.profilePhoto?.src}` : null
 
   return (
     <div
@@ -27,7 +28,7 @@ function CommentItem({ message, mine, author, rating, id, onRateComment }) {
       <div className={styles.avatar}>
         <Avatar
           size={50}
-          url={author?.profilePhoto.src}
+          url={profileUrl}
           text={author?.username}
         />
         <RatingSlide
