@@ -22,7 +22,7 @@ const RatingList = ({ ratings, onRatePost }) => {
           return (
             <div className={styles.log_item} key={index}>
               <div className={styles.image} onClick={showModal}>
-              <img src={`https://www.freeskies.com/static/${item.rated?.src}`} alt="" />
+              <img src={item.rated?.src !== null ? `https://www.freeskies.com/static/${item.rated?.src}` : 'https://www.bartender.com.ua/wp-content/themes/bartender/images/default-thumbnail.jpg'} alt="" />
               </div>
               <div className={styles.info}>
                 <span className={styles.name}>{item.rated?.caption}</span>

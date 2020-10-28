@@ -48,7 +48,7 @@ export default function PhotosModal({ data, onRatePost, ...rest }) {
         >
           {data.map((item, index) => (
             <>
-              {item !== undefined && item.src && (
+              {item !== undefined && item.src !== null && (
                 <div className={styles.photo_container}>
                   <div className={styles.photo} key={index}>
                     <img
