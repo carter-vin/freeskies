@@ -21,8 +21,10 @@ export default function PhotosModal({ data, onRatePost, ...rest }) {
   const onSlideChanged = (e) => setSliderIndex(e.item);
 
   const handleRatePhoto = (rate) => {
-    onRatePost('Item', data[sliderIndex].id, rate);
+    onRatePost('Photo', data[sliderIndex].id, rate);
   };
+
+  const roundRating = data.length !== 0 ? Math.round(data[sliderIndex]?.rating || 0) : 0
 
   return (
     <PhotoModalWrapper {...rest}>
@@ -59,7 +61,7 @@ export default function PhotosModal({ data, onRatePost, ...rest }) {
 
         <div className={styles.rating_wrapper}>
           <RatingSlide
-           defaultRate={0}
+           defaultRate={roundRating}
            withoutText
            onChange={handleRatePhoto}
          />

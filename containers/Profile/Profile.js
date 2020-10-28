@@ -310,7 +310,7 @@ function Profile({ auth }) {
         )}
       >
         <div className={styles.profile_contents}>
-          <PhotoSection user={accountData} />
+          <PhotoSection user={accountData} onRatePost={ratePost} />
           <div className={classnames(styles.container_bg, styles.section)}>
             <div className={styles.section_title}>
               <p>Friends</p>

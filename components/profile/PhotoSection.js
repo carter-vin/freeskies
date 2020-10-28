@@ -6,14 +6,16 @@ import { useModal } from 'react-modal-hook';
 import { useRouter } from 'next/router';
 import PhotosModal from './PhotosModal';
 
-export default function PhotoSection({ user }) {
+export default function PhotoSection({ user, onRatePost }) {
   const router = useRouter();
+  const images = user?.recentPhotos
   const [showModal, hideModal] = useModal(({ in: open }) => (
     <PhotosModal
       title="Photo detail"
       showModal={open}
       onClose={hideModal}
-      data={user?.recentPhotos}
+      data={images}
+      onRatePost={onRatePost}
     />
   ));
 
