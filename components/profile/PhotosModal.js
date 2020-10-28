@@ -47,15 +47,19 @@ export default function PhotosModal({ data, onRatePost, ...rest }) {
           onSlideChanged={onSlideChanged}
         >
           {data.map((item, index) => (
-            <div className={styles.photo_container}>
-              <div className={styles.photo} key={index}>
-                <img
-                  onDragStart={handleOnDragStart}
-                  src={`https://www.freeskies.com/static/${item.src}`}
-                  alt=""
-                />
-              </div>
-            </div>
+            <>
+              {item !== undefined && item.src && (
+                <div className={styles.photo_container}>
+                  <div className={styles.photo} key={index}>
+                    <img
+                      onDragStart={handleOnDragStart}
+                      src={`https://www.freeskies.com/static/${item.src}`}
+                      alt=""
+                    />
+                  </div>
+                </div>
+              )}
+            </>
           ))}
         </AliceCarousel>
 
