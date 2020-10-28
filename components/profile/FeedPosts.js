@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import Avatar from '../../components/common/Avatar';
 import TimelinePosts from '../../components/timeline/TimelinePosts'
 
-export default function FeedPosts({ user, onRatePost }) {
+export default function FeedPosts({ user, onRatePost, onUpdateTimeline }) {
   const router = useRouter();
   const goToActivity = () => {
     router.push('/activity');
@@ -27,6 +27,7 @@ export default function FeedPosts({ user, onRatePost }) {
         <TimelinePosts
           data={profileFeed}
           onRatePost={onRatePost}
+          onUpdateTimeline={onUpdateTimeline}
         />
       )}
 

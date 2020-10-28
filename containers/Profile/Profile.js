@@ -114,6 +114,8 @@ function Profile({ auth }) {
         url = '/video-clips/rate';
       } else if (type === 'Item') {
         url = '/items/rate';
+      } else if (type === 'Post') {
+        url = '/posts/rate';
       }
 
       const request = await API({
@@ -130,7 +132,7 @@ function Profile({ auth }) {
       console.warn('ratePost', data, status);
 
       if (status === 201) {
-        onUpdateTimeline();
+        getAccount();
         message.success('Evaluate successfully');
       } else {
         message.error(data?.message || 'Something wrong');
@@ -347,6 +349,7 @@ function Profile({ auth }) {
           <FeedPosts
             user={accountData}
             onRatePost={ratePost}
+            onUpdateTimeline={getAccount}
           />
         </div>
       </div>
