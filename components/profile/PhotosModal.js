@@ -12,13 +12,17 @@ import {
 } from '@ant-design/icons';
 import { RatingSlide } from 'components/forms';
 
-export default function PhotosModal({ data, ...rest }) {
+export default function PhotosModal({ data, onRatePost, ...rest }) {
   const [sliderIndex, setSliderIndex] = useState(0);
   const handleOnDragStart = (e) => e.preventDefault();
 
   const slideNext = () => setSliderIndex((state) => state + 1);
   const slidePrev = () => setSliderIndex((state) => state - 1);
   const onSlideChanged = (e) => setSliderIndex(e.item);
+
+  const handleRatePhoto = (rate) => {
+    onRatePost('Item', data[sliderIndex].id, rate);
+  };
 
   return (
     <PhotoModalWrapper {...rest}>
@@ -54,7 +58,11 @@ export default function PhotosModal({ data, ...rest }) {
         </AliceCarousel>
 
         <div className={styles.rating_wrapper}>
-          <RatingSlide />
+          <RatingSlide
+           defaultRate={0}
+           withoutText
+           onChange={handleRatePhoto}
+         />
         </div>
       </div>
     </PhotoModalWrapper>

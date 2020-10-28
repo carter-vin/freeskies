@@ -78,6 +78,8 @@ function TimelinePage({ authServices, auth }) {
         url = '/video-clips/rate';
       } else if (type === 'Item') {
         url = '/items/rate';
+      } else if (type === 'Post') {
+        url = '/posts/rate';
       }
 
       const request = await API({

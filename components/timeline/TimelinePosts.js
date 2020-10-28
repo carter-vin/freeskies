@@ -21,6 +21,7 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
       title="Photo detail"
       showModal={open}
       onClose={hidePhotoModal}
+      onRatePost={onRatePost}
       data={imagesList}
     />
   ));
