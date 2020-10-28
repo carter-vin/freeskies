@@ -15,7 +15,6 @@ import { connect } from 'react-redux';
 
 function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
   const [activePostId, setActivePostId] = useState(null);
-
   const [showPhotoModal, hidePhotoModal] = useModal(({ in: open }) => (
     <PhotosModal
       title="Photo detail"
@@ -32,12 +31,11 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
   const toggleCommentShow = (index) =>
     setCommentShow(commentShow === index ? null : index);
 
-
-  console.log('DATA->',data);
   return (
     <div className={styles.activity_content}>
       {data.map((item, index) => {
-        const { account, profilePhoto, createdAt, type, comments, text, images, videos } = item;
+        const { account, createdAt, type, comments, text, images, videos } = item;
+        const { profilePhoto } = item.account;
         const fullName = `${account?.firstName} ${account?.lastName}`;
         return (
           <div className={styles.post} key={item.id}>
@@ -116,7 +114,7 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
               <div className={styles.avatar}>
                 <Avatar
                   text={fullName}
-                  url={profilePhoto}
+                  url={profilePhoto.src}
                   size={80}
                   borderSize={3}
                 />
