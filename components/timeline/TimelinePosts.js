@@ -39,7 +39,7 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
       {data.map((item, index) => {
         const { account, createdAt, type, comments, text, images, videos } = item;
         // const { profilePhoto } = item.account;
-        const profileUrl = account !== null && account !== undefined ? `https://freeskies.com/static/${account.profilePhoto?.src}` : null
+        const profileUrl = account !== null && account !== undefined ? `${account.profilePhoto?.src}` : null
         const fullName = `${account?.firstName} ${account?.lastName}`;
         return (
           <div className={styles.post} key={item.id}>

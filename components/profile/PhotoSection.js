@@ -8,13 +8,13 @@ import PhotosModal from './PhotosModal';
 
 export default function PhotoSection({ user, onRatePost }) {
   const router = useRouter();
-  const images = user?.recentPhotos
+  const imagesList = [].concat.apply([], user?.recentPhotos.map(item => item.images))
   const [showModal, hideModal] = useModal(({ in: open }) => (
     <PhotosModal
       title="Photo detail"
       showModal={open}
       onClose={hideModal}
-      data={images}
+      data={imagesList}
       onRatePost={onRatePost}
     />
   ));
@@ -32,7 +32,7 @@ export default function PhotoSection({ user, onRatePost }) {
       </div>
 
       <div className={classnames(styles.photos, styles.sections_content)}>
-        {user?.recentPhotos.map((item) => (
+        {user?.recentPhotos.length !== 0 && user?.recentPhotos.map((item) => (
           <div className={styles.photo} onClick={showModal} key={item.id}>
             <img src={`https://www.freeskies.com/static/${item.src}`} alt="" />
           </div>

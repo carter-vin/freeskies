@@ -26,6 +26,8 @@ export default function PhotosModal({ data, onRatePost, ...rest }) {
 
   const roundRating = data.length !== 0 ? Math.round(data[sliderIndex]?.rating || 0) : 0
 
+  console.log(data)
+
   return (
     <PhotoModalWrapper {...rest}>
       <div className={styles.container}>
@@ -59,13 +61,15 @@ export default function PhotosModal({ data, onRatePost, ...rest }) {
           ))}
         </AliceCarousel>
 
-        <div className={styles.rating_wrapper}>
-          <RatingSlide
-           defaultRate={roundRating}
-           withoutText
-           onChange={handleRatePhoto}
-         />
-        </div>
+        {data.length !== 0 && (
+          <div className={styles.rating_wrapper}>
+            <RatingSlide
+            defaultRate={roundRating}
+            withoutText
+            onChange={handleRatePhoto}
+          />
+          </div>
+        )}
       </div>
     </PhotoModalWrapper>
   );

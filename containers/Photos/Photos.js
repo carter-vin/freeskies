@@ -35,7 +35,7 @@ function Photos({ auth: { user } }) {
               onClick={showModal}
             >
               <div className={styles.photo}>
-                <img src={item.src} alt="" />
+                <img src={`https://freeskies.com/static/${item.src}`} alt="" />
               </div>
             </div>
           ))}
