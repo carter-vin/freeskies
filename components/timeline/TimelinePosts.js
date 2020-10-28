@@ -14,12 +14,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
+  const imagesList = [].concat.apply([], data.map(item => item.images))
   const [activePostId, setActivePostId] = useState(null);
   const [showPhotoModal, hidePhotoModal] = useModal(({ in: open }) => (
     <PhotosModal
       title="Photo detail"
       showModal={open}
       onClose={hidePhotoModal}
+      data={imagesList}
     />
   ));
 

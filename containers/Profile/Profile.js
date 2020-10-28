@@ -209,6 +209,7 @@ function Profile({ auth }) {
 
   const coverUrl = accountData !== null && accountData !== undefined ? `url(https://www.freeskies.com/static/${accountData.profileBackgroundImage?.src})` : null
   const profileUrl = accountData !== null && accountData !== undefined ? `${accountData.profilePhoto?.src}` : null
+  const roundRating = Math.round(accountData?.rating || 0)
 
   return (
     <div>
@@ -255,11 +256,11 @@ function Profile({ auth }) {
                     <Rate
                       disabled
                       allowHalf
-                      defaultValue={Math.round(accountData?.rating || 0)}
+                      defaultValue={roundRating}
                       style={{ color: '#fadb14', fontSize: '1em' }}
                     />
                     <span className={styles.rating_text}>
-                      {Math.round(accountData?.rating || 0)}
+                      {roundRating}
                     </span>
                   </p>
                 </div>

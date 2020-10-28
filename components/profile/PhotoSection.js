@@ -9,7 +9,12 @@ import PhotosModal from './PhotosModal';
 export default function PhotoSection({ user }) {
   const router = useRouter();
   const [showModal, hideModal] = useModal(({ in: open }) => (
-    <PhotosModal title="Photo detail" showModal={open} onClose={hideModal} />
+    <PhotosModal
+      title="Photo detail"
+      showModal={open}
+      onClose={hideModal}
+      data={user?.recentPhotos}
+    />
   ));
 
   const goToPhotos = () => {

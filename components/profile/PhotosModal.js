@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import { RatingSlide } from 'components/forms';
 
-export default function PhotosModal({ ...rest }) {
+export default function PhotosModal({ data, ...rest }) {
   const [sliderIndex, setSliderIndex] = useState(0);
   const handleOnDragStart = (e) => e.preventDefault();
 
@@ -40,12 +40,12 @@ export default function PhotosModal({ ...rest }) {
           slideToIndex={sliderIndex}
           onSlideChanged={onSlideChanged}
         >
-          {[0, 0, 0, 0, 0].map((item, index) => (
+          {data.map((item, index) => (
             <div className={styles.photo_container}>
               <div className={styles.photo} key={index}>
                 <img
                   onDragStart={handleOnDragStart}
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                  src={`https://www.freeskies.com/static/${item.src}`}
                   alt=""
                 />
               </div>
@@ -59,4 +59,8 @@ export default function PhotosModal({ ...rest }) {
       </div>
     </PhotoModalWrapper>
   );
+}
+
+PhotosModal.defaultProps = {
+  data: [],
 }

@@ -6,8 +6,14 @@ import PhotosModal from './PhotosModal';
 import { useModal } from 'react-modal-hook';
 
 export default function RatedSection({ user }) {
+  const imagesList = user?.recentRated.map(item => item.rated)
   const [showModal, hideModal] = useModal(({ in: open }) => (
-    <PhotosModal title="Photo detail" showModal={open} onClose={hideModal} />
+    <PhotosModal
+      title="Photo detail"
+      showModal={open}
+      onClose={hideModal}
+      data={imagesList}
+    />
   ));
 
   return (
