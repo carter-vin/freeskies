@@ -17,6 +17,7 @@ function CommentItem({ message, mine, author, rating, id, onRateComment }) {
   const handleRateComment = (rate) => {
     onRateComment(id, rate);
   };
+  const profileUrl = author !== null && author !== undefined ? `https://freeskies.com/static/${author.profilePhoto?.src}` : null
 
   return (
     <div
@@ -27,7 +28,7 @@ function CommentItem({ message, mine, author, rating, id, onRateComment }) {
       <div className={styles.avatar}>
         <Avatar
           size={50}
-          url={author?.profilePhoto.src}
+          url={profileUrl}
           text={author?.username}
         />
         <RatingSlide
@@ -90,9 +91,12 @@ function Comments({
   };
 
   const onComment = async (type, postId, text) => {
-    // console.log(type, text, postId);
     try {
       let url = '';
+      let dataForRequest;
+      const formData = new FormData;
+
+      formData.append('commented', postId)
 
       if (type === 'Photo') {
         url = '/photos/comment';
@@ -100,15 +104,28 @@ function Comments({
         url = '/video-clips/comment';
       } else if (type === 'Item') {
         url = '/items/comment';
+      } else if (type === 'Post') {
+        url = '/posts/comment';
       }
+
+      // if (files !== undefined) {
+      //   for (var i = 0; i < files.length; i++) {
+      //     if (files[i].type.split('/')[0] === 'image') {
+      //       formData.append('image', files[i]);
+      //     }
+      //   }
+      // }
+      
+      if (text.length !== 0) {
+        formData.append('text', text)
+      }
+      
+      dataForRequest = formData
 
       const request = await API({
         method: 'post',
         url,
-        data: {
-          text,
-          commented: postId,
-        },
+        data: formData,
         headers: { 'x-token': token },
       });
       const { data, status } = request;
@@ -153,6 +170,8 @@ function Comments({
     }
   };
 
+  console.log(data)
+
   return (
     <div
       className={classnames(styles.comments, {
@@ -177,7 +196,7 @@ function Comments({
         <div className={styles.avatar}>
           <Avatar
             size={45}
-            url={auth.user?.profilePhoto.src}
+            url={auth.user?.profilePhoto?.src}
             text={auth.user?.username}
           />
         </div>

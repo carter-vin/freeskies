@@ -7,7 +7,12 @@ import requireAuth from 'helpers/hoc/requireAuth';
 
 function Photos({ auth: { user } }) {
   const [showModal, hideModal] = useModal(({ in: open }) => (
-    <PhotosModal title="Photo detail" showModal={open} onClose={hideModal} />
+    <PhotosModal
+      title="Photo detail"
+      showModal={open}
+      onClose={hideModal}
+      data={user?.recentPhotos}
+    />
   ));
 
   return (
@@ -30,7 +35,7 @@ function Photos({ auth: { user } }) {
               onClick={showModal}
             >
               <div className={styles.photo}>
-                <img src={item.src} alt="" />
+                <img src={`https://www.freeskies.com/static/${item.src}`} alt="" />
               </div>
             </div>
           ))}

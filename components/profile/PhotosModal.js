@@ -12,13 +12,19 @@ import {
 } from '@ant-design/icons';
 import { RatingSlide } from 'components/forms';
 
-export default function PhotosModal({ ...rest }) {
+export default function PhotosModal({ data, onRatePost, ...rest }) {
   const [sliderIndex, setSliderIndex] = useState(0);
   const handleOnDragStart = (e) => e.preventDefault();
 
   const slideNext = () => setSliderIndex((state) => state + 1);
   const slidePrev = () => setSliderIndex((state) => state - 1);
   const onSlideChanged = (e) => setSliderIndex(e.item);
+
+  const handleRatePhoto = (rate) => {
+    onRatePost('Photo', data[sliderIndex].id, rate);
+  };
+
+  const roundRating = data.length !== 0 ? Math.round(data[sliderIndex]?.rating || 0) : 0
 
   return (
     <PhotoModalWrapper {...rest}>
@@ -40,23 +46,37 @@ export default function PhotosModal({ ...rest }) {
           slideToIndex={sliderIndex}
           onSlideChanged={onSlideChanged}
         >
-          {[0, 0, 0, 0, 0].map((item, index) => (
-            <div className={styles.photo_container}>
-              <div className={styles.photo} key={index}>
-                <img
-                  onDragStart={handleOnDragStart}
-                  src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                  alt=""
-                />
-              </div>
-            </div>
+          {data.map((item, index) => (
+            <>
+              {item !== undefined && item.src !== null && (
+                <div className={styles.photo_container}>
+                  <div className={styles.photo} key={index}>
+                    <img
+                      onDragStart={handleOnDragStart}
+                      src={`https://www.freeskies.com/static/${item.src}`}
+                      alt=""
+                    />
+                  </div>
+                </div>
+              )}
+            </>
           ))}
         </AliceCarousel>
 
-        <div className={styles.rating_wrapper}>
-          <RatingSlide />
-        </div>
+        {data.length !== 0 && (
+          <div className={styles.rating_wrapper}>
+            <RatingSlide
+            defaultRate={roundRating}
+            withoutText
+            onChange={handleRatePhoto}
+          />
+          </div>
+        )}
       </div>
     </PhotoModalWrapper>
   );
+}
+
+PhotosModal.defaultProps = {
+  data: [],
 }

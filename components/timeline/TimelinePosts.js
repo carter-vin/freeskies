@@ -14,12 +14,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
+  const imagesList = [].concat.apply([], data.map(item => item.images))
   const [activePostId, setActivePostId] = useState(null);
   const [showPhotoModal, hidePhotoModal] = useModal(({ in: open }) => (
     <PhotosModal
       title="Photo detail"
       showModal={open}
       onClose={hidePhotoModal}
+      onRatePost={onRatePost}
+      data={imagesList}
     />
   ));
 
@@ -35,11 +38,11 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
     <div className={styles.activity_content}>
       {data.map((item, index) => {
         const { account, createdAt, type, comments, text, images, videos } = item;
-        const { profilePhoto } = item.account;
+        const profileUrl = account !== null && account !== undefined ? `${account.profilePhoto?.src}` : null
         const fullName = `${account?.firstName} ${account?.lastName}`;
         return (
           <div className={styles.post} key={item.id}>
-            {images && images.length > 0 && (
+            {images && images.length > 0 ? (
               <div className={styles.post_content}>
                 <div
                   className={classnames(styles.image, {
@@ -109,12 +112,14 @@ function TimelinePosts({ data, onUpdateTimeline, onRatePost, modalActions }) {
                   )}
                 </div>
               </div>
+            ) : (
+              <div style={{ height: 50 }} />
             )}
             <div className={styles.post_header}>
               <div className={styles.avatar}>
                 <Avatar
                   text={fullName}
-                  url={profilePhoto.src}
+                  url={profileUrl}
                   size={80}
                   borderSize={3}
                 />

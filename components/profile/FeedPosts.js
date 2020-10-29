@@ -1,14 +1,19 @@
 import { LikeFilled, MessageFilled } from '@ant-design/icons';
 import styles from './styles/feed-post.module.scss';
 import { Button } from 'antd';
+import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import Avatar from '../../components/common/Avatar';
+import TimelinePosts from '../../components/timeline/TimelinePosts'
 
-export default function FeedPosts({ user }) {
+export default function FeedPosts({ user, onRatePost, onUpdateTimeline }) {
   const router = useRouter();
   const goToActivity = () => {
     router.push('/activity');
   };
+
+  // const profileUrl = user !== null && user !== undefined ? `https://freeskies.com/static/${user.profilePhoto?.src}` : null
+  const profileFeed = user !== null && user !== undefined ? user?.recentActivity.map(item => { item.account = user; return item }) : []
 
   return (
     <div className={styles.activity_content}>
@@ -18,13 +23,21 @@ export default function FeedPosts({ user }) {
           All activities
         </Button>
       </div>
-      {user?.recentActivity.map((item, index) => (
+      {profileFeed.length !== 0 && (
+        <TimelinePosts
+          data={profileFeed}
+          onRatePost={onRatePost}
+          onUpdateTimeline={onUpdateTimeline}
+        />
+      )}
+
+      {/* {user?.recentActivity.map((item, index) => (
         <div className={styles.post} key={index}>
           <div className={styles.post_header}>
             <div className={styles.avatar}>
               <Avatar
                 size={50}
-                url={user?.profilePhoto.src}
+                url={profileUrl}
                 text={user?.username}
               />
             </div>
@@ -35,29 +48,34 @@ export default function FeedPosts({ user }) {
           </div>
           <div className={styles.post_content}>
             <p className={styles.description}>
-              {item.type === 'Photo' && item.caption}
-              {item.type === 'Comment' && item.text}
+              {item.text}
             </p>
-            {item.type === 'Photo' && (
-              <div className={styles.image}>
-                <img src={`https://www.freeskies.com/static/${item.src}`} alt="" />
+            {item.images.map((image) => (
+              <div
+                className={classnames(styles.image, {
+                  [styles.grid_2]: index === 1,
+                  [styles.grid_3]: index === 2,
+                  [styles.grid_4]: index === 3,
+                })}
+              >
+                <div className={styles.image}>
+                  <img src={`https://freeskies.com/static/${image.src}`} alt="" />
+                </div>
               </div>
-            )}
+            ))}
           </div>
-          {item.type === 'Photo' && (
-            <div className={styles.post_actions}>
-              <div>
-                <LikeFilled />
-                <span>Like</span>
-              </div>
-              <div>
-                <MessageFilled />
-                <span>Comment</span>
-              </div>
+          <div className={styles.post_actions}>
+            <div>
+              <LikeFilled />
+              <span>Like</span>
             </div>
-          )}
+            <div>
+              <MessageFilled />
+              <span>Comment</span>
+            </div>
+          </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
