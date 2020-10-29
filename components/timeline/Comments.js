@@ -17,7 +17,7 @@ function CommentItem({ message, mine, author, rating, id, onRateComment }) {
   const handleRateComment = (rate) => {
     onRateComment(id, rate);
   };
-  const profileUrl = author !== null && author !== undefined ? `https://freeskies.com/static/${author.profilePhoto?.src}` : null
+  const profileUrl = author !== null && author !== undefined ? `${author.profilePhoto?.src}` : null
 
   return (
     <div
